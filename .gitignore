@@ -32,6 +32,8 @@
 *.sqlite
 *.cachefile
 *.FileListAbsolute.txt
+*.cache
+*.suo
 
 # OS generated files #
 ######################

@@ -77,10 +77,10 @@
     <Folder Include="View\Animations\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ReadMe.txt" />
+    <Compile Include="Model\Actor.Physics.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Actor.Physics.cs" />
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
