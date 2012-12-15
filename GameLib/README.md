@@ -1,5 +1,5 @@
 ﻿==============
-= README.TXT =
+= README.md =
 ==============
 This is gamelib.
 Created by: William Guss, 2012 <carlostnb@gmail.com>
