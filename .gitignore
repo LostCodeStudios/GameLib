@@ -10,7 +10,8 @@
 *.pdb
 /GameLib/README.md
 *.user
-
+bin/*
+obj/*
 
 # Packages #
 ############
@@ -45,3 +46,9 @@
 Icon?
 ehthumbs.db
 Thumbs.db
+*.suo
+bin
+obj
+*.cache
+*.pdb
+*.txt
