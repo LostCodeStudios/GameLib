@@ -1,0 +1,2 @@
+Content\vertexMap.xnb
+Content\vertexMap.bmp

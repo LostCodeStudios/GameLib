@@ -1,0 +1,2 @@
+C:\Users\wg203341\Dropbox\Dev\C#\XNA\GameLib\GameLibTest\GameLibTestContent\obj\x86\Debug\GameLibTestContent.contentprojResolveAssemblyReference.cache
+C:\Users\William\Dropbox\Dev\C#\XNA\GameLib\GameLibTest\GameLibTestContent\obj\x86\Debug\GameLibTestContent.contentprojResolveAssemblyReference.cache
