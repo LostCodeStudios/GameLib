@@ -1,3 +1,0 @@
-Content\font.xnb
-Content\spriteSheet.xnb
-Content\spriteSheet.bmp
