@@ -6,8 +6,6 @@ C:\Users\William\Dropbox\Dev\C#\XNA\GameLib\GameLibTest\GameLibTest\bin\x86\Debu
 C:\Users\William\Dropbox\Dev\C#\XNA\GameLib\GameLibTest\GameLibTest\obj\x86\Debug\GameLibTest.csprojResolveAssemblyReference.cache
 C:\Users\William\Dropbox\Dev\C#\XNA\GameLib\GameLibTest\GameLibTest\obj\x86\Debug\GameLibTest.exe
 C:\Users\William\Dropbox\Dev\C#\XNA\GameLib\GameLibTest\GameLibTest\obj\x86\Debug\GameLibTest.pdb
-C:\Users\William\Dropbox\Dev\C#\XNA\GameLib\GameLibTest\GameLibTest\bin\x86\Debug\Content\vertexMap.xnb
-C:\Users\William\Dropbox\Dev\C#\XNA\GameLib\GameLibTest\GameLibTest\bin\x86\Debug\Content\vertexMap.bmp
 C:\Users\wg203341\Dropbox\Dev\C#\XNA\GameLib\GameLibTest\GameLibTest\bin\x86\Debug\Content\vertexMap.xnb
 C:\Users\wg203341\Dropbox\Dev\C#\XNA\GameLib\GameLibTest\GameLibTest\bin\x86\Debug\Content\vertexMap.bmp
 C:\Users\wg203341\Dropbox\Dev\C#\XNA\GameLib\GameLibTest\GameLibTest\bin\x86\Debug\GameLibTest.exe
@@ -18,3 +16,9 @@ C:\Users\wg203341\Dropbox\Dev\C#\XNA\GameLib\GameLibTest\GameLibTest\obj\x86\Deb
 C:\Users\wg203341\Dropbox\Dev\C#\XNA\GameLib\GameLibTest\GameLibTest\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\wg203341\Dropbox\Dev\C#\XNA\GameLib\GameLibTest\GameLibTest\obj\x86\Debug\GameLibTest.exe
 C:\Users\wg203341\Dropbox\Dev\C#\XNA\GameLib\GameLibTest\GameLibTest\obj\x86\Debug\GameLibTest.pdb
+C:\Users\William\Dropbox\Dev\C#\XNA\GameLib\GameLibTest\GameLibTest\bin\x86\Debug\FarseerPhysicsXNA.dll
+C:\Users\William\Dropbox\Dev\C#\XNA\GameLib\GameLibTest\GameLibTest\bin\x86\Debug\FarseerPhysicsXNA.pdb
+C:\Users\William\Dropbox\Dev\C#\XNA\GameLib\GameLibTest\GameLibTest\bin\x86\Debug\FarseerPhysicsXNA.xml
+C:\Users\William\Dropbox\Dev\C#\XNA\GameLib\GameLibTest\GameLibTest\bin\x86\Debug\Content\font.xnb
+C:\Users\William\Dropbox\Dev\C#\XNA\GameLib\GameLibTest\GameLibTest\bin\x86\Debug\Content\spriteSheet.xnb
+C:\Users\William\Dropbox\Dev\C#\XNA\GameLib\GameLibTest\GameLibTest\bin\x86\Debug\Content\spriteSheet.bmp

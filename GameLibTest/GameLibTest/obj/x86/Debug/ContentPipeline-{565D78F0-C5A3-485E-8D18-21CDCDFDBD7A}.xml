@@ -2,13 +2,22 @@
 <XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
   <Asset Type="Pipeline:BuildItemCollection">
     <Item>
-      <Source>vertexMap.bmp</Source>
-      <Name>vertexMap</Name>
+      <Source>font.spritefont</Source>
+      <Name>font</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\William\Dropbox\Dev\C#\XNA\GameLib\GameLibTest\GameLibTest\bin\x86\Debug\Content\font.xnb</Output>
+      <Time>2012-12-15T15:09:38.2295566-07:00</Time>
+    </Item>
+    <Item>
+      <Source>spriteSheet.bmp</Source>
+      <Name>spriteSheet</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\William\Dropbox\Dev\C#\XNA\GameLib\GameLibTest\GameLibTest\bin\x86\Debug\Content\vertexMap.xnb</Output>
-      <Time>2012-12-13T13:10:27-07:00</Time>
+      <Output>C:\Users\William\Dropbox\Dev\C#\XNA\GameLib\GameLibTest\GameLibTest\bin\x86\Debug\Content\spriteSheet.xnb</Output>
+      <Time>2012-12-15T17:46:01.8991751-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

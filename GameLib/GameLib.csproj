@@ -59,28 +59,32 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\Collision\Collisions.cs" />
-    <Compile Include="Controller\Collision\IBoundry.cs" />
-    <Compile Include="Controller\Collision\Boundry\Polygon.cs" />
-    <Compile Include="View\Animation.cs" />
-    <Compile Include="View\Helpers\Geometry.cs" />
-    <Compile Include="View\Screen.cs" />
-    <Compile Include="View\Sprite.cs" />
-    <Compile Include="Model\Actor.cs" />
-    <Compile Include="Model\Director.cs" />
+    <Compile Include="Core\Model\Stage.cs" />
+    <Compile Include="Core\View\Animation.cs" />
+    <Compile Include="Core\Controller\Animator.cs" />
+    <Compile Include="Core\View\Animations\StaticAnimation.cs" />
+    <Compile Include="Helpers\ConvertUnits.cs" />
+    <Compile Include="Core\View\Screen.cs" />
+    <Compile Include="Core\View\Sprite.cs" />
+    <Compile Include="Core\Model\Actor.cs" />
+    <Compile Include="Core\Controller\Director.cs" />
+    <Compile Include="Helpers\DebugViewXNA.cs" />
+    <Compile Include="Helpers\PrimitiveBatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controller\Input\" />
-    <Folder Include="Model\Actors\" />
-    <Folder Include="Model\Directors\" />
-    <Folder Include="View\Animations\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Model\Actor.Physics.cs" />
+    <Folder Include="Core\Model\Actors\" />
+    <Folder Include="Core\Model\Stages\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
+    <None Include="TODO" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Farseer Physics Engine 3.3.1\Farseer Physics XNA.csproj">
+      <Project>{0A850700-1ABB-4288-A391-6726B90EBEB9}</Project>
+      <Name>Farseer Physics XNA</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />

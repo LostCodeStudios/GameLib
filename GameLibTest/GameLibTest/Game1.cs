@@ -9,7 +9,14 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using GameLib.View;
-using GameLib.Controller.Collision.Bounderies;
+using FarseerPhysics.Dynamics;
+using FarseerPhysics.Collision.Shapes;
+using FarseerPhysics.Factories;
+using GameLib.Helpers;
+using FarseerPhysics.Collision;
+using FarseerPhysics;
+using GameLib.Helpers;
+
 
 namespace GameLibTest
 {
@@ -21,19 +28,24 @@ namespace GameLibTest
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+
         Rectangle source1 = new Rectangle(0,0,26,24);
-        Polygon polygon1;
         Vector2 position1 = new Vector2(50);
 
         Rectangle source2 = new Rectangle(0, 20, 500, 500);
         Vector2 position2 = new Vector2(100);
 
-        List<Polygon> polygons = new List<Polygon>();
+        World Stage = new World(new Vector2(0, 1f));
 
-        bool Colliding = false;
-        float rot = 0;
+        DebugViewXNA _debugView;
 
-        BasicEffect basicEffect;
+        Body test;
+        
+
+
+
+
+
         Texture2D vertexMap;
 
         public Game1()
@@ -65,33 +77,17 @@ namespace GameLibTest
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            //create a shader so that primitives can be drawn
-            basicEffect = new BasicEffect(GraphicsDevice);
-            basicEffect.VertexColorEnabled = true;
-            basicEffect.Projection = Matrix.CreateOrthographicOffCenter
-            (0, GraphicsDevice.Viewport.Width,     // left, right
-            GraphicsDevice.Viewport.Height, 0,    // bottom, top
-            0, 1); 
+            
+            ConvertUnits.SetDisplayUnitToSimUnitRatio(64);
+            _debugView = new DebugViewXNA(Stage);
+            _debugView.LoadContent(GraphicsDevice, Content);
 
-            vertexMap = Content.Load<Texture2D>("vertexMap");
-
-            // TODO: use this.Content to load your game content here
-            polygon1 = new Polygon(Vector2.Zero, vertexMap, Color.Magenta, source1, 10f);
-            polygons.Add(new Polygon(Vector2.Zero, vertexMap, Color.Magenta, source2, 0f));
-            polygons.Add(new Polygon(Vector2.Zero, vertexMap, Color.Magenta, source2, 40f));
-            polygons.Add(new Polygon((Vector2.Zero), vertexMap, Color.Magenta, source2, 40f));
-            polygons.Add(new Polygon(Vector2.Zero, vertexMap, Color.Magenta, source2, 40f));
-            polygons.Add(new Polygon(Vector2.Zero, vertexMap, Color.Magenta, source2, 40f));
-
-
-
-
-            polygons[0].Position = position2;
-            polygons[1].Position = new Vector2(320);
-            polygons[2].Position = new Vector2(420);
-            polygons[3].Position = new Vector2(520);
-            polygons[4].Position = new Vector2(620);
-
+            vertexMap = Content.Load<Texture2D>("spriteSheet");
+            
+            test = new Body(Stage);
+            test.BodyType = BodyType.Dynamic;
+            test.Position = ConvertUnits.ToSimUnits(position1);
+            FixtureFactory.AttachRectangle(ConvertUnits.ToSimUnits(30), ConvertUnits.ToSimUnits(30), 1, Vector2.Zero, test);
 
         }
 
@@ -101,7 +97,6 @@ namespace GameLibTest
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
         }
 
         /// <summary>
@@ -111,6 +106,7 @@ namespace GameLibTest
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            
             if (last != Keyboard.GetState())
             {
             }
@@ -126,33 +122,17 @@ namespace GameLibTest
             if (Keyboard.GetState().IsKeyDown(Keys.D))
                 position1 += new Vector2(5, 0);
 
-            polygon1.Position = position1;
 
             //if (Keyboard.GetState().IsKeyDown(Keys.E))
             //    polygon1.Origin += new Vector2(10, 0);
             //if (Keyboard.GetState().IsKeyDown(Keys.Q))
             //    polygon1.Origin -= new Vector2(10, 0);
 
-           //  rot += (float)(Math.PI / 360);
-            //polygon1.Rotation = rot;
-
-            // TODO: Add your update logic here
-
-            Colliding = false;
-            for(int i = 0; i< polygons.Count(); i++)
-            {
-                for(int o = 0; o < polygons.Count(); o++){
-                    if( o != i)
-                        if(polygons[i].CheckCollision(Vector2.Zero, polygons[o]) && 
-                            polygons[o].CheckCollision(Vector2.Zero, polygons[i])
-                            ||
-                            (polygons[i].CheckCollision(Vector2.Zero, polygon1) &&
-                            polygon1.CheckCollision(Vector2.Zero, polygons[i])))
-                            Colliding = true;
-                }
-            }
+            test.Position = ConvertUnits.ToSimUnits(position1);
             
-
+            Stage.Step(0.03333f);
+            
+            
             base.Update(gameTime);
         }
         KeyboardState last = new KeyboardState();
@@ -164,25 +144,26 @@ namespace GameLibTest
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
-
-            basicEffect.CurrentTechnique.Passes[0].Apply();
+            
+            
 
             spriteBatch.Begin();
-            
             //Draw the sprites
-           // spriteBatch.Draw(vertexMap, position1, source1, Color.White, rot, Vector2.Zero,1f,SpriteEffects.None,0);
+            spriteBatch.Draw(vertexMap, ConvertUnits.ToDisplayUnits(test.Position), source1, Color.White, 0f, new Vector2(15), 1f, SpriteEffects.None, 0);
+            
             spriteBatch.Draw(vertexMap, position2, source2, Color.White);
 
-            polygon1.Draw(spriteBatch, Vector2.Zero);
-            
-            foreach(Polygon p in polygons)
-                p.Draw(spriteBatch, Vector2.Zero);
-
-            if(Colliding)
-                spriteBatch.Draw(vertexMap, Vector2.Zero, source1, Color.White);
-
             spriteBatch.End();
+
+            Matrix projection = Matrix.CreateOrthographicOffCenter(0f, GraphicsDevice.Viewport.Width / ConvertUnits.ToDisplayUnits(1f),
+                                                  GraphicsDevice.Viewport.Height / ConvertUnits.ToDisplayUnits(1f), 0f, 0f,
+                                                  1f);
+            Matrix view = Matrix.CreateTranslation(new Vector3((Vector2.Zero / ConvertUnits.ToDisplayUnits(1f)) - (new Vector2(graphics.GraphicsDevice.Viewport.Width / 2f, graphics.GraphicsDevice.Viewport.Height / 2f) / ConvertUnits.ToDisplayUnits(1f)), 0f)) * Matrix.CreateTranslation(new Vector3((new Vector2(graphics.GraphicsDevice.Viewport.Width / 2f, graphics.GraphicsDevice.Viewport.Height / 2f) / ConvertUnits.ToDisplayUnits(1f)), 0f));
+            // draw the debug view
+            _debugView.RenderDebugData(ref projection, ref view);
+
             base.Draw(gameTime);
         }
     }
 }
+

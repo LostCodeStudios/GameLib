@@ -1,2 +1,3 @@
-Content\vertexMap.xnb
-Content\vertexMap.bmp
+Content\font.xnb
+Content\spriteSheet.xnb
+Content\spriteSheet.bmp
