@@ -72,13 +72,9 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Components\Physical.cs" />
-    <Compile Include="Entities\Components\Sprite.cs" />
-    <Compile Include="Entities\Systems\DebugRenderSystem.cs" />
+    <Compile Include="CarWorld.cs" />
     <Compile Include="Entities\Systems\GroundRenderSystem.cs" />
-    <Compile Include="Entities\Systems\PhysicsSystem.cs" />
     <Compile Include="Entities\Systems\PlayerControlSystem.cs" />
-    <Compile Include="Entities\Systems\RenderSystem.cs" />
     <Compile Include="Entities\Templates\BridgeTemplate.cs" />
     <Compile Include="Entities\Templates\PlayerTemplate.cs" />
     <Compile Include="Entities\Templates\GroundTemplate.cs" />
@@ -129,7 +125,9 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Entities\Components\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--

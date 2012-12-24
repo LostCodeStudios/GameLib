@@ -4,17 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GameLibrary.Entities;
-using CarGame.Entities.Components;
 using GameLibrary.Physics.Factories;
 using GameLibrary.Physics.Common;
 using Microsoft.Xna.Framework;
+using GameLibrary.Entities.Components;
+using GameLibrary;
 
 namespace CarGame.Entities.Templates
 {
     class GroundTemplate  : IEntityTemplate
     {
-        private EntityWorld world;
-        public GroundTemplate(EntityWorld world)
+        private World world;
+        public GroundTemplate(World world)
         {
             this.world = world;
         }

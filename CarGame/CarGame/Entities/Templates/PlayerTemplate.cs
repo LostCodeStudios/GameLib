@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CarGame.Entities.Components;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using GameLibrary.Entities;
@@ -10,13 +9,15 @@ using GameLibrary.Physics.Common;
 using GameLibrary.Physics.Collision.Shapes;
 using GameLibrary.Physics.Dynamics;
 using GameLibrary.Physics.Dynamics.Joints;
+using GameLibrary.Entities.Components;
+using GameLibrary;
 
 namespace CarGame.Entities.Templates
 {
     public class PlayerTemplate : IEntityTemplate
     {
-        private EntityWorld world;
-        public PlayerTemplate(EntityWorld world)
+        private World world;
+        public PlayerTemplate(World world)
         {
             this.world = world;
         }

@@ -5,16 +5,17 @@ using System.Text;
 using GameLibrary.Entities;
 using GameLibrary.Physics.Dynamics;
 using GameLibrary.Physics.Collision.Shapes;
-using CarGame.Entities.Components;
 using Microsoft.Xna.Framework;
 using GameLibrary.Physics.Factories;
+using GameLibrary.Entities.Components;
+using GameLibrary;
 
 namespace CarGame.Entities.Templates
 {
     class BridgeTemplate : IEntityTemplate
     {
-        private EntityWorld world;
-        public BridgeTemplate(EntityWorld world)
+        private World world;
+        public BridgeTemplate(World world)
         {
             this.world = world;
         }

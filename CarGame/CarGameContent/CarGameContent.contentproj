@@ -41,9 +41,10 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Compile Include="Fonts\gamefont.spritefont">
-      <Name>gamefont</Name>
+    <Compile Include="Fonts\debugfont.spritefont">
+      <Name>debugfont</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>

@@ -12,7 +12,6 @@ using CarGame.Entities.Systems;
 using GameLibrary.Helpers;
 using GameLibrary.Entities;
 using CarGame.Entities.Templates;
-using CarGame.Entities.Components;
 
 namespace CarGame
 {
@@ -24,14 +23,8 @@ namespace CarGame
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        private PhysicsSystem physicsSystem;
-        private RenderSystem renderSystem;
-        private DebugRenderSystem debugRenderSystem;
-        private GroundRenderSystem groundRenderSysten;
-        private PlayerControlSystem playerControlSystem;
-        private Camera camera;
 
-        private EntityWorld entityWorld;
+        private CarWorld World;
         private Entity player;
 
         public Game1()
@@ -58,29 +51,12 @@ namespace CarGame
             // TODO: Add your initialization logic here
             ConvertUnits.SetDisplayUnitToSimUnitRatio(24f);
             ScreenHelper.Initialize(graphics.GraphicsDevice);
-
-            camera = new Camera(graphics.GraphicsDevice);
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            entityWorld = new EntityWorld(new Vector2(0, 10f));
-
-            var systemManager = entityWorld.SystemManager;
-            entityWorld.SetEntityTemplate("Ground", new GroundTemplate(entityWorld));
-            entityWorld.SetEntityTemplate("Player", new PlayerTemplate(entityWorld));
-            entityWorld.SetEntityTemplate("Bridge", new BridgeTemplate(entityWorld));
-            physicsSystem = systemManager.SetSystem(new PhysicsSystem(),
-                ExecutionType.Update);
+            World = new CarWorld(new Camera(GraphicsDevice), spriteBatch);
+            World.Initialize();
            
-#if DEBUG
-            debugRenderSystem = systemManager.SetSystem(new DebugRenderSystem(camera), ExecutionType.Draw);
-#else
-            renderSystem = systemManager.SetSystem(new RenderSystem(graphics.GraphicsDevice, spriteBatch), ExecutionType.Draw);
-#endif
 
-            groundRenderSysten = systemManager.SetSystem(new GroundRenderSystem(camera, GraphicsDevice), ExecutionType.Draw);
-            playerControlSystem = systemManager.SetSystem(new PlayerControlSystem(), ExecutionType.Update);
-
-            systemManager.InitializeAll();
 
             base.Initialize();
         }
@@ -91,31 +67,7 @@ namespace CarGame
         /// </summary>
         protected override void LoadContent()
         {
-
-            Entity ground = entityWorld.CreateEntity("Ground");
-            ground.Refresh();
-
-            player = entityWorld.CreateEntity("Player",
-                Content.Load<Texture2D>("car"),
-                new Rectangle(0, 0, 120, 32),
-                Content.Load<Texture2D>("wheel"),
-                new Rectangle(0, 0, 23, 24));
-            player.Refresh();
-
-            Entity bridge = entityWorld.CreateEntity("Bridge", ground.GetComponent<Physical>("Ground"));
-            bridge.Refresh();
-
-            camera.ResetCamera();
-            camera.MinRotation = -0.05f;
-            camera.MaxRotation = 0.05f;
-
-            camera.TrackingBody = player.GetComponent<Physical>("Chassis");
-            camera.EnableRotationTracking = true;
-            camera.EnablePositionTracking = true;
-            
-#if DEBUG
-            debugRenderSystem.LoadContent(GraphicsDevice, Content);
-#endif
+            World.LoadContent(Content);
             // TODO: use this.Content to load your game content here
         }
 
@@ -139,26 +91,8 @@ namespace CarGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-
-            entityWorld.LoopStart();
-            // TODO: Add your update logic here
-            entityWorld.Step((float)gameTime.ElapsedGameTime.TotalSeconds);
-            entityWorld.Delta = (int)gameTime.ElapsedGameTime.TotalMilliseconds;
-
-            entityWorld.SystemManager.UpdateSynchronous(ExecutionType.Update);
-            camera.Update(gameTime);
-
-
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
-                playerControlSystem.acceleration = Math.Min(playerControlSystem.acceleration + (float)(2.0 * (float)gameTime.ElapsedGameTime.TotalSeconds), 1f);
-            else if (Keyboard.GetState().IsKeyDown(Keys.A))
-                playerControlSystem.acceleration = Math.Min(playerControlSystem.acceleration + (float)(2.0 *(float)gameTime.ElapsedGameTime.TotalSeconds), -1f);
-            else if (Keyboard.GetState().IsKeyDown(Keys.Space))
-                playerControlSystem.acceleration = 0;
-            else
-                playerControlSystem.acceleration -= Math.Sign(playerControlSystem.acceleration) * (float)(2.0 * (float)gameTime.ElapsedGameTime.TotalSeconds);
-
-            playerControlSystem.UpdateInput(Keyboard.GetState());
+            World.PlayerControlSystem.UpdateInput(Keyboard.GetState());
+            World.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -171,8 +105,8 @@ namespace CarGame
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin(0, null, null, null, null, null, camera.View);
-            entityWorld.SystemManager.UpdateSynchronous(ExecutionType.Draw);
+            spriteBatch.Begin(0, null, null, null, null, null, World.Camera.View);
+            World.Draw(gameTime);
             spriteBatch.End();
 
             base.Draw(gameTime);
