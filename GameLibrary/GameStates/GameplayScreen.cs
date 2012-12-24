@@ -9,9 +9,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 using GameLibrary.Input;
-using GameLibrary.Model.Managers;
-using GameLibrary.Model.Entities;
-using GameLibrary.Model;
+using GameLibrary.Helpers;
+
 
 namespace GameLibrary.GameStates.Screens
 {
@@ -23,13 +22,11 @@ namespace GameLibrary.GameStates.Screens
         #region Fields
 
         ContentManager content;
-        EntityManager entities;
-        StarField starField;
         SpriteFont gameFont;
         string fontName;
 
         float pauseAlpha;
-        Spritesheet spriteSheet;
+        SpriteSheet spriteSheet;
         InputAction pauseAction;
 
         bool colliding = false;
@@ -56,7 +53,7 @@ namespace GameLibrary.GameStates.Screens
         /// <summary>
         /// The spritesheet.
         /// </summary>
-        public Spritesheet Spritesheet
+        public SpriteSheet Spritesheet
         {
             get { return spriteSheet; }
         }
@@ -90,17 +87,12 @@ namespace GameLibrary.GameStates.Screens
             if (content == null)
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
 
-            Screen.Initialize(ScreenManager.GraphicsDevice.Viewport);
+            ScreenHelper.Initialize(ScreenManager.GraphicsDevice);
 
             gameFont = content.Load<SpriteFont>(fontName);
 
-            spriteSheet = new Spritesheet(Content, "Textures/spritesheet");
+            spriteSheet = new SpriteSheet(Content, "Textures/spritesheet");
 
-            //Get all the sprite source rectangles.
-            SetSourceRectangles(spriteSheet);
-
-            entities = new EntityManager();
-            starField = new StarField(spriteSheet);
 
             if (multiplayer)
             {
@@ -108,28 +100,15 @@ namespace GameLibrary.GameStates.Screens
                 {
                     if (ScreenManager.Input.GamePadWasConnected[x])
                     {
-                        Player player = Player.PlayerAt((PlayerIndex)x, spriteSheet);
-                        entities.Add("player" + (x + 1).ToString(), player);
+                       
                     }
                 }
             }
 
             else
-            {
-                Player player;
-                if (ControllingPlayer != null)
-                    player = Player.PlayerAt((PlayerIndex)ControllingPlayer, spriteSheet);
-                else
-                    player= Player.PlayerAt(PlayerIndex.One, spriteSheet);
-                entities.Add("player1", player);
+            {               
             }
             
-
-            Ship Dragon = new Ship(new Vector2(700, 200), 0f, new Sprite("birdbody", new Vector2(92, 64), spriteSheet, AnimationType.Loop,Color.White));
-            //Dragon.Add("head",new Ship(new Vector2(700,200), 0f, new Sprite("birdhead", new Vector2(37/2, 51/2-30), spriteSheet)));
-            Dragon.Velocity = new Vector2(0, 0);
-            
-            entities.Add("dragon", Dragon);
 
             ScreenManager.Game.ResetElapsedTime();
         }
@@ -174,29 +153,7 @@ namespace GameLibrary.GameStates.Screens
             if (IsActive)
             {
                 
-                //TODO: Game
-
-                //if (entities["dragon"].Sprites["hawtbody"].IsBoxColliding(entities["ShipMuhfuckka"].Sprites["base"].HitBox))
-                //{
-                //    entities["dragon"].Sprites["hawtbody"].Location = new Vector2(640, 0);
-                //    entities["dragon"].Sprites["head"].Location = new Vector2(640 + 76, 63);
-                //    entities["ShipMuhfuckka"].Sprites["base"].AdvanceFrame();
-                //}
-                entities["dragon"].Rotation += 0.005f;
-
-                colliding = false;
-
-                Ship dragon = entities["dragon"] as Ship;
-                Ship player = entities["player1"] as Ship;
-
-                if (player.IsCollidingWith(dragon))
-                    colliding = true;
-
-                if (dragon.IsCollidingWith(player))
-                    colliding = true;
-
-                starField.Update(gameTime);
-                entities.Update(gameTime);
+              
             }
 
         }
@@ -221,8 +178,6 @@ namespace GameLibrary.GameStates.Screens
             bool gamePadDisconnected = !gamePadState.IsConnected &&
                 input.GamePadWasConnected[playerIndex];
 
-            entities.HandleInput(input);
-
             PlayerIndex player;
 
             if (input.CurrentKeyboardStates[0].IsKeyDown(Keys.Space))
@@ -246,17 +201,7 @@ namespace GameLibrary.GameStates.Screens
 
             spriteBatch.Begin();
 
-            Ship dragon = entities["dragon"] as Ship;
-            Ship player = entities["player1"] as Ship;
-            spriteBatch.Draw(ScreenManager.BlankTexture, dragon.test, Color.White);
-            spriteBatch.Draw(ScreenManager.BlankTexture, player.test, Color.White);
-            //TODO: All drawing for gameplay.
-            starField.Draw(gameTime, spriteBatch);
-            entities.Draw(gameTime, spriteBatch);
-
-            if (colliding)
-                spriteBatch.DrawString(gameFont, "Colliding", Vector2.Zero, Color.White);
-
+           
             spriteBatch.DrawString(gameFont, "X: " + mouseLoc.X, new Vector2(300, 300), Color.White);
             spriteBatch.DrawString(gameFont, "Y: " + mouseLoc.Y, new Vector2(500, 300), Color.White);
             
@@ -286,7 +231,7 @@ namespace GameLibrary.GameStates.Screens
 
         #region Source Rectangles
 
-        void SetSourceRectangles(Spritesheet sheet)
+        void SetSourceRectangles(SpriteSheet sheet)
         {
             Dictionary<string, Rectangle[]> sourceRectangles = new Dictionary<string, Rectangle[]>();
 

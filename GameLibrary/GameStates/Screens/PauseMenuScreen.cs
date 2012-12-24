@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 
 using GameLibrary;
+using GameLibrary.Input;
 
 namespace GameLibrary.GameStates.Screens
 {
