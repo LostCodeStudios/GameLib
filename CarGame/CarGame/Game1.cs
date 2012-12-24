@@ -73,9 +73,9 @@ namespace CarGame
            
 #if DEBUG
             debugRenderSystem = systemManager.SetSystem(new DebugRenderSystem(camera), ExecutionType.Draw);
-#else
-            renderSystem = systemManager.SetSystem(new RenderSystem(graphics.GraphicsDevice, spriteBatch), ExecutionType.Draw);
 #endif
+            renderSystem = systemManager.SetSystem(new RenderSystem(graphics.GraphicsDevice, spriteBatch), ExecutionType.Draw);
+
             groundRenderSysten = systemManager.SetSystem(new GroundRenderSystem(camera, GraphicsDevice), ExecutionType.Draw);
             playerControlSystem = systemManager.SetSystem(new PlayerControlSystem(), ExecutionType.Update);
 
