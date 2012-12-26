@@ -28,9 +28,9 @@ namespace CarGame.Entities.Templates
             e.Tag = "Player";
 
             #region Physical
-            e.AddComponent<Physical>("WheelFront", new Physical(world, e));
-            e.AddComponent<Physical>("WheelBack", new Physical(world, e));
-            e.AddComponent<Physical>("Chassis", new Physical(world, e));
+            e.AddComponent<Physical>("WheelFront", new Physical(world, e, "WheelFront"));
+            e.AddComponent<Physical>("WheelBack", new Physical(world, e, "WheelBack"));
+            e.AddComponent<Physical>("Chassis", new Physical(world, e, "Chassis"));
 
             Physical Chassis = e.GetComponent<Physical>("Chassis");
             {

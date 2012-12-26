@@ -32,7 +32,7 @@ namespace CarGame.Entities.Templates
             Physical prevBody = args[0] as Physical;
             for (int i = 0; i < segmentCount; ++i)
             {
-                Physical body = e.AddComponent<Physical>("segment" + i, new Physical(world, e));
+                Physical body = e.AddComponent<Physical>("segment" + i, new Physical(world, e, "segment" + i));
                 body.BodyType = BodyType.Dynamic;
                 body.Position = new Vector2(161f + 2f * i, 0.125f);
                 Fixture fix = body.CreateFixture(shape);

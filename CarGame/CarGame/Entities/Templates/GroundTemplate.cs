@@ -24,7 +24,7 @@ namespace CarGame.Entities.Templates
         {
             e.Group = "Props";
             e.Tag = "Ground";
-            Physical ground = e.AddComponent<Physical>("Ground", new Physical(world, e));
+            Physical ground = e.AddComponent<Physical>("Ground", new Physical(world, e, "Ground"));
             
             
             //Verts
