@@ -49,9 +49,9 @@ namespace GameLibrary
             //Systems
             _MovementSystem = this.SystemManager.SetSystem(new ParticleMovementSystem(), ExecutionType.Update);
 #if DEBUG
-            _DebugRenderSystem = this.SystemManager.SetSystem(new DebugRenderSystem(this.Camera), ExecutionType.Draw);
+            _DebugRenderSystem = this.SystemManager.SetSystem(new DebugRenderSystem(this.Camera), ExecutionType.Draw, 0);
 #endif
-            _RenderSystem = this.SystemManager.SetSystem(new RenderSystem(_SpriteBatch), ExecutionType.Draw);
+            _RenderSystem = this.SystemManager.SetSystem(new RenderSystem(_SpriteBatch), ExecutionType.Draw, 1);
             #endregion
 
             SystemManager.InitializeAll();

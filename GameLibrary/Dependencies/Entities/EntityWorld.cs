@@ -142,6 +142,7 @@ namespace GameLibrary.Dependencies.Entities
                     groupManager.Remove(e);
                     if( e != null)
                         e.DeletingState = false;
+                   
                 }
                 deleted.Clear();
             }

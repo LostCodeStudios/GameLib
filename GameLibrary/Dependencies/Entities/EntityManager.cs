@@ -1,4 +1,5 @@
 using System;
+using GameLibrary.Entities.Components.Physics;
 
 namespace GameLibrary.Dependencies.Entities
 {
@@ -74,7 +75,8 @@ namespace GameLibrary.Dependencies.Entities
             if (e == null)
                 return;
             activeEntities.Set(e.Id, null);
-
+            if (e.HasComponent<Body>())
+                world.RemoveBody(e.GetComponent<Body>());
             e.TypeBits = 0;
 
             Refresh(e);

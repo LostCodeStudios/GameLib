@@ -23,8 +23,7 @@ namespace GameLibrary.Entities.Components.Physics
         }
         ~Body()
         {
-            this.World.RemoveBody(this);
-            
+            this.World.RemoveBody(this);   
         }
 
         #region ITransform
