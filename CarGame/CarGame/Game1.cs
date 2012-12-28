@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using CarGame.Entities.Systems;
 using GameLibrary.Helpers;
-using GameLibrary.Entities;
+using GameLibrary.Dependencies.Entities;
 using CarGame.Entities.Templates;
 
 namespace CarGame

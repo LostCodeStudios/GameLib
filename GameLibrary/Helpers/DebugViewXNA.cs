@@ -5,15 +5,15 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using GameLibrary.Physics;
-using GameLibrary.Physics.Collision;
-using GameLibrary.Physics.Dynamics.Joints;
-using GameLibrary.Physics.Dynamics;
-using GameLibrary.Physics.Dynamics.Contacts;
-using GameLibrary.Physics.Collision.Shapes;
-using GameLibrary.Physics.Common;
-using GameLibrary.Physics.Controllers;
-using GameLibrary.Entities;
+using GameLibrary.Dependencies.Physics;
+using GameLibrary.Dependencies.Physics.Collision;
+using GameLibrary.Dependencies.Physics.Dynamics.Joints;
+using GameLibrary.Dependencies.Physics.Dynamics;
+using GameLibrary.Dependencies.Physics.Dynamics.Contacts;
+using GameLibrary.Dependencies.Physics.Collision.Shapes;
+using GameLibrary.Dependencies.Physics.Common;
+using GameLibrary.Dependencies.Physics.Controllers;
+using GameLibrary.Dependencies.Entities;
 
 namespace GameLibrary.Helpers
 {
@@ -172,7 +172,7 @@ namespace GameLibrary.Helpers
         {
             if ((Flags & DebugViewFlags.Shape) == DebugViewFlags.Shape)
             {
-                foreach (Body b in World.BodyList)
+                foreach (PhysicsBody b in World.BodyList)
                 {
                     if (b.UserData != null && b.UserData is Entity) //Draw the name of the entity
                         DrawString(true, (int)ConvertUnits.ToDisplayUnits(b.WorldCenter.X), (int)ConvertUnits.ToDisplayUnits(b.WorldCenter.Y), "[" + (b.UserData as Entity).Id + "] " + (b.UserData as Entity).Tag.ToString(), Color.LightSalmon);
@@ -233,7 +233,7 @@ namespace GameLibrary.Helpers
             }
             if ((Flags & DebugViewFlags.PolygonPoints) == DebugViewFlags.PolygonPoints)
             {
-                foreach (Body body in World.BodyList)
+                foreach (PhysicsBody body in World.BodyList)
                 {
                     foreach (Fixture f in body.FixtureList)
                     {
@@ -254,7 +254,7 @@ namespace GameLibrary.Helpers
             }
             if ((Flags & DebugViewFlags.Joint) == DebugViewFlags.Joint)
             {
-                foreach (Joint j in World.JointList)
+                foreach (PhysicsJoint j in World.JointList)
                 {
                     DrawJoint(j);
                 }
@@ -284,7 +284,7 @@ namespace GameLibrary.Helpers
                 Color color = new Color(0.9f, 0.3f, 0.9f);
                 IBroadPhase bp = World.ContactManager.BroadPhase;
 
-                foreach (Body b in World.BodyList)
+                foreach (PhysicsBody b in World.BodyList)
                 {
                     if (b.Enabled == false)
                     {
@@ -306,7 +306,7 @@ namespace GameLibrary.Helpers
             }
             if ((Flags & DebugViewFlags.CenterOfMass) == DebugViewFlags.CenterOfMass)
             {
-                foreach (Body b in World.BodyList)
+                foreach (PhysicsBody b in World.BodyList)
                 {
                     Transform xf;
                     b.GetTransform(out xf);
@@ -559,13 +559,13 @@ namespace GameLibrary.Helpers
             DrawPolygon(verts, 4, color);
         }
 
-        private void DrawJoint(Joint joint)
+        private void DrawJoint(PhysicsJoint joint)
         {
             if (!joint.Enabled)
                 return;
 
-            Body b1 = joint.BodyA;
-            Body b2 = joint.BodyB;
+            PhysicsBody b1 = joint.BodyA;
+            PhysicsBody b2 = joint.BodyB;
             Transform xf1, xf2;
             b1.GetTransform(out xf1);
 

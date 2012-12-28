@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GameLibrary.Entities;
+using GameLibrary.Dependencies.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -47,8 +47,7 @@ namespace GameLibrary
         {
             #region Systems
             //Systems
-            _PhysicsUpdateSystem = this.SystemManager.SetSystem(new PhysicsUpdateSystem(), ExecutionType.Update);
-            _MovementSystem = this.SystemManager.SetSystem(new MovementSystem(), ExecutionType.Update);
+            _MovementSystem = this.SystemManager.SetSystem(new ParticleMovementSystem(), ExecutionType.Update);
 #if DEBUG
             _DebugRenderSystem = this.SystemManager.SetSystem(new DebugRenderSystem(this.Camera), ExecutionType.Draw);
 #endif
@@ -101,9 +100,8 @@ namespace GameLibrary
         protected SpriteBatch _SpriteBatch;
 
         //Systems
-        protected PhysicsUpdateSystem _PhysicsUpdateSystem;
         protected RenderSystem _RenderSystem;
-        protected MovementSystem _MovementSystem;
+        protected ParticleMovementSystem _MovementSystem;
         protected DebugRenderSystem _DebugRenderSystem;
 
         #endregion
