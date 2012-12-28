@@ -40,14 +40,14 @@ namespace GameLibrary.Dependencies.Physics.Common.PhysicsLogic
      * Force applied at a ray is inversely proportional to the square of distance from source
      * AABB is used to query for shapes that may be affected
      * For each RIGID BODY (not shape -- this is an optimization) that is matched, loop through its vertices to determine
-     *		the extreme points -- if there is structure that contains outlining polygon, use that as an additional optimization
+     *        the extreme points -- if there is structure that contains outlining polygon, use that as an additional optimization
      * Evenly cast a number of rays against the shape - number roughly proportional to the arc coverage
-     *		-Something like every 3 degrees should do the trick although this can be altered depending on the distance (if really close don't need such a high density of rays)
-     *		-There should be a minimum number of rays (3-5?) applied to each body so that small bodies far away are still accurately modeled
-     *		-Be sure to have the forces of each ray be proportional to the average arc length covered by each.
+     *        -Something like every 3 degrees should do the trick although this can be altered depending on the distance (if really close don't need such a high density of rays)
+     *        -There should be a minimum number of rays (3-5?) applied to each body so that small bodies far away are still accurately modeled
+     *        -Be sure to have the forces of each ray be proportional to the average arc length covered by each.
      * For each ray that actually intersects with the shape (non intersections indicate something blocking the path of explosion):
-     *		> apply the appropriate force dotted with the negative of the collision normal at the collision point
-     *		> optionally apply linear interpolation between aforementioned Normal force and the original explosion force in the direction of ray to simulate "surface friction" of sorts
+     *        > apply the appropriate force dotted with the negative of the collision normal at the collision point
+     *        > optionally apply linear interpolation between aforementioned Normal force and the original explosion force in the direction of ray to simulate "surface friction" of sorts
      */
 
     /// <summary>

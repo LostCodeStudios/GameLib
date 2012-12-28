@@ -11,10 +11,10 @@ namespace GameLibrary.Dependencies.Entities
             : base(requiredType, otherTypes)
         {
             foreach (var item in GetMergedTypes(requiredType, otherTypes))
-	        {
-		        compTypes.Add(ComponentTypeManager.GetTypeFor(item));
-	        }
-		}
+            {
+                compTypes.Add(ComponentTypeManager.GetTypeFor(item));
+            }
+        }
         List<ComponentType> compTypes = new List<ComponentType>();
         public int EntitiesToProcessEachFrame = 50;        
         Queue<Entity> queue = new Queue<Entity>();              

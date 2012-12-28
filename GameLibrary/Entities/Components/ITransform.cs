@@ -10,7 +10,7 @@ namespace GameLibrary.Entities.Components
     /// <summary>
     /// An interface which specifies if a component posses a transformation.
     /// </summary>
-    public interface Transform : Component
+    public interface ITransform : Component
     {
         /// <summary>
         /// The Position of a component

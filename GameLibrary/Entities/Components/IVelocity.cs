@@ -10,7 +10,7 @@ namespace GameLibrary.Entities.Components
     /// <summary>
     /// A component of the entities velocity.
     /// </summary>
-    public interface Velocity : Component
+    public interface IVelocity : Component
     {
         /// <summary>
         /// The linear velocity of an entity.

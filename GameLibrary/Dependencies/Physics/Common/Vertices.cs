@@ -247,7 +247,7 @@ namespace GameLibrary.Dependencies.Physics.Common
         /// NOTE: It will also return false if the input contains colinear edges.
         /// </summary>
         /// <returns>
-        /// 	<c>true</c> if it is convex; otherwise, <c>false</c>.
+        ///     <c>true</c> if it is convex; otherwise, <c>false</c>.
         /// </returns>
         public bool IsConvex()
         {

@@ -206,11 +206,11 @@ namespace GameLibrary.Dependencies.Physics.Collision.Shapes
 
 #if false
     // This code would put the reference point inside the polygon.
-	        for (int i = 0; i < count; ++i)
-	        {
-		        pRef += vs[i];
-	        }
-	        pRef *= 1.0f / count;
+            for (int i = 0; i < count; ++i)
+            {
+                pRef += vs[i];
+            }
+            pRef *= 1.0f / count;
 #endif
 
             const float inv3 = 1.0f / 3.0f;

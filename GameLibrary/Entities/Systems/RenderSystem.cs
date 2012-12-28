@@ -12,13 +12,13 @@ namespace GameLibrary.Entities.Systems
 {
     public class RenderSystem : EntityProcessingSystem
     {
-        private ComponentMapper<Transform> transformMapper;
+        private ComponentMapper<ITransform> transformMapper;
         private ComponentMapper<Sprite> spriteMapper;
 
         private SpriteBatch spriteBatch;
 
         public RenderSystem(SpriteBatch spritebatch):
-            base(typeof(Sprite), typeof(Transform))
+            base(typeof(Sprite), typeof(ITransform))
         {
             this.spriteBatch = spritebatch;
         }
@@ -26,7 +26,7 @@ namespace GameLibrary.Entities.Systems
         public override void Initialize()
         {
             spriteMapper = new ComponentMapper<Sprite>(world);
-            transformMapper = new ComponentMapper<Transform>(world);
+            transformMapper = new ComponentMapper<ITransform>(world);
         }
 
         /// <summary>
@@ -36,8 +36,9 @@ namespace GameLibrary.Entities.Systems
         public override void Process(Entity e)
         {
             //Get sprite data and transform
-            Transform transform  = transformMapper.Get(e);
+            ITransform transform  = transformMapper.Get(e);
             Sprite  sprite = spriteMapper.Get(e);
+
 
             //Draw to sprite batch
             spriteBatch.Draw(sprite.SpriteSheet, ConvertUnits.ToDisplayUnits(transform.Position),

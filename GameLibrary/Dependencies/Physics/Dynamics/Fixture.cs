@@ -354,7 +354,7 @@ namespace GameLibrary.Dependencies.Physics.Dynamics
         /// </summary>
         /// <param name="fixture">The fixture.</param>
         /// <returns>
-        /// 	<c>true</c> if the fixture is ignored; otherwise, <c>false</c>.
+        ///     <c>true</c> if the fixture is ignored; otherwise, <c>false</c>.
         /// </returns>
         public bool IsFixtureIgnored(Fixture fixture)
         {

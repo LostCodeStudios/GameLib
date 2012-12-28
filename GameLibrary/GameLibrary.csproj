@@ -98,8 +98,10 @@
     <Compile Include="Entities\Components\Physics\Body.cs" />
     <Compile Include="Entities\Components\Physics\Particle.cs" />
     <Compile Include="Entities\Components\Sprite.cs" />
-    <Compile Include="Entities\Components\Transform.cs" />
-    <Compile Include="Entities\Components\Velocity.cs" />
+    <Compile Include="Entities\Components\ITransform.cs" />
+    <Compile Include="Entities\Components\IVelocity.cs" />
+    <Compile Include="Entities\Components\Physics\Transform.cs" />
+    <Compile Include="Entities\Components\Physics\Velocity.cs" />
     <Compile Include="Entities\Systems\DebugRenderSystem.cs" />
     <Compile Include="Entities\Systems\ParticalMovementSystem.cs" />
     <Compile Include="Entities\Systems\RenderSystem.cs" />

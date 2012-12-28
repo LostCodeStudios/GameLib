@@ -563,7 +563,7 @@ namespace GameLibrary.Dependencies.Physics.Common.Decomposition
         /// <param name="yv">The yv.</param>
         /// <param name="xvLength">Length of the xv.</param>
         /// <returns>
-        /// 	<c>true</c> if the specified i is ear; otherwise, <c>false</c>.
+        ///     <c>true</c> if the specified i is ear; otherwise, <c>false</c>.
         /// </returns>
         private static bool IsEar(int i, float[] xv, float[] yv, int xvLength)
         {

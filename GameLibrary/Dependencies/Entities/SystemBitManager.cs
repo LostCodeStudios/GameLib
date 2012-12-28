@@ -10,25 +10,25 @@ using BigInteger = System.Int32;
 
 namespace GameLibrary.Dependencies.Entities
 {
-	internal static class SystemBitManager {
-		private static int POS = 0;
-		private static Dictionary<EntitySystem, BigInteger> systemBits = new Dictionary<EntitySystem, BigInteger>();
-		
-		public static BigInteger GetBitFor(EntitySystem es){
+    internal static class SystemBitManager {
+        private static int POS = 0;
+        private static Dictionary<EntitySystem, BigInteger> systemBits = new Dictionary<EntitySystem, BigInteger>();
+        
+        public static BigInteger GetBitFor(EntitySystem es){
             BigInteger bit;
             bool hasBit = systemBits.TryGetValue(es, out bit);
-			if(!hasBit){
+            if(!hasBit){
 #if WINDOWS_PHONE || XBOX
-				bit = 1 << POS;
+                bit = 1 << POS;
 #else
                 bit = 1L << POS;
 #endif
                 POS++;
-				systemBits.Add(es, bit);
-			}
-			
-			return bit;
-		}
-	}
+                systemBits.Add(es, bit);
+            }
+            
+            return bit;
+        }
+    }
 }
 

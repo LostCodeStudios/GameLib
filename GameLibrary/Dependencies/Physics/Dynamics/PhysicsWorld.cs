@@ -107,7 +107,7 @@ namespace GameLibrary.Dependencies.Physics.Dynamics
         /// </summary>
         /// <param name="category">The category.</param>
         /// <returns>
-        /// 	<c>true</c> if the object has the specified category; otherwise, <c>false</c>.
+        ///     <c>true</c> if the object has the specified category; otherwise, <c>false</c>.
         /// </returns>
         public bool IsInDisabledCategory(Category category)
         {
@@ -137,7 +137,7 @@ namespace GameLibrary.Dependencies.Physics.Dynamics
         /// </summary>
         /// <param name="category">The category.</param>
         /// <returns>
-        /// 	<c>true</c> if the object has the specified category; otherwise, <c>false</c>.
+        ///     <c>true</c> if the object has the specified category; otherwise, <c>false</c>.
         /// </returns>
         public bool IsInEnabledCategory(Category category)
         {

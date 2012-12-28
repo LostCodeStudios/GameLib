@@ -7,7 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace GameLibrary.Physics.Common
+namespace GameLibrary.Dependencies.Physics.Common
 {
     
     public class HashSet<T> : ICollection<T>

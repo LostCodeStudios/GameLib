@@ -337,7 +337,7 @@ namespace GameLibrary.Dependencies.Physics.Collision
         /// Verify that the bounds are sorted.
         /// </summary>
         /// <returns>
-        /// 	<c>true</c> if this instance is valid; otherwise, <c>false</c>.
+        ///     <c>true</c> if this instance is valid; otherwise, <c>false</c>.
         /// </returns>
         public bool IsValid()
         {
@@ -373,7 +373,7 @@ namespace GameLibrary.Dependencies.Physics.Collision
         /// </summary>
         /// <param name="aabb">The aabb.</param>
         /// <returns>
-        /// 	<c>true</c> if it contains the specified aabb; otherwise, <c>false</c>.
+        ///     <c>true</c> if it contains the specified aabb; otherwise, <c>false</c>.
         /// </returns>
         public bool Contains(ref AABB aabb)
         {
@@ -390,7 +390,7 @@ namespace GameLibrary.Dependencies.Physics.Collision
         /// </summary>
         /// <param name="point">The point.</param>
         /// <returns>
-        /// 	<c>true</c> if it contains the specified point; otherwise, <c>false</c>.
+        ///     <c>true</c> if it contains the specified point; otherwise, <c>false</c>.
         /// </returns>
         public bool Contains(ref Vector2 point)
         {

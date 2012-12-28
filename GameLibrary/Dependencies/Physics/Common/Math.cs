@@ -128,7 +128,7 @@ namespace GameLibrary.Dependencies.Physics.Common
         /// </summary>
         /// <param name="x">The x.</param>
         /// <returns>
-        /// 	<c>true</c> if the specified x is valid; otherwise, <c>false</c>.
+        ///     <c>true</c> if the specified x is valid; otherwise, <c>false</c>.
         /// </returns>
         public static bool IsValid(float x)
         {

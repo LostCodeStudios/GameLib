@@ -122,17 +122,17 @@ namespace GameLibrary.Dependencies.Physics.Common.PolygonManipulation
                 return DistancePointPoint(p, A);
 
             // otherwise use comp.graphics.algorithms Frequently Asked Questions method
-            /*(1)     	      AC dot AB
+            /*(1)               AC dot AB
                         r =   ---------
                               ||AB||^2
              
-		                r has the following meaning:
-		                r=0 Point = A
-		                r=1 Point = B
-		                r<0 Point is on the backward extension of AB
-		                r>1 Point is on the forward extension of AB
-		                0<r<1 Point is interior to AB
-	        */
+                        r has the following meaning:
+                        r=0 Point = A
+                        r=1 Point = B
+                        r<0 Point is on the backward extension of AB
+                        r>1 Point is on the forward extension of AB
+                        0<r<1 Point is interior to AB
+            */
 
             double r = ((p.X - A.X) * (B.X - A.X) + (p.Y - A.Y) * (B.Y - A.Y))
                        /
@@ -143,12 +143,12 @@ namespace GameLibrary.Dependencies.Physics.Common.PolygonManipulation
 
 
             /*(2)
-		                    (Ay-Cy)(Bx-Ax)-(Ax-Cx)(By-Ay)
-		                s = -----------------------------
-		             	                Curve^2
+                            (Ay-Cy)(Bx-Ax)-(Ax-Cx)(By-Ay)
+                        s = -----------------------------
+                                         Curve^2
 
-		                Then the distance from C to Point = |s|*Curve.
-	        */
+                        Then the distance from C to Point = |s|*Curve.
+            */
 
             double s = ((A.Y - p.Y) * (B.X - A.X) - (A.X - p.X) * (B.Y - A.Y))
                        /

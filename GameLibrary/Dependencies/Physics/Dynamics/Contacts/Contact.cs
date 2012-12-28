@@ -218,7 +218,7 @@ namespace GameLibrary.Dependencies.Physics.Dynamics.Contacts
         /// Determines whether this contact is touching.
         /// </summary>
         /// <returns>
-        /// 	<c>true</c> if this instance is touching; otherwise, <c>false</c>.
+        ///     <c>true</c> if this instance is touching; otherwise, <c>false</c>.
         /// </returns>
         public bool IsTouching()
         {

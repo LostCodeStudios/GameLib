@@ -10,12 +10,12 @@ namespace GameLibrary.Entities.Components.Physics
     /// <summary>
     /// A non physical body which does not interact with the farseer physics library
     /// </summary>
-    public class Particle : Component, Transform, Velocity
+    public class Particle : Component, ITransform, IVelocity
     {
         public Particle(Entity e, Vector2 position, float rotation, Vector2 linearVelocity, float angularVelocity)
         {
-            e.AddComponent<Transform>(this);
-            e.AddComponent<Velocity>(this);
+            e.AddComponent<ITransform>(this);
+            e.AddComponent<IVelocity>(this);
 
             this.Position = position;
             this.Rotation = rotation;
@@ -28,20 +28,14 @@ namespace GameLibrary.Entities.Components.Physics
         {
         }
 
-        #region Transform
+        #region ITransform
         /// <summary>
         /// The world position of a particle.
         /// </summary>
         public Microsoft.Xna.Framework.Vector2 Position
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            set;
+            get;
         }
 
         /// <summary>

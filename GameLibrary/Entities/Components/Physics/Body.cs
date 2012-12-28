@@ -10,16 +10,16 @@ using GameLibrary.Dependencies.Physics.Dynamics;
 namespace GameLibrary.Entities.Components.Physics
 {
     /// <summary>
-    /// A physical component is a body. Physical components are always coupled with Transform & Velocity
+    /// A physical component is a body. Body components are always coupled with ITransform & Velocity
     /// </summary>
-    public class Body : GameLibrary.Dependencies.Physics.Dynamics.PhysicsBody, Component, Transform, Velocity
+    public class Body : GameLibrary.Dependencies.Physics.Dynamics.PhysicsBody, Component, ITransform, IVelocity
     {
         public Body(EntityWorld world, Entity e)
             : base(world, e)
         {
             //Add transform and velocity
-            e.AddComponent<Transform>(this);
-            e.AddComponent<Velocity>(this);
+            e.AddComponent<ITransform>(this);
+            e.AddComponent<IVelocity>(this);
         }
         ~Body()
         {
@@ -27,11 +27,11 @@ namespace GameLibrary.Entities.Components.Physics
             
         }
 
-        #region Transform
+        #region ITransform
         /// <summary>
         /// The position of an entity.
         /// </summary>
-        Vector2 Transform.Position
+        Vector2 ITransform.Position
         {
             get
             {
@@ -46,7 +46,7 @@ namespace GameLibrary.Entities.Components.Physics
         /// <summary>
         /// The rotation of an entity.
         /// </summary>
-        float Transform.Rotation
+        float ITransform.Rotation
         {
             get
             {
@@ -63,7 +63,7 @@ namespace GameLibrary.Entities.Components.Physics
         /// <summary>
         /// The linear velocity of an entity.
         /// </summary>
-        Vector2 Velocity.LinearVelocity
+        Vector2 IVelocity.LinearVelocity
         {
             get
             {
@@ -78,7 +78,7 @@ namespace GameLibrary.Entities.Components.Physics
         /// <summary>
         /// The angular velocity of an entity.
         /// </summary>
-        float Velocity.AngularVelocity
+        float IVelocity.AngularVelocity
         {
             get
             {
