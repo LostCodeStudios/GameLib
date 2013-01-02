@@ -605,10 +605,15 @@ namespace GameLibrary.Dependencies.Physics.Dynamics
 
         private void ProcessRemovedBodies()
         {
+            lock(this)
             if (_bodyRemoveList.Count > 0)
             {
-                foreach (PhysicsBody body in _bodyRemoveList)
+                
+                var iter = _bodyRemoveList.GetEnumerator();
+                lock(_bodyRemoveList)
+                while(iter.MoveNext())
                 {
+                    PhysicsBody body = iter.Current;
                     Debug.Assert(BodyList.Count > 0);
 
                     // You tried to remove a body that is not contained in the BodyList.

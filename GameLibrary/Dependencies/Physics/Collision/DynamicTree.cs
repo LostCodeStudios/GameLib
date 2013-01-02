@@ -313,81 +313,83 @@ namespace GameLibrary.Dependencies.Physics.Collision
             Vector2 p1 = input.Point1;
             Vector2 p2 = input.Point2;
             Vector2 r = p2 - p1;
-            Debug.Assert(r.LengthSquared() > 0.0f);
-            r.Normalize();
-
-            // v is perpendicular to the segment.
-            Vector2 absV = MathUtils.Abs(new Vector2(-r.Y, r.X));
-
-            // Separating axis for segment (Gino, p80).
-            // |dot(v, p1 - c)| > dot(|v|, h)
-
-            float maxFraction = input.MaxFraction;
-
-            // Build a bounding box for the segment.
-            AABB segmentAABB = new AABB();
+            if (r.LengthSquared() > 0.0f)
             {
-                Vector2 t = p1 + maxFraction * (p2 - p1);
-                Vector2.Min(ref p1, ref t, out segmentAABB.LowerBound);
-                Vector2.Max(ref p1, ref t, out segmentAABB.UpperBound);
-            }
+                r.Normalize();
 
-            _stack.Clear();
-            _stack.Push(_root);
-
-            while (_stack.Count > 0)
-            {
-                int nodeId = _stack.Pop();
-                if (nodeId == NullNode)
-                {
-                    continue;
-                }
-
-                DynamicTreeNode<T> node = _nodes[nodeId];
-
-                if (AABB.TestOverlap(ref node.AABB, ref segmentAABB) == false)
-                {
-                    continue;
-                }
+                // v is perpendicular to the segment.
+                Vector2 absV = MathUtils.Abs(new Vector2(-r.Y, r.X));
 
                 // Separating axis for segment (Gino, p80).
                 // |dot(v, p1 - c)| > dot(|v|, h)
-                Vector2 c = node.AABB.Center;
-                Vector2 h = node.AABB.Extents;
-                float separation = Math.Abs(Vector2.Dot(new Vector2(-r.Y, r.X), p1 - c)) - Vector2.Dot(absV, h);
-                if (separation > 0.0f)
+
+                float maxFraction = input.MaxFraction;
+
+                // Build a bounding box for the segment.
+                AABB segmentAABB = new AABB();
                 {
-                    continue;
+                    Vector2 t = p1 + maxFraction * (p2 - p1);
+                    Vector2.Min(ref p1, ref t, out segmentAABB.LowerBound);
+                    Vector2.Max(ref p1, ref t, out segmentAABB.UpperBound);
                 }
 
-                if (node.IsLeaf())
+                _stack.Clear();
+                _stack.Push(_root);
+
+                while (_stack.Count > 0)
                 {
-                    RayCastInput subInput;
-                    subInput.Point1 = input.Point1;
-                    subInput.Point2 = input.Point2;
-                    subInput.MaxFraction = maxFraction;
-
-                    float value = callback(subInput, nodeId);
-
-                    if (value == 0.0f)
+                    int nodeId = _stack.Pop();
+                    if (nodeId == NullNode)
                     {
-                        // the client has terminated the raycast.
-                        return;
+                        continue;
                     }
 
-                    if (value > 0.0f)
+                    DynamicTreeNode<T> node = _nodes[nodeId];
+
+                    if (AABB.TestOverlap(ref node.AABB, ref segmentAABB) == false)
                     {
-                        // Update segment bounding box.
-                        maxFraction = value;
-                        Vector2 t = p1 + maxFraction * (p2 - p1);
-                        segmentAABB.LowerBound = Vector2.Min(p1, t);
-                        segmentAABB.UpperBound = Vector2.Max(p1, t);
+                        continue;
                     }
-                }
-                else
-                {
-                    _stack.Push(node.Child1);
-                    _stack.Push(node.Child2);
+
+                    // Separating axis for segment (Gino, p80).
+                    // |dot(v, p1 - c)| > dot(|v|, h)
+                    Vector2 c = node.AABB.Center;
+                    Vector2 h = node.AABB.Extents;
+                    float separation = Math.Abs(Vector2.Dot(new Vector2(-r.Y, r.X), p1 - c)) - Vector2.Dot(absV, h);
+                    if (separation > 0.0f)
+                    {
+                        continue;
+                    }
+
+                    if (node.IsLeaf())
+                    {
+                        RayCastInput subInput;
+                        subInput.Point1 = input.Point1;
+                        subInput.Point2 = input.Point2;
+                        subInput.MaxFraction = maxFraction;
+
+                        float value = callback(subInput, nodeId);
+
+                        if (value == 0.0f)
+                        {
+                            // the client has terminated the raycast.
+                            return;
+                        }
+
+                        if (value > 0.0f)
+                        {
+                            // Update segment bounding box.
+                            maxFraction = value;
+                            Vector2 t = p1 + maxFraction * (p2 - p1);
+                            segmentAABB.LowerBound = Vector2.Min(p1, t);
+                            segmentAABB.UpperBound = Vector2.Max(p1, t);
+                        }
+                    }
+                    else
+                    {
+                        _stack.Push(node.Child1);
+                        _stack.Push(node.Child2);
+                    }
                 }
             }
         }

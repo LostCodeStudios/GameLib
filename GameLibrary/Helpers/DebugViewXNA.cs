@@ -355,7 +355,7 @@ namespace GameLibrary.Helpers
             float yScale = PerformancePanelBounds.Bottom - (float)PerformancePanelBounds.Top;
             float yAxis = (PerformancePanelBounds.Bottom +
                 (MinimumValue / (MaximumValue - MinimumValue)) * yScale);
-
+            
             // we must have at least 2 values to start rendering
             if (_graphTotalValues.Count > 2)
             {

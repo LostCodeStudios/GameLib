@@ -10,17 +10,19 @@ namespace GameLibrary.Entities.Components.Physics
     /// <summary>
     /// A non physical body which does not interact with the farseer physics library
     /// </summary>
-    public class Particle : Component, ITransform, IVelocity
+    public class Particle : Component, ITransform, IVelocity, IDamping
     {
         public Particle(Entity e, Vector2 position, float rotation, Vector2 linearVelocity, float angularVelocity)
         {
             e.AddComponent<ITransform>(this);
             e.AddComponent<IVelocity>(this);
-
+            e.AddComponent<IDamping>(this);
             this.Position = position;
             this.Rotation = rotation;
             this.LinearVelocity = linearVelocity;
             this.AngularVelocity = angularVelocity;
+            this.LinearDamping = 0.0f;
+            this.AngularDamping = 0.0f;
         }
 
         public Particle(Entity e)
@@ -48,7 +50,7 @@ namespace GameLibrary.Entities.Components.Physics
         }
         #endregion
 
-        #region Velocity
+        #region IVelocity
         /// <summary>
         /// The linear velocity of a particle.
         /// </summary>
@@ -66,6 +68,19 @@ namespace GameLibrary.Entities.Components.Physics
             set;
             get;
         }
+        #endregion
+
+        #region IDamping
+        /// <summary>
+        /// The meter/second quantity by which the linear velocity will slow.
+        /// </summary>
+        public float LinearDamping { set; get; }
+
+        /// <summary>
+        /// The radian/second quantity by which the angular velocity (omega) will slow.
+        /// </summary>
+        public float AngularDamping { set; get; }
+
         #endregion
     }
 }

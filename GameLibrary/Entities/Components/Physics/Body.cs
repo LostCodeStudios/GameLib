@@ -12,7 +12,7 @@ namespace GameLibrary.Entities.Components.Physics
     /// <summary>
     /// A physical component is a body. Body components are always coupled with ITransform & Velocity
     /// </summary>
-    public class Body : GameLibrary.Dependencies.Physics.Dynamics.PhysicsBody, Component, ITransform, IVelocity
+    public class Body : GameLibrary.Dependencies.Physics.Dynamics.PhysicsBody, Component, ITransform, IVelocity, IDamping
     {
         public Body(EntityWorld world, Entity e)
             : base(world, e)
@@ -20,6 +20,7 @@ namespace GameLibrary.Entities.Components.Physics
             //Add transform and velocity
             e.AddComponent<ITransform>(this);
             e.AddComponent<IVelocity>(this);
+            e.AddComponent<IDamping>(this);
         }
         ~Body()
         {
@@ -58,7 +59,7 @@ namespace GameLibrary.Entities.Components.Physics
         }
         #endregion
 
-        #region Velocity
+        #region IVelocity
         /// <summary>
         /// The linear velocity of an entity.
         /// </summary>
@@ -90,6 +91,40 @@ namespace GameLibrary.Entities.Components.Physics
         }
         #endregion
 
+        #region IDamping
+
+        /// <summary>
+        /// The radian/second quantity by which the angular velocity (omega) will slow.
+        /// </summary>
+        float IDamping.AngularDamping
+        {
+            get
+            {
+                return this.AngularDamping;
+            }
+            set
+            {
+                this.AngularDamping = value;
+            }
+        }
+
+        /// <summary>
+        /// The meter/second quantity by which the linear velocity will slow.
+        /// </summary>
+        float IDamping.LinearDamping
+        {
+            get
+            {
+                return this.LinearDamping;
+            }
+            set
+            {
+                this.LinearDamping = value;
+            }
+        }
+
+        #endregion
+
         #region Helpers
         public override string ToString()
         {
@@ -99,6 +134,5 @@ namespace GameLibrary.Entities.Components.Physics
                 + "),\n                (Ent=" + this.UserData + ")]";
         }
         #endregion
-
     }
 }

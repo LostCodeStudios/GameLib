@@ -77,6 +77,7 @@
     <Compile Include="Dependencies\Entities\EntitySystem.cs" />
     <Compile Include="Dependencies\Entities\EntityWorld.cs" />
     <Compile Include="Dependencies\Entities\GroupManager.cs" />
+    <Compile Include="Dependencies\Entities\GroupSystem.cs" />
     <Compile Include="Dependencies\Entities\HybridQueueSystemProcessing.cs" />
     <Compile Include="Dependencies\Entities\IEntityGroupTemplate.cs" />
     <Compile Include="Dependencies\Entities\IEntityTemplate.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Dependencies\Entities\Utils\Timer.cs" />
     <Compile Include="Dependencies\Entities\Utils\TrigLUT.cs" />
     <Compile Include="Dependencies\Entities\Utils\Utils.cs" />
+    <Compile Include="Entities\Components\IDamping.cs" />
     <Compile Include="Entities\Components\Physics\Body.cs" />
     <Compile Include="Entities\Components\Physics\Particle.cs" />
     <Compile Include="Entities\Components\Sprite.cs" />

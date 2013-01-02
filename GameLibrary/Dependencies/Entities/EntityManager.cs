@@ -249,8 +249,6 @@ namespace GameLibrary.Dependencies.Entities
         /// <returns>Component instance</returns>
         internal Component GetComponent(Entity e, ComponentType type)
         {
-            System.Diagnostics.Debug.Assert(e != null);
-            System.Diagnostics.Debug.Assert(type != null);
             int entityId = e.Id;
             Bag<Component> bag = componentsByType.Get(type.Id);
             if (type.Id >= componentsByType.Capacity)

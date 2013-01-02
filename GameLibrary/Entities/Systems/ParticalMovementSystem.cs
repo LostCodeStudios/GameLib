@@ -9,7 +9,7 @@ using GameLibrary.Entities.Components.Physics;
 
 namespace GameLibrary.Entities.Systems
 {
-    public class ParticleMovementSystem : ParallelEntityProcessingSystem
+    public class ParticleMovementSystem : EntityProcessingSystem
     {
         ComponentMapper<Particle> particleMapper;
         public ParticleMovementSystem()
@@ -27,9 +27,16 @@ namespace GameLibrary.Entities.Systems
         {
             Particle particle = particleMapper.Get(e);
 
+            float dt = World.Delta / 1000f;
+
+            //Damping (dx/dt) = (-c*dx/dt) * DT
+            particle.AngularVelocity += -particle.AngularDamping * dt * particle.AngularVelocity;
+            particle.LinearVelocity += new Vector2(-particle.LinearDamping * dt) * particle.LinearVelocity;
+            
+
             //Add the velocity of a particle to its transform
-            particle.Position += particle.LinearVelocity * new Vector2(World.Delta / 1000f); //x = int(dx/dt)[delta t]
-            particle.Rotation += particle.AngularVelocity * (World.Delta / 1000f); //theta = int(dtheta/dt)[delta t]
+            particle.Position += particle.LinearVelocity * new Vector2(dt); //x = int(dx/dt)[delta t]
+            particle.Rotation += particle.AngularVelocity * (dt); //theta = int(dtheta/dt)[delta t]
         }
     }
 }

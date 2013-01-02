@@ -27,7 +27,7 @@ namespace GameLibrary
             : base(gravity)
         {
             this.Camera = camera;
-            this._SpriteBatch = spriteBatch;
+            this.SpriteBatch = spriteBatch;
         }
 
         /// <summary>
@@ -39,21 +39,14 @@ namespace GameLibrary
         }
         #endregion
 
-        #region Functioning Loop
+        #region Initialization
+
         /// <summary>
         /// Initializes the world.
         /// </summary>
         public virtual void Initialize()
         {
-            #region Systems
-            //Systems
-            _MovementSystem = this.SystemManager.SetSystem(new ParticleMovementSystem(), ExecutionType.Update);
-#if DEBUG
-            _DebugRenderSystem = this.SystemManager.SetSystem(new DebugRenderSystem(this.Camera), ExecutionType.Draw, 0);
-#endif
-            _RenderSystem = this.SystemManager.SetSystem(new RenderSystem(_SpriteBatch), ExecutionType.Draw, 1);
-            #endregion
-
+            this.BuildSystems();
             SystemManager.InitializeAll();
         }
 
@@ -62,12 +55,52 @@ namespace GameLibrary
         /// </summary>
         /// <param name="Content"></param>
         public virtual void LoadContent(ContentManager Content, params object[] args)
-        {   //If user doesn't implement use default.
+        {
 #if DEBUG   //Debug render system
-            this._DebugRenderSystem.LoadContent(_SpriteBatch.GraphicsDevice, Content);
+            this._DebugRenderSystem.LoadContent(SpriteBatch.GraphicsDevice, Content);
 #endif
+
+            //Builds templates in world.
+
+            this.BuildTemplates(Content, args);
+            this.BuildEntities(Content, args);
         }
 
+        #region Building
+        /// <summary>
+        /// Builds all of the systems.
+        /// </summary>
+        protected virtual void BuildSystems()
+        {
+            //Default Systems
+            _MovementSystem = this.SystemManager.SetSystem(new ParticleMovementSystem(), ExecutionType.Update);
+#if DEBUG
+            _DebugRenderSystem = this.SystemManager.SetSystem(new DebugRenderSystem(this.Camera), ExecutionType.Draw, 0);
+#endif
+            _RenderSystem = this.SystemManager.SetSystem(new RenderSystem(SpriteBatch), ExecutionType.Draw, 1);
+        }
+
+        /// <summary>
+        /// Builds all of the templates in the world.
+        /// </summary>
+        protected virtual void BuildTemplates(ContentManager Content, params object[] args)
+        {
+
+        }
+
+        /// <summary>
+        /// Builds all of the entities in the world (initially)
+        /// </summary>
+        protected virtual void BuildEntities(ContentManager Content, params object[] args)
+        {
+        }
+
+
+        #endregion
+
+        #endregion
+
+        #region Functioning Loop
         /// <summary>
         /// Updates the world
         /// </summary>
@@ -97,7 +130,7 @@ namespace GameLibrary
         #region Fields
 
         public Camera Camera;
-        protected SpriteBatch _SpriteBatch;
+        protected SpriteBatch SpriteBatch;
 
         //Systems
         protected RenderSystem _RenderSystem;
