@@ -16,11 +16,13 @@ namespace GameLibrary.Entities.Systems
         private ComponentMapper<Sprite> spriteMapper;
 
         private SpriteBatch spriteBatch;
+        private Camera camera;
 
-        public RenderSystem(SpriteBatch spritebatch):
+        public RenderSystem(SpriteBatch spritebatch, Camera camera):
             base(typeof(Sprite), typeof(ITransform))
         {
             this.spriteBatch = spritebatch;
+            this.camera = camera;
         }
 
         public override void Initialize()
@@ -47,7 +49,18 @@ namespace GameLibrary.Entities.Systems
                 transform.Rotation,
                 sprite.Origin,
                 sprite.Scale,
-                SpriteEffects.None, 0f);
+                SpriteEffects.None, sprite.Layer);
+        }
+
+        /// <summary>
+        /// Starts/Ends spriteBatch
+        /// </summary>
+        /// <param name="entities"></param>
+        protected override void ProcessEntities(Dictionary<int, Entity> entities) 
+        {
+            spriteBatch.Begin(SpriteSortMode.BackToFront, null, null, null, null, null, camera.View);
+            base.ProcessEntities(entities);
+            spriteBatch.End();
         }
     }
 }

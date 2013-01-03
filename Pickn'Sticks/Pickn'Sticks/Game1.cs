@@ -8,12 +8,9 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using CarGame.Entities.Systems;
 using GameLibrary.Helpers;
-using GameLibrary.Dependencies.Entities;
-using CarGame.Entities.Templates;
 
-namespace CarGame
+namespace Pickn_Sticks
 {
     /// <summary>
     /// This is the main type for your game
@@ -22,17 +19,14 @@ namespace CarGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
-
-        private CarWorld World;
-        private Entity player;
+        StickWorld World;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            Window.Title = "CarGame EF test";
+            Window.Title = "Pick_nSticks";
             graphics.PreferMultiSampling = true;
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 720;
@@ -51,12 +45,12 @@ namespace CarGame
             // TODO: Add your initialization logic here
             ConvertUnits.SetDisplayUnitToSimUnitRatio(24f);
             ScreenHelper.Initialize(graphics.GraphicsDevice);
+
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            World = new CarWorld(new Camera(GraphicsDevice), spriteBatch);
+            
+            World = new StickWorld(new GameLibrary.Helpers.Camera(GraphicsDevice), spriteBatch);
+            //Init
             World.Initialize();
-           
-
 
             base.Initialize();
         }
@@ -67,8 +61,8 @@ namespace CarGame
         /// </summary>
         protected override void LoadContent()
         {
+            //Load world content
             World.LoadContent(Content);
-            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>
@@ -87,12 +81,10 @@ namespace CarGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            if(Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
-
-            World.PlayerControlSystem.UpdateInput(Keyboard.GetState());
             World.Update(gameTime);
+
             base.Update(gameTime);
         }
 
@@ -102,9 +94,8 @@ namespace CarGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.LawnGreen);
 
-            // TODO: Add your drawing code here
             World.Draw(gameTime);
 
             base.Draw(gameTime);

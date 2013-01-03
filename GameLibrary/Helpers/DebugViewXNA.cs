@@ -175,7 +175,7 @@ namespace GameLibrary.Helpers
                 foreach (PhysicsBody b in World.BodyList)
                 {
                     if (b.UserData != null && b.UserData is Entity) //Draw the name of the entity
-                        DrawString(true, (int)ConvertUnits.ToDisplayUnits(b.WorldCenter.X), (int)ConvertUnits.ToDisplayUnits(b.WorldCenter.Y), "[" + (b.UserData as Entity).Id + "] " + (b.UserData as Entity).Tag.ToString(), Color.LightSalmon);
+                        DrawString(true, (int)ConvertUnits.ToDisplayUnits(b.WorldCenter.X), (int)ConvertUnits.ToDisplayUnits(b.WorldCenter.Y), "[" + (b.UserData as Entity).Id + "] " + (b.UserData as Entity).Tag.ToString(), Color.LightSalmon, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                     Transform xf;
                     b.GetTransform(out xf);
                     foreach (Fixture f in b.FixtureList)
@@ -482,9 +482,9 @@ namespace GameLibrary.Helpers
             else
                 avgAxis = PerformancePanelBounds.Center.Y - 4;
 
-            DrawString(PerformancePanelBounds.Right + 10, PerformancePanelBounds.Top, "Max: " + _max);
-            DrawString(PerformancePanelBounds.Right + 10, (int)MathHelper.Clamp(avgAxis, PerformancePanelBounds.Top, yAxis), "Avg: " + _avg, Color.White);
-            DrawString(PerformancePanelBounds.Right + 10, PerformancePanelBounds.Bottom - 15, "Min: " + _min, Color.LightSalmon);
+            DrawString(PerformancePanelBounds.Right + 10, PerformancePanelBounds.Top, "Max: " + _max, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+            DrawString(PerformancePanelBounds.Right + 10, (int)MathHelper.Clamp(avgAxis, PerformancePanelBounds.Top, yAxis), "Avg: " + _avg, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+            DrawString(PerformancePanelBounds.Right + 10, PerformancePanelBounds.Bottom - 15, "Min: " + _min, Color.LightSalmon, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
 
             //Draw background.
             _background[0] = new Vector2(PerformancePanelBounds.X, PerformancePanelBounds.Y);
@@ -501,7 +501,7 @@ namespace GameLibrary.Helpers
             DrawSegment(new Vector2(PerformancePanelBounds.X, yAxis),
                 new Vector2(PerformancePanelBounds.X - 8, yAxis),
                 Color.White);
-            DrawString(PerformancePanelBounds.X - 8, (int)yAxis-12, "0", Color.White);
+            DrawString(PerformancePanelBounds.X - 8, (int)yAxis - 12, "0", Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
             #endregion
         }
 
@@ -993,16 +993,16 @@ namespace GameLibrary.Helpers
                 if (_worldStringData[i].Args.Length > 0) //If they have variable arguments
                 {
                     _batch.DrawString(_font, string.Format(_worldStringData[i].S, _worldStringData[i].Args),
-                                      new Vector2(_worldStringData[i].X + 1f, _worldStringData[i].Y + 1f), Color.Black);
-                    _batch.DrawString(_font, string.Format(_worldStringData[i].S, _worldStringData[i].Args),
-                                      new Vector2(_worldStringData[i].X, _worldStringData[i].Y), _worldStringData[i].Color);
+                                      new Vector2(_worldStringData[i].X + 1f, _worldStringData[i].Y + 1f), Color.Black, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                    _batch.DrawString(_font, string.Format(_worldStringData[i].S, _worldStringData[i].Args,0f,Vector2.Zero,1f,SpriteEffects.None,0f),
+                                      new Vector2(_worldStringData[i].X, _worldStringData[i].Y), _worldStringData[i].Color,0f,Vector2.Zero,1f,SpriteEffects.None,0f);
                 }
                 else
                 {
                     _batch.DrawString(_font, _worldStringData[i].S,
-                        new Vector2(_worldStringData[i].X + 1f, _worldStringData[i].Y + 1f), Color.Black);
+                        new Vector2(_worldStringData[i].X + 1f, _worldStringData[i].Y + 1f), Color.Black, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                     _batch.DrawString(_font, _worldStringData[i].S,
-                        new Vector2(_worldStringData[i].X, _worldStringData[i].Y), _worldStringData[i].Color);
+                        new Vector2(_worldStringData[i].X, _worldStringData[i].Y), _worldStringData[i].Color, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                 }
                 _worldStringData.RemoveAll(new Predicate<StringData>(x => x.S == _worldStringData[i].S));
                 i--;

@@ -15,7 +15,8 @@ namespace GameLibrary.Dependencies.Entities
         private Dictionary<String, IEntityTemplate> entityTemplates = new Dictionary<String, IEntityTemplate>();
         private Dictionary<String, IEntityGroupTemplate> entityGroupTemplates = new Dictionary<String, IEntityGroupTemplate>();
         private int delta;
-        
+        private int stepCount = 0;
+
         public EntityWorld(Vector2 Gravity) : base(Gravity) 
         {
             entityManager = new EntityManager(this);
@@ -47,6 +48,11 @@ namespace GameLibrary.Dependencies.Entities
         public int Delta {
             get { return delta; }
             set { delta = value; }
+        }
+
+        public int StepCount
+        {
+            get { return stepCount; }
         }
 
         /// <summary>
@@ -133,6 +139,7 @@ namespace GameLibrary.Dependencies.Entities
 
         public void LoopStart()
         {
+            stepCount++;
             if (!deleted.IsEmpty)
             {
                 for (int i = 0, j = deleted.Size; j > i; i++)

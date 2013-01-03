@@ -29,7 +29,7 @@ namespace CarGame
         public override void Initialize()
         {
             #region Systems
-            _groundRenderSystem = this.SystemManager.SetSystem(new GroundRenderSystem(Camera, _SpriteBatch.GraphicsDevice), ExecutionType.Draw);
+            _groundRenderSystem = this.SystemManager.SetSystem(new GroundRenderSystem(Camera, this.SpriteBatch.GraphicsDevice), ExecutionType.Draw);
             PlayerControlSystem = this.SystemManager.SetSystem(new PlayerControlSystem(), ExecutionType.Update);
 
             #endregion
@@ -70,7 +70,7 @@ namespace CarGame
             Camera.EnableRotationTracking = true;
             Camera.EnablePositionTracking = true;
 #if DEBUG
-            this._DebugRenderSystem.LoadContent(_SpriteBatch.GraphicsDevice, Content,
+            this._DebugRenderSystem.LoadContent(SpriteBatch.GraphicsDevice, Content,
                  new KeyValuePair<string, object>("Camera", this.Camera),
                  new KeyValuePair<string, object>("Player", this.PlayerCar.GetComponent<Body>()));
 #endif

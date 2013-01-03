@@ -75,9 +75,9 @@ namespace GameLibrary
             //Default Systems
             _MovementSystem = this.SystemManager.SetSystem(new ParticleMovementSystem(), ExecutionType.Update);
 #if DEBUG
-            _DebugRenderSystem = this.SystemManager.SetSystem(new DebugRenderSystem(this.Camera), ExecutionType.Draw, 0);
+            _DebugRenderSystem = this.SystemManager.SetSystem(new DebugRenderSystem(this.Camera), ExecutionType.Draw, 1);
 #endif
-            _RenderSystem = this.SystemManager.SetSystem(new RenderSystem(SpriteBatch), ExecutionType.Draw, 1);
+            _RenderSystem = this.SystemManager.SetSystem(new RenderSystem(SpriteBatch, this.Camera), ExecutionType.Draw, 0);
         }
 
         /// <summary>
@@ -110,8 +110,8 @@ namespace GameLibrary
             this.LoopStart(); //Start the functioning loop
             {
                 this.Delta = (int)gameTime.ElapsedGameTime.TotalMilliseconds; //set change in time.
-                this.Step((float)gameTime.ElapsedGameTime.TotalSeconds); //Update physical world.
                 this.SystemManager.UpdateSynchronous(ExecutionType.Update); //Update the entity world.
+                this.Step((float)gameTime.ElapsedGameTime.TotalSeconds); //Update physical world.
                 Camera.Update(gameTime); //Finally update the camera.
             }
         }

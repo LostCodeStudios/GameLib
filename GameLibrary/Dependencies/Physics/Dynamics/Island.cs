@@ -447,7 +447,7 @@ namespace GameLibrary.Dependencies.Physics.Dynamics
 
         public void Add(Contact contact)
         {
-            Debug.Assert(ContactCount < _contactCapacity);
+            if(ContactCount < _contactCapacity);
             _contacts[ContactCount++] = contact;
         }
 

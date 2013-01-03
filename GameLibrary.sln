@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarGame", "CarGame\CarGame\CarGame.csproj", "{F0296D40-D96C-48B9-ACD7-FAC34C77942E}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "CarGameContent", "CarGame\CarGameContent\CarGameContent.contentproj", "{9AB2E4C5-913A-46F5-99DD-E758945A475C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarGameContent", "CarGame\CarGameContent\CarGameContent.contentproj", "{9AB2E4C5-913A-46F5-99DD-E758945A475C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLibrary", "GameLibrary\GameLibrary.csproj", "{49BA83BF-05DF-400B-B33A-3CBE32443D04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pickn'Sticks", "Pickn'Sticks\Pickn'Sticks\Pickn'Sticks.csproj", "{57563872-C5A5-418F-A0B6-2605B8CFDF81}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "Pickn'SticksContent", "Pickn'Sticks\Pickn'SticksContent\Pickn'SticksContent.contentproj", "{69F0A394-9FC8-4333-AC1B-C79D59DD3D00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +27,12 @@ Global
 		{49BA83BF-05DF-400B-B33A-3CBE32443D04}.Debug|x86.Build.0 = Debug|x86
 		{49BA83BF-05DF-400B-B33A-3CBE32443D04}.Release|x86.ActiveCfg = Release|x86
 		{49BA83BF-05DF-400B-B33A-3CBE32443D04}.Release|x86.Build.0 = Release|x86
+		{57563872-C5A5-418F-A0B6-2605B8CFDF81}.Debug|x86.ActiveCfg = Debug|x86
+		{57563872-C5A5-418F-A0B6-2605B8CFDF81}.Debug|x86.Build.0 = Debug|x86
+		{57563872-C5A5-418F-A0B6-2605B8CFDF81}.Release|x86.ActiveCfg = Release|x86
+		{57563872-C5A5-418F-A0B6-2605B8CFDF81}.Release|x86.Build.0 = Release|x86
+		{69F0A394-9FC8-4333-AC1B-C79D59DD3D00}.Debug|x86.ActiveCfg = Debug|x86
+		{69F0A394-9FC8-4333-AC1B-C79D59DD3D00}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
