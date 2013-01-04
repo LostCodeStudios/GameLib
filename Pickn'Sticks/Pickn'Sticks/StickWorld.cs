@@ -94,6 +94,13 @@ namespace Pickn_Sticks
 
         #region Functioning Loop
 
+        public override void Update(GameTime gameTime)
+        {
+            Camera.Zoom = Mouse.GetState().ScrollWheelValue * 0.01f;
+
+            base.Update(gameTime);
+        }
+
         #endregion
 
         #region Fields
