@@ -1,14 +1,14 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GameLibrary.Entities;
-using GameLibrary.Physics.Factories;
-using GameLibrary.Physics.Common;
+using GameLibrary.Dependencies.Entities;
+using GameLibrary.Dependencies.Physics.Factories;
+using GameLibrary.Dependencies.Physics.Common;
 using Microsoft.Xna.Framework;
 using GameLibrary.Entities.Components;
 using GameLibrary;
+using GameLibrary.Entities.Components.Physics;
 
 namespace CarGame.Entities.Templates
 {
@@ -24,7 +24,7 @@ namespace CarGame.Entities.Templates
         {
             e.Group = "Props";
             e.Tag = "Ground";
-            Physical ground = e.AddComponent<Physical>("Ground", new Physical(world, e, "Ground"));
+            Body ground = e.AddComponent<Body>(new Body(world, e));
             
             
             //Verts
@@ -64,10 +64,10 @@ namespace CarGame.Entities.Templates
                 terrain.Add(new Vector2(310f, 0));
                 terrain.Add(new Vector2(310f, -5));
 
-                for (int i = 0; i < terrain.Count - 1; ++i)
-                {
-                    FixtureFactory.AttachEdge(terrain[i], terrain[i + 1], ground);
-                }
+            for (int i = 0; i < terrain.Count - 1; ++i)
+            {
+                FixtureFactory.AttachEdge(terrain[i], terrain[i + 1], ground);
+            }
             ground.Friction = 0.6f;
 
             return e;

@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using CarGame.Entities.Systems;
 using GameLibrary.Helpers;
-using GameLibrary.Entities;
+using GameLibrary.Dependencies.Entities;
 using CarGame.Entities.Templates;
 
 namespace CarGame
@@ -105,9 +105,7 @@ namespace CarGame
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin(0, null, null, null, null, null, World.Camera.View);
             World.Draw(gameTime);
-            spriteBatch.End();
 
             base.Draw(gameTime);
         }

@@ -1,16 +1,1 @@
-[] Implement Farseer physics into actor system.
-  [] World
-     [] Give stages their own world/list of entities/directors
-  [] Actor
-     [] Animate bounding boxes.
-	 [] Add collision events to constructor and then set up stage option forr adding actors (with directors and sheeet).
-	 [] Actors
-		[] Living Actor
-		[] Prop (Static, -Only collides, fun stuff)
-  [] Stage
-     [] Actors
-	 [] Draw
-	 [] Update
-	 [] Scenery
-[] Merge
-[] Remove old polygon system :)
+[] Animations

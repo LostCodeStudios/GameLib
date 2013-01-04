@@ -75,8 +75,10 @@
     <Compile Include="CarWorld.cs" />
     <Compile Include="Entities\Systems\GroundRenderSystem.cs" />
     <Compile Include="Entities\Systems\PlayerControlSystem.cs" />
-    <Compile Include="Entities\Templates\BridgeTemplate.cs" />
-    <Compile Include="Entities\Templates\PlayerTemplate.cs" />
+    <Compile Include="Entities\Templates\BridgeGroupTemplate.cs" />
+    <Compile Include="Entities\Templates\CarGroupTemplate.cs" />
+    <Compile Include="Entities\Templates\Car\ChassisTemplate.cs" />
+    <Compile Include="Entities\Templates\Car\WheelTemplate.cs" />
     <Compile Include="Entities\Templates\GroundTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
@@ -125,9 +127,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\Components\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--
