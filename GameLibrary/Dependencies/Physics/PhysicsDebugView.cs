@@ -92,9 +92,9 @@ namespace GameLibrary.Dependencies.Physics
 
     /// Implement and register this class with a World to provide debug drawing of physics
     /// entities in your game.
-    public abstract class DebugView
+    public abstract class PhysicsDebugView
     {
-        protected DebugView(EntityWorld world)
+        protected PhysicsDebugView(EntityWorld world)
         {
             World = world;
         }

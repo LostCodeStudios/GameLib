@@ -45,17 +45,19 @@ namespace CarGame.Entities.Systems
 
             //Process motor
             Body body = physicalMapper.Get(e);
-
-            LineJoint _springBack = (LineJoint)body.JointList.Joint;
-            _springBack.MotorSpeed = Math.Sign(acceleration) *
-                         MathHelper.SmoothStep(0f, 50, Math.Abs(acceleration));
-            if (Math.Abs(_springBack.MotorSpeed) < 50 * 0.06f)
+            if (body.JointList != null)
             {
-                _springBack.MotorEnabled = false;
-            }
-            else
-            {
-                _springBack.MotorEnabled = true;
+                LineJoint _springBack = (LineJoint)body.JointList.Joint;
+                _springBack.MotorSpeed = Math.Sign(acceleration) *
+                             MathHelper.SmoothStep(0f, 50, Math.Abs(acceleration));
+                if (Math.Abs(_springBack.MotorSpeed) < 50 * 0.06f)
+                {
+                    _springBack.MotorEnabled = false;
+                }
+                else
+                {
+                    _springBack.MotorEnabled = true;
+                }
             }
         }
 

@@ -15,14 +15,14 @@ using GameLibrary.Dependencies.Physics.Common;
 using GameLibrary.Dependencies.Physics.Controllers;
 using GameLibrary.Dependencies.Entities;
 
-namespace GameLibrary.Helpers
+namespace GameLibrary.Helpers.Debug
 {
     /// <summary>
     /// A debug view that works in XNA.
     /// A debug view shows you what happens inside the physics engine. You can view
     /// bodies, joints, fixtures and more.
     /// </summary>
-    public class DebugViewXNA : DebugView, IDisposable
+    public class DebugView : PhysicsDebugView, IDisposable
     {
         //Drawing
         private PrimitiveBatch _primitiveBatch;
@@ -90,7 +90,7 @@ namespace GameLibrary.Helpers
         public const int CircleSegments = 32;
 #endif
 
-        public DebugViewXNA(EntityWorld world, Camera camera)
+        public DebugView(EntityWorld world, Camera camera)
             : base(world)
         {
             world.ContactManager.PreSolve += PreSolve;
@@ -659,7 +659,7 @@ namespace GameLibrary.Helpers
                     {
                         PolygonShape poly = (PolygonShape)fixture.Shape;
                         int vertexCount = poly.Vertices.Count;
-                        Debug.Assert(vertexCount <= Settings.MaxPolygonVertices);
+                        System.Diagnostics.Debug.Assert(vertexCount <= Settings.MaxPolygonVertices);
 
                         for (int i = 0; i < vertexCount; ++i)
                         {

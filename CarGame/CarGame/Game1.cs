@@ -21,8 +21,6 @@ namespace CarGame
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-
 
         private CarWorld World;
         private Entity player;
@@ -31,13 +29,11 @@ namespace CarGame
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-
-            Window.Title = "CarGame EF test";
             graphics.PreferMultiSampling = true;
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 720;
-
             IsFixedTimeStep = true;
+            Window.Title = "CarGame EF test";
         }
 
         /// <summary>
@@ -51,13 +47,9 @@ namespace CarGame
             // TODO: Add your initialization logic here
             ConvertUnits.SetDisplayUnitToSimUnitRatio(24f);
             ScreenHelper.Initialize(graphics.GraphicsDevice);
-            spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            World = new CarWorld(new Camera(GraphicsDevice), spriteBatch);
+            World = new CarWorld(this);
             World.Initialize();
-           
-
-
             base.Initialize();
         }
 

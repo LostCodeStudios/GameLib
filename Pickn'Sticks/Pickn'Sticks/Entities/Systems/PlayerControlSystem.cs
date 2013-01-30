@@ -70,7 +70,6 @@ namespace Pickn_Sticks.Entities.Systems
                 //b.Rotation = MathHelper.SmoothStep(b.Rotation, (float)Math.Atan2(b.LinearVelocity.Y, b.LinearVelocity.X) + (float)Math.PI/2f, 0.1f);
                 b.Rotation = (float)Math.Atan2(b.LinearVelocity.Y, b.LinearVelocity.X) + (float)Math.PI / 2f;
 
-
             //update position
             b.ApplyLinearImpulse((target)*new Vector2(_Velocity));
             #endregion

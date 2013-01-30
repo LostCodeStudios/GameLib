@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using GameLibrary.Helpers;
+using GameLibrary.Helpers.Debug;
 
 namespace Pickn_Sticks
 {
@@ -18,9 +19,9 @@ namespace Pickn_Sticks
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
         StickWorld World;
 
+        
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -30,7 +31,6 @@ namespace Pickn_Sticks
             graphics.PreferMultiSampling = true;
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 720;
-
             IsFixedTimeStep = true;
         }
 
@@ -44,12 +44,9 @@ namespace Pickn_Sticks
         {
             // TODO: Add your initialization logic here
             ConvertUnits.SetDisplayUnitToSimUnitRatio(24f);
-            ScreenHelper.Initialize(graphics.GraphicsDevice);
-
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            ScreenHelper.Initialize(GraphicsDevice);
             
-            World = new StickWorld(new GameLibrary.Helpers.Camera(GraphicsDevice), spriteBatch);
-            //Init
+            World = new StickWorld(this);
             World.Initialize();
 
             base.Initialize();
@@ -63,6 +60,7 @@ namespace Pickn_Sticks
         {
             //Load world content
             World.LoadContent(Content);
+
         }
 
         /// <summary>
@@ -71,7 +69,6 @@ namespace Pickn_Sticks
         /// </summary>
         protected override void UnloadContent()
         {
-
         }
 
         /// <summary>
