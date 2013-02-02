@@ -20,8 +20,8 @@ namespace CarGame
     /// </summary>
     class CarWorld : World
     {
-        public CarWorld(Camera camera, SpriteBatch spriteBatch)
-            : base(camera, spriteBatch, new Vector2(0f, 10f))
+        public CarWorld(Game Game)
+            : base(Game, new Vector2(0f, 10f))
         {
         }
 
@@ -70,7 +70,7 @@ namespace CarGame
             Camera.EnableRotationTracking = true;
             Camera.EnablePositionTracking = true;
 #if DEBUG
-            this._DebugRenderSystem.LoadContent(SpriteBatch.GraphicsDevice, Content,
+            this._DebugSystem.LoadContent(SpriteBatch.GraphicsDevice, Content,
                  new KeyValuePair<string, object>("Camera", this.Camera),
                  new KeyValuePair<string, object>("Player", this.PlayerCar.GetComponent<Body>()));
 #endif

@@ -13,13 +13,14 @@ using GameLibrary.Entities.Components.Physics;
 using GameLibrary.Helpers;
 using GameLibrary.Dependencies.Physics.Dynamics;
 using GameLibrary.Dependencies.Physics.Dynamics.Contacts;
+using GameLibrary.Helpers.Debug;
 
 namespace Pickn_Sticks
 {
     public class StickWorld : World
     {
-        public StickWorld(Camera camera, SpriteBatch spriteBatch)
-            : base(camera, spriteBatch)
+        public StickWorld(Game game)
+            : base(game)
         {
         }
 
@@ -41,6 +42,8 @@ namespace Pickn_Sticks
             base.BuildTemplates(Content, args);
         }
 
+        int STICKCOUNT = 0;
+
         protected override void BuildEntities(Microsoft.Xna.Framework.Content.ContentManager Content, params object[] args)
         {
             //Player
@@ -54,6 +57,7 @@ namespace Pickn_Sticks
                    {
                        if (b.Body.UserData != null && (b.Body.UserData as Entity).Group == "Sticks")
                        {
+                           Console.WriteLine("\n["+ ++STICKCOUNT +"]Stick touched at" + (b.Body.UserData as Entity).GetComponent<Body>().Position.ToString());
                            Random r = new Random();
                            (b.Body.UserData as Entity).GetComponent<Body>().Position = ConvertUnits.ToSimUnits(new Vector2(r.Next(0, ScreenHelper.GraphicsDevice.Viewport.Width), r.Next(0, ScreenHelper.GraphicsDevice.Viewport.Height))
                                - new Vector2(ScreenHelper.GraphicsDevice.Viewport.Bounds.Center.X, ScreenHelper.GraphicsDevice.Viewport.Bounds.Center.Y) + new Vector2(15));
@@ -82,7 +86,7 @@ namespace Pickn_Sticks
 
 
 #if DEBUG //Track player info
-            this._DebugRenderSystem.LoadContent(SpriteBatch.GraphicsDevice, Content,
+            this._DebugSystem.LoadContent(SpriteBatch.GraphicsDevice, Content,
                  new KeyValuePair<string, object>("Camera", this.Camera),
                  new KeyValuePair<string, object>("Player", player.GetComponent<Body>()));
 #endif
@@ -93,14 +97,10 @@ namespace Pickn_Sticks
         #endregion
 
         #region Functioning Loop
-
         public override void Update(GameTime gameTime)
         {
-            Camera.Zoom = Mouse.GetState().ScrollWheelValue * 0.01f;
-
             base.Update(gameTime);
         }
-
         #endregion
 
         #region Fields
