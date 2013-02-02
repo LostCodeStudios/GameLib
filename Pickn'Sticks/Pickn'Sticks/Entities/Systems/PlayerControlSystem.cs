@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Xna.Framework.Input;
-using GameLibrary.Dependencies.Entities;
-using GameLibrary.Entities.Components.Physics;
+
 using Microsoft.Xna.Framework;
-using GameLibrary.Entities.Components;
+using Microsoft.Xna.Framework.Input;
+
 using GameLibrary.Helpers;
+using GameLibrary.Dependencies.Entities;
 using GameLibrary.Dependencies.Physics.Dynamics;
 using GameLibrary.Dependencies.Physics.Dynamics.Contacts;
+using GameLibrary.Entities.Components;
+using GameLibrary.Entities.Components.Physics;
 
 namespace Pickn_Sticks.Entities.Systems
 {
