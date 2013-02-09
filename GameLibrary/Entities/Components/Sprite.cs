@@ -16,7 +16,18 @@ namespace GameLibrary.Entities.Components
     /// </summary>
     public struct Sprite : Component
     {
-        public Sprite(SpriteSheet spriteSheet, string spriteKey, Vector2 origin, float scale, Color color, float layer, TimeSpan frameTime)
+        #region Constructor
+
+        /// <summary>
+        /// Creates a sprite with a spritesheet and a specified origin.
+        /// </summary>
+        /// <param name="spriteSheet"></param>
+        /// <param name="spriteKey"></param>
+        /// <param name="origin"></param>
+        /// <param name="scale"></param>
+        /// <param name="color"></param>
+        /// <param name="layer"></param>
+        public Sprite(SpriteSheet spriteSheet, string spriteKey, Vector2 origin, float scale, Color color, float layer)
         {
             this.Source = spriteSheet.Animations[spriteKey];
             this.SpriteSheet = spriteSheet;
@@ -24,16 +35,29 @@ namespace GameLibrary.Entities.Components
             this.Scale = scale;
             this.Color = color;
             this.Layer = layer;
-            this.index = 0;
-            this.frameTime = frameTime;
-            this.elapsed = TimeSpan.Zero;
+            this._Index = 0;
         }
 
-        public Sprite(SpriteSheet spriteSheet, string spriteKey, Body body, float scale, Color color, float layer, TimeSpan frameTime) :
-            this(spriteSheet, spriteKey, AssetCreator.CalculateOrigin(body) / scale, scale, color, layer, frameTime)
+
+        /// <summary>
+        /// Creates a sprite with a spritesheet and abody.
+        /// </summary>
+        /// <param name="spriteSheet"></param>
+        /// <param name="spriteKey"></param>
+        /// <param name="body"></param>
+        /// <param name="scale"></param>
+        /// <param name="color"></param>
+        /// <param name="layer"></param>
+        public Sprite(SpriteSheet spriteSheet, string spriteKey, Body body, float scale, Color color, float layer) :
+            this(spriteSheet, spriteKey, AssetCreator.CalculateOrigin(body) / scale, scale, color, layer)
         {
         }
 
+        /// <summary>
+        /// Creates a sprite with a spritesheet.
+        /// </summary>
+        /// <param name="spriteSheet"></param>
+        /// <param name="spriteKey"></param>
         public Sprite(SpriteSheet spriteSheet, string spriteKey) : this(
             spriteSheet, 
             spriteKey, 
@@ -41,51 +65,94 @@ namespace GameLibrary.Entities.Components
                 spriteSheet[spriteKey][0].Width/2f, spriteSheet[spriteKey][0].Height/2f),
             1,
             Color.White,
-            0f,
-            TimeSpan.Zero)
+            0f)
         {
         }
 
+        /// <summary>
+        /// Creates a new sprite using source and a texture with a specified origin.
+        /// </summary>
+        /// <param name="spriteSheet"></param>
+        /// <param name="source"></param>
+        /// <param name="origin"></param>
+        /// <param name="scale"></param>
+        /// <param name="color"></param>
+        /// <param name="layer"></param>
+        public Sprite(Texture2D spriteSheet, Rectangle source, Vector2 origin, float scale, Color color, float layer)
+        {
+            this.Source = new Rectangle[] { source };
+            this.Layer = layer;
+            this.Origin = origin;
+            this.Scale = scale;
+            this.Color = color;
+            this._Index = 0;
+            this.SpriteSheet = new SpriteSheet(spriteSheet);
+        }
+
+        /// <summary>
+        /// Creates a new sprite with a source and a texture using a body.
+        /// </summary>
+        /// <param name="spriteSheet"></param>
+        /// <param name="source"></param>
+        /// <param name="body"></param>
+        /// <param name="scale"></param>
+        /// <param name="color"></param>
+        /// <param name="layer"></param>
+        public Sprite(Texture2D spriteSheet, Rectangle source, Body body, float scale, Color color, float layer)
+            : this(spriteSheet, source, AssetCreator.CalculateOrigin(body) / scale, scale, color, layer)
+        {
+        }
+
+        /// <summary>
+        /// Creates a new sprite supplied with a source and a texture.
+        /// </summary>
+        /// <param name="spriteSheet"></param>
+        /// <param name="source"></param>
+        public Sprite(Texture2D spriteSheet, Rectangle source)
+            : this(spriteSheet, source, new Vector2(source.Width / 2f, source.Height / 2f), 1f, Color.White, 0f)
+        {
+        }
+
+
+
+        #endregion
+
+        #region Fields
         public float Layer;
         public Color Color;
         public float Scale;
         public SpriteSheet SpriteSheet;
         public Vector2 Origin;
         public Rectangle[] Source;
-        
-        int index;
+
+        private int _Index;
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Returns the index of the animation frame. Within the sprite sheet.
+        /// </summary>
         public int FrameIndex
         {
-            get { return index; }
+            get { return _Index; }
             set
             {
-                if (value < 0)
-                    index = 0;
+                if (_Index < 0)
+                    _Index = 0;
 
-                else
-                    index = value % (Source.Count() - 1);
+                _Index = value % (Source.Count() - 1);
             }
         }
 
-        TimeSpan frameTime;
-        public double FrameDelay
-        {
-            get { return frameTime.TotalSeconds; }
-            set
-            {
-                frameTime = TimeSpan.FromSeconds(Math.Max(0, value));
-            }
-        }
-        TimeSpan elapsed;
-        public TimeSpan Elapsed
-        {
-            get { return elapsed; }
-            set { elapsed = value; }
-        }
-
+        /// <summary>
+        /// Returns the current rectangle animated.
+        /// </summary>
         public Rectangle CurrentRectangle
         {
             get { return Source[FrameIndex]; }
         }
+
+        #endregion
     }
 }

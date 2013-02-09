@@ -85,10 +85,11 @@ namespace Pickn_Sticks.Entities.Systems
                     AnimationHeight %= 90; //Max height on spritesheet.
                 }
             }
+
             else
                 AnimationHeight = 30;
             Sprite s = e.GetComponent<Sprite>();
-            s = new Sprite(s.SpriteSheet, new Rectangle(15, AnimationHeight, 50, 30), s.Origin, s.Scale, s.Color, s.Layer);
+            s = new Sprite(s.SpriteSheet.Texture, new Rectangle(15, AnimationHeight, 50, 30), s.Origin, s.Scale, s.Color, s.Layer);
             e.RemoveComponent(ComponentTypeManager.GetTypeFor<Sprite>());
             e.AddComponent<Sprite>(s);
             #endregion

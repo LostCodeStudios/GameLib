@@ -11,6 +11,7 @@ using GameLibrary.Dependencies.Physics.Collision.Shapes;
 using GameLibrary.Dependencies.Physics.Common;
 using Microsoft.Xna.Framework.Graphics;
 using GameLibrary.Entities.Components.Physics;
+using GameLibrary.Helpers;
 
 namespace CarGame.Entities.Templates.Car
 {
@@ -47,7 +48,7 @@ namespace CarGame.Entities.Templates.Car
 
             #region Sprite
             e.AddComponent<Sprite>(new Sprite(args[0] as Texture2D, (Rectangle)args[1],
-                Chassis, 1, Color.White, 0f));
+               Chassis, 1, Color.White, 0f));
             #endregion
             return e;
         }
