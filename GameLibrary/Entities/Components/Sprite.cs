@@ -16,7 +16,7 @@ namespace GameLibrary.Entities.Components
     /// </summary>
     public struct Sprite : Component
     {
-        public Sprite(SpriteSheet spriteSheet, string spriteKey, Vector2 origin, float scale, Color color, float layer)
+        public Sprite(SpriteSheet spriteSheet, string spriteKey, Vector2 origin, float scale, Color color, float layer, TimeSpan frameTime)
         {
             this.Source = spriteSheet.Animations[spriteKey];
             this.SpriteSheet = spriteSheet;
@@ -25,10 +25,12 @@ namespace GameLibrary.Entities.Components
             this.Color = color;
             this.Layer = layer;
             this.index = 0;
+            this.frameTime = frameTime;
+            this.elapsed = TimeSpan.Zero;
         }
 
-        public Sprite(SpriteSheet spriteSheet, string spriteKey, Body body, float scale, Color color, float layer) :
-            this(spriteSheet, spriteKey, AssetCreator.CalculateOrigin(body) / scale, scale, color, layer)
+        public Sprite(SpriteSheet spriteSheet, string spriteKey, Body body, float scale, Color color, float layer, TimeSpan frameTime) :
+            this(spriteSheet, spriteKey, AssetCreator.CalculateOrigin(body) / scale, scale, color, layer, frameTime)
         {
         }
 
@@ -39,7 +41,8 @@ namespace GameLibrary.Entities.Components
                 spriteSheet[spriteKey][0].Width/2f, spriteSheet[spriteKey][0].Height/2f),
             1,
             Color.White,
-            0f)
+            0f,
+            TimeSpan.Zero)
         {
         }
 
@@ -49,18 +52,35 @@ namespace GameLibrary.Entities.Components
         public SpriteSheet SpriteSheet;
         public Vector2 Origin;
         public Rectangle[] Source;
-
+        
         int index;
         public int FrameIndex
         {
             get { return index; }
             set
             {
-                if (index < 0)
+                if (value < 0)
                     index = 0;
 
-                index = value % (Source.Count() - 1);
+                else
+                    index = value % (Source.Count() - 1);
             }
+        }
+
+        TimeSpan frameTime;
+        public double FrameDelay
+        {
+            get { return frameTime.TotalSeconds; }
+            set
+            {
+                frameTime = TimeSpan.FromSeconds(Math.Max(0, value));
+            }
+        }
+        TimeSpan elapsed;
+        public TimeSpan Elapsed
+        {
+            get { return elapsed; }
+            set { elapsed = value; }
         }
 
         public Rectangle CurrentRectangle
