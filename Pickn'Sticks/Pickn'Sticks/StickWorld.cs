@@ -78,7 +78,7 @@ namespace Pickn_Sticks
             //    new Vector2(SpriteBatch.GraphicsDevice.Viewport.Bounds.Right, SpriteBatch.GraphicsDevice.Viewport.Bounds.Bottom));
             //Camera.MinPosition = ConvertUnits.ToSimUnits(
             //    new Vector2(SpriteBatch.GraphicsDevice.Viewport.Bounds.Left, SpriteBatch.GraphicsDevice.Viewport.Bounds.Top));
-            Camera.Zoom = 2f;
+            Camera.Zoom = 1f;
 
             this.CreateEntityGroup("Terrain", "Terrain",
                 Content.Load<Texture2D>("terrain"), new Rectangle(7, 5, 88 - 7, 88 - 5),
