@@ -15,7 +15,7 @@ namespace GameLibrary.Entities.Components
         Loop, //Loops the the sprite incrementally
         ReverseLoop, //Loops the sprite decrementally
         Increment, //Increments the sprites frame once and then sets its animation state to none.
-        Decrement //Decrements the sprites frame once and then sets its animation state to none.
+        Decrement, //Decrements the sprites frame once and then sets its animation state to none.
     }
 
     public class Animation : Component
@@ -48,7 +48,6 @@ namespace GameLibrary.Entities.Components
         #region Fields
 
         internal int _Tick;
-
         #endregion
     }
 }
