@@ -16,6 +16,7 @@ namespace GameLibrary.Entities.Components
         ReverseLoop, //Loops the sprite decrementally
         Increment, //Increments the sprites frame once and then sets its animation state to none.
         Decrement, //Decrements the sprites frame once and then sets its animation state to none.
+        Bounce //Animate back and forth through frames
     }
 
     public class Animation : Component
@@ -38,6 +39,12 @@ namespace GameLibrary.Entities.Components
         /// </summary>
         public int FrameRate { set; get; }
 
+        public int FrameInc
+        {
+            get { return frameInc; }
+            set { frameInc = value; }
+        }
+
         /// <summary>
         /// The type of animation. (See AnimationType)
         /// </summary>
@@ -48,6 +55,7 @@ namespace GameLibrary.Entities.Components
         #region Fields
 
         internal int _Tick;
+        private int frameInc = 1;
         #endregion
     }
 }
