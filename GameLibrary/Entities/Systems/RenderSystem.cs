@@ -43,7 +43,7 @@ namespace GameLibrary.Entities.Systems
 
             //Draw to sprite batch
             spriteBatch.Draw(
-                sprite.SpriteSheet.Texture, 
+                sprite.SpriteSheet.Texture,
                 ConvertUnits.ToDisplayUnits(transform.Position),
                 sprite.CurrentRectangle,
                 sprite.Color,
