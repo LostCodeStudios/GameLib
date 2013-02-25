@@ -146,7 +146,10 @@ namespace GameLibrary.Dependencies.Entities
          * @return the element at the specified position in bag
          */
         public E Get(int index) {
-            return data[index];
+            if (index < data.Length)
+                return data[index];
+            else
+                return data[data.Length - 1];
         }
 
         /// <summary>
