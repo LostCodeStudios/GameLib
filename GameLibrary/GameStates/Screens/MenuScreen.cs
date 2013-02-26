@@ -5,6 +5,9 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 
+using GameLibrary.Input;
+using GameLibrary.Helpers;
+
 namespace GameLibrary.GameStates.Screens
 {
     /// <summary>
@@ -179,7 +182,7 @@ namespace GameLibrary.GameStates.Screens
             float transitionOffset = (float)Math.Pow(TransitionPosition, 2);
 
             //Start at Y = 225; each X value is generated per entry
-            Vector2 position = new Vector2(0f, 250f);
+            Vector2 position = new Vector2(0f, ScreenHelper.Viewport.Height * 0.3472222222222222f);
 
             //update each menu entry's location in turn
             for (int i = 0; i < menuEntries.Count; i++)
@@ -248,7 +251,7 @@ namespace GameLibrary.GameStates.Screens
             float transitionOffset = (float)Math.Pow(TransitionPosition, 2);
 
             //Draw the menu title centered on the screen
-            Vector2 titlePosition = new Vector2(graphics.Viewport.Width / 2, 125);
+            Vector2 titlePosition = new Vector2(graphics.Viewport.Width / 2, graphics.Viewport.Height * 0.1736111111111111f);
             Vector2 titleOrigin = titleFont.MeasureString(menuTitle) / 2;
             Color titleColor = new Color(100, 77, 45) * TransitionAlpha;
             float titleScale = 1f;
