@@ -1,19 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
+using GameLibrary.Dependencies.Entities;
 using GameLibrary.Dependencies.Physics;
 using GameLibrary.Dependencies.Physics.Collision;
-using GameLibrary.Dependencies.Physics.Dynamics.Joints;
-using GameLibrary.Dependencies.Physics.Dynamics;
-using GameLibrary.Dependencies.Physics.Dynamics.Contacts;
 using GameLibrary.Dependencies.Physics.Collision.Shapes;
 using GameLibrary.Dependencies.Physics.Common;
 using GameLibrary.Dependencies.Physics.Controllers;
-using GameLibrary.Dependencies.Entities;
+using GameLibrary.Dependencies.Physics.Dynamics;
+using GameLibrary.Dependencies.Physics.Dynamics.Contacts;
+using GameLibrary.Dependencies.Physics.Dynamics.Joints;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GameLibrary.Helpers.Debug
 {
@@ -26,6 +25,7 @@ namespace GameLibrary.Helpers.Debug
     {
         //Drawing
         private PrimitiveBatch _primitiveBatch;
+
         private SpriteBatch _batch;
         private SpriteFont _font;
         private GraphicsDevice _device;
@@ -39,6 +39,7 @@ namespace GameLibrary.Helpers.Debug
 
         //Shapes
         public Color DefaultShapeColor = new Color(0.9f, 0.7f, 0.7f);
+
         public Color InactiveShapeColor = new Color(0.5f, 0.5f, 0.3f);
         public Color KinematicShapeColor = new Color(0.5f, 0.5f, 0.9f);
         public Color SleepingShapeColor = new Color(0.6f, 0.6f, 0.6f);
@@ -47,6 +48,7 @@ namespace GameLibrary.Helpers.Debug
 
         //Contacts
         private int _pointCount;
+
         private const int MaxContactPoints = 2048;
         private ContactPoint[] _points = new ContactPoint[MaxContactPoints];
 
@@ -64,17 +66,16 @@ namespace GameLibrary.Helpers.Debug
         /// UserData to be displayed on the debug panel.
         /// </summary>
         public Dictionary<string, object> DebugPanelUserData;
-        
 
         //Performance graph
         public bool AdaptiveLimits = true;
+
         public float ValuesToGraph = 500;
         public float MinimumValue = -1000;
         public float MaximumValue = 1000;
         private List<float> _graphTotalValues = new List<float>();
         private List<float> _graphPhysicsValues = new List<float>();
         private List<float> _graphEntitiesValues = new List<float>();
-
 
 #if XBOX
         public Rectangle PerformancePanelBounds = new Rectangle(305, 100, 200, 100);
@@ -127,7 +128,7 @@ namespace GameLibrary.Helpers.Debug
             World.ContactManager.PreSolve -= PreSolve;
         }
 
-        #endregion
+        #endregion IDisposable Members
 
         private void PreSolve(Contact contact, ref Manifold oldManifold)
         {
@@ -334,7 +335,8 @@ namespace GameLibrary.Helpers.Debug
             }
         }
 
-        List<float> _graphAvgTotalValues = new List<float>();
+        private List<float> _graphAvgTotalValues = new List<float>();
+
         private void DrawPerformanceGraph()
         {
             _graphTotalValues.Add(World.PhysicsUpdateTime + World.EntitySystemUpdateTime);
@@ -355,7 +357,7 @@ namespace GameLibrary.Helpers.Debug
             float yScale = PerformancePanelBounds.Bottom - (float)PerformancePanelBounds.Top;
             float yAxis = (PerformancePanelBounds.Bottom +
                 (MinimumValue / (MaximumValue - MinimumValue)) * yScale);
-            
+
             // we must have at least 2 values to start rendering
             if (_graphTotalValues.Count > 2)
             {
@@ -366,11 +368,14 @@ namespace GameLibrary.Helpers.Debug
 
                 if (AdaptiveLimits)
                 {
-                    MaximumValue = _graphAvgTotalValues[0]*2;
+                    MaximumValue = _graphAvgTotalValues[0] * 2;
                     MinimumValue = -500;
                 }
+
                 #region Draw Total
+
                 x = PerformancePanelBounds.X;
+
                 // start at last value (newest value added)
                 // continue until no values are left
                 for (int i = _graphTotalValues.Count - 1; i > 0; i--)
@@ -393,10 +398,13 @@ namespace GameLibrary.Helpers.Debug
 
                     x += deltaX;
                 }
-                #endregion
+
+                #endregion Draw Total
 
                 #region Draw Physics
+
                 x = PerformancePanelBounds.X;
+
                 // start at last value (newest value added)
                 // continue until no values are left
                 for (int i = _graphPhysicsValues.Count - 1; i > 0; i--)
@@ -419,10 +427,13 @@ namespace GameLibrary.Helpers.Debug
 
                     x += deltaX;
                 }
-                #endregion
+
+                #endregion Draw Physics
 
                 #region Draw Entities
+
                 x = PerformancePanelBounds.X;
+
                 // start at last value (newest value added)
                 // continue until no values are left
                 for (int i = _graphEntitiesValues.Count - 1; i > 0; i--)
@@ -445,10 +456,13 @@ namespace GameLibrary.Helpers.Debug
 
                     x += deltaX;
                 }
-                #endregion
+
+                #endregion Draw Entities
 
                 #region Draw Average
+
                 x = PerformancePanelBounds.X;
+
                 // start at last value (newest value added)
                 // continue until no values are left
                 for (int i = _graphAvgTotalValues.Count - 1; i > 0; i--)
@@ -471,14 +485,14 @@ namespace GameLibrary.Helpers.Debug
 
                     x += deltaX;
                 }
-                #endregion
 
+                #endregion Draw Average
             }
 
             float avgAxis;
             if (_graphAvgTotalValues.Count > 0)
                 avgAxis = yAxis -
-                ((_graphAvgTotalValues.Last() / (MaximumValue - MinimumValue)) * yScale)-4;
+                ((_graphAvgTotalValues.Last() / (MaximumValue - MinimumValue)) * yScale) - 4;
             else
                 avgAxis = PerformancePanelBounds.Center.Y - 4;
 
@@ -498,11 +512,13 @@ namespace GameLibrary.Helpers.Debug
             DrawSolidPolygon(_background, 4, Color.DarkGray, true);
 
             #region Draw Zero
+
             DrawSegment(new Vector2(PerformancePanelBounds.X, yAxis),
                 new Vector2(PerformancePanelBounds.X - 8, yAxis),
                 Color.White);
             DrawString(PerformancePanelBounds.X - 8, (int)yAxis - 12, "0", Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
-            #endregion
+
+            #endregion Draw Zero
         }
 
         private void DrawDebugPanel()
@@ -536,7 +552,7 @@ namespace GameLibrary.Helpers.Debug
 
             if (DebugPanelUserData.Count > 0)
             {
-                DrawString(x, y+130, "UserData:" + _GetUserDataString(), Color.Green);
+                DrawString(x, y + 130, "UserData:" + _GetUserDataString(), Color.Green);
             }
         }
 
@@ -589,6 +605,7 @@ namespace GameLibrary.Helpers.Debug
                 case JointType.Distance:
                     DrawSegment(p1, p2, color);
                     break;
+
                 case JointType.Pulley:
                     PulleyJoint pulley = (PulleyJoint)joint;
                     Vector2 s1 = pulley.GroundAnchorA;
@@ -597,38 +614,49 @@ namespace GameLibrary.Helpers.Debug
                     DrawSegment(s2, p2, color);
                     DrawSegment(s1, s2, color);
                     break;
+
                 case JointType.FixedMouse:
                     DrawPoint(p1, 0.5f, new Color(0.0f, 1.0f, 0.0f));
                     DrawSegment(p1, p2, new Color(0.8f, 0.8f, 0.8f));
                     break;
+
                 case JointType.Revolute:
+
                     //DrawSegment(x2, p1, color);
                     DrawSegment(p2, p1, color);
                     DrawSolidCircle(p2, 0.1f, Vector2.Zero, Color.LightSalmon);
                     DrawSolidCircle(p1, 0.1f, Vector2.Zero, Color.LightBlue);
                     break;
+
                 case JointType.FixedAngle:
+
                     //Should not draw anything.
                     break;
+
                 case JointType.FixedRevolute:
                     DrawSegment(x1, p1, color);
                     DrawSolidCircle(p1, 0.1f, Vector2.Zero, Color.Pink);
                     break;
+
                 case JointType.FixedLine:
                     DrawSegment(x1, p1, color);
                     DrawSegment(p1, p2, color);
                     break;
+
                 case JointType.FixedDistance:
                     DrawSegment(x1, p1, color);
                     DrawSegment(p1, p2, color);
                     break;
+
                 case JointType.FixedPrismatic:
                     DrawSegment(x1, p1, color);
                     DrawSegment(p1, p2, color);
                     break;
+
                 case JointType.Gear:
                     DrawSegment(x1, x2, color);
                     break;
+
                 //case JointType.Weld:
                 //    break;
                 default:
@@ -669,7 +697,6 @@ namespace GameLibrary.Helpers.Debug
                         DrawSolidPolygon(_tempVertices, vertexCount, color);
                     }
                     break;
-
 
                 case ShapeType.Edge:
                     {
@@ -863,7 +890,7 @@ namespace GameLibrary.Helpers.Debug
 
         public void DrawString(int x, int y, string s, params object[] args)
         {
-            this.DrawString( x, y, s, TextColor, args);
+            this.DrawString(x, y, s, TextColor, args);
         }
 
         public void DrawString(int x, int y, string s, Color color, params object[] args)
@@ -878,7 +905,6 @@ namespace GameLibrary.Helpers.Debug
             else
                 _stringData.Add(new StringData(x, y, s, args, color));
         }
-
 
         public void DrawArrow(Vector2 start, Vector2 end, float length, float width, bool drawStartIndicator,
                               Color color)
@@ -895,8 +921,10 @@ namespace GameLibrary.Helpers.Debug
 
             // Calculate angle of directional vector
             float angle = (float)Math.Atan2(rotation.X, -rotation.Y);
+
             // Create matrix for rotation
             Matrix rotMatrix = Matrix.CreateRotationZ(angle);
+
             // Create translation matrix for end-point
             Matrix endMatrix = Matrix.CreateTranslation(end.X, end.Y, 0);
 
@@ -908,6 +936,7 @@ namespace GameLibrary.Helpers.Debug
 
             // Rotate end shape
             Vector2.Transform(verts, ref rotMatrix, verts);
+
             // Translate end shape
             Vector2.Transform(verts, ref endMatrix, verts);
 
@@ -918,6 +947,7 @@ namespace GameLibrary.Helpers.Debug
             {
                 // Create translation matrix for start
                 Matrix startMatrix = Matrix.CreateTranslation(start.X, start.Y, 0);
+
                 // Setup arrow start shape
                 Vector2[] baseVerts = new Vector2[4];
                 baseVerts[0] = new Vector2(-halfWidth, length / 4);
@@ -927,8 +957,10 @@ namespace GameLibrary.Helpers.Debug
 
                 // Rotate start shape
                 Vector2.Transform(baseVerts, ref rotMatrix, baseVerts);
+
                 // Translate start shape
                 Vector2.Transform(baseVerts, ref startMatrix, baseVerts);
+
                 // Draw start shape
                 DrawSolidPolygon(baseVerts, 4, color, false);
             }
@@ -979,8 +1011,8 @@ namespace GameLibrary.Helpers.Debug
                     _batch.DrawString(_font, _stringData[i].S,
                         new Vector2(_stringData[i].X, _stringData[i].Y), _stringData[i].Color);
                 }
-
             }
+
             // end the sprite batch effect
             _batch.End();
             _stringData.Clear();
@@ -994,8 +1026,8 @@ namespace GameLibrary.Helpers.Debug
                 {
                     _batch.DrawString(_font, string.Format(_worldStringData[i].S, _worldStringData[i].Args),
                                       new Vector2(_worldStringData[i].X + 1f, _worldStringData[i].Y + 1f), Color.Black, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
-                    _batch.DrawString(_font, string.Format(_worldStringData[i].S, _worldStringData[i].Args,0f,Vector2.Zero,1f,SpriteEffects.None,0f),
-                                      new Vector2(_worldStringData[i].X, _worldStringData[i].Y), _worldStringData[i].Color,0f,Vector2.Zero,1f,SpriteEffects.None,0f);
+                    _batch.DrawString(_font, string.Format(_worldStringData[i].S, _worldStringData[i].Args, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f),
+                                      new Vector2(_worldStringData[i].X, _worldStringData[i].Y), _worldStringData[i].Color, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                 }
                 else
                 {
@@ -1006,7 +1038,6 @@ namespace GameLibrary.Helpers.Debug
                 }
                 _worldStringData.RemoveAll(new Predicate<StringData>(x => x.S == _worldStringData[i].S));
                 i--;
-
             }
 
             _batch.End();
@@ -1029,7 +1060,7 @@ namespace GameLibrary.Helpers.Debug
             _device = device;
             _batch = new SpriteBatch(_device);
             _primitiveBatch = new PrimitiveBatch(_device, 1000);
-           _font = content.Load<SpriteFont>("Fonts/debugfont");
+            _font = content.Load<SpriteFont>("Fonts/debugfont");
             _stringData = new List<StringData>();
             _worldStringData = new List<StringData>();
 
@@ -1043,7 +1074,6 @@ namespace GameLibrary.Helpers.Debug
                     DebugPanelUserData.Add(data.Key, data.Value);
                 this.EnableOrDisableFlag(DebugViewFlags.PerformanceGraph);
                 this.EnableOrDisableFlag(DebugViewFlags.DebugPanel);
-                
             }
 
             _graphTotalValues.Add(World.PhysicsUpdateTime + World.EntitySystemUpdateTime);
@@ -1060,7 +1090,7 @@ namespace GameLibrary.Helpers.Debug
             public PointState State;
         }
 
-        #endregion
+        #endregion Nested type: ContactPoint
 
         #region Nested type: StringData
 
@@ -1081,6 +1111,6 @@ namespace GameLibrary.Helpers.Debug
             }
         }
 
-        #endregion
+        #endregion Nested type: StringData
     }
 }

@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace GameLibrary.Helpers.Debug.DebugCommands
+﻿namespace GameLibrary.Helpers.Debug.DebugCommands
 {
     public class ExecCommand : DebugCommand
     {
         public ExecCommand(DebugConsole console)
             : base("ex", "Executes C# cod e in the current scope.",
-            null,1, "ex <C#-Expression>\n C#-Expression: var S = scope;")
+            null, 1, "ex <C#-Expression>\n C#-Expression: var S = scope;")
         {
             this._Console = console;
             this._Execute = Run;
@@ -26,6 +21,6 @@ namespace GameLibrary.Helpers.Debug.DebugCommands
             }
         }
 
-        DebugConsole _Console;
+        private DebugConsole _Console;
     }
 }

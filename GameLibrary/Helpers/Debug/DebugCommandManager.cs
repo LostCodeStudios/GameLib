@@ -1,8 +1,7 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Collections.Concurrent;
 
 namespace GameLibrary.Helpers.Debug
 {
@@ -15,6 +14,7 @@ namespace GameLibrary.Helpers.Debug
         }
 
         #region Functioning Loop
+
         public void Execute(string input)
         {
             List<string> commandInput = new List<string>(input.Split(' ')); //Get a list of all of the words entered
@@ -37,13 +37,17 @@ namespace GameLibrary.Helpers.Debug
                 }
             }
         }
-        #endregion
+
+        #endregion Functioning Loop
 
         #region Fields
-        World _World;
-        #endregion
+
+        private World _World;
+
+        #endregion Fields
 
         #region Helpers
+
         public void Print()
         {
             Console.ForegroundColor = ConsoleColor.Black;
@@ -54,6 +58,7 @@ namespace GameLibrary.Helpers.Debug
             foreach (DebugCommand c in this)
                 Console.WriteLine(c.ToString());
         }
-        #endregion
+
+        #endregion Helpers
     }
 }

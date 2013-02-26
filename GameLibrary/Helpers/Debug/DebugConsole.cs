@@ -1,21 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GameLibrary.Helpers.Debug.DebugCommands;
+using System;
+using System.IO;
 using System.Linq;
 using System.Text;
-using GameLibrary.Dependencies.Entities;
-using System.Collections.Concurrent;
 using System.Threading;
-using System.Diagnostics;
-using GameLibrary.Helpers;
-using System.IO;
-using System.CodeDom.Compiler;
-using Microsoft.CSharp;
-using System.Text.RegularExpressions;
-using System.Reflection;
-using System.Runtime.Remoting.Contexts;
-using System.Linq.Expressions;
-using System.Reflection.Emit;
-using GameLibrary.Helpers.Debug.DebugCommands;
 
 namespace GameLibrary.Helpers.Debug
 {
@@ -50,17 +38,16 @@ namespace GameLibrary.Helpers.Debug
                     }
                 }));
 
-
             //Log
-
 
             //"ex" - Executes C#
             Commands.Add(new ExecCommand(this));
+
             //"cd" - Changes the scope of the variable printer.
             Commands.Add(new ChangeScopeCommand(this));
+
             //"dir" - Prints all variables in current scope.
             Commands.Add(new DisplayScopeCommand(this));
-
         }
 
         /// <summary>
@@ -75,14 +62,15 @@ namespace GameLibrary.Helpers.Debug
                     //Commands
                     Scope = _World;
                     BuildDefaultCommands();
+
                     //Thread stuff
                     _Running = true;
                     _ConsoleThread = new Thread(new ThreadStart(this.Run));
                     _ConsoleThread.IsBackground = true;
                     _ConsoleThread.Start();
                     return true;
-                }  
-            
+                }
+
             return false;
         }
 
@@ -120,7 +108,7 @@ namespace GameLibrary.Helpers.Debug
             return false;
         }
 
-        #endregion
+        #endregion Functioning Loop
 
         #region Properties
 
@@ -145,6 +133,7 @@ namespace GameLibrary.Helpers.Debug
                 return _ScopeString;
             }
         }
+
         private string _ScopeString = "";
 
         /// <summary>
@@ -162,17 +151,21 @@ namespace GameLibrary.Helpers.Debug
         /// Manages all the commands
         /// </summary>
         public DebugCommandManager Commands;
-        #endregion
+
+        #endregion Properties
 
         #region Fields
-        World _World;
+
+        private World _World;
         public object Scope;
 
-        bool _Running;
-        Thread _ConsoleThread;
-        #endregion
+        private bool _Running;
+        private Thread _ConsoleThread;
+
+        #endregion Fields
 
         #region Methods
+
         /// <summary>
         /// Region runs through the console's Header
         /// </summary>
@@ -186,12 +179,9 @@ namespace GameLibrary.Helpers.Debug
             Console.WriteLine("Type \"help\" for a list of commands;\n To exit any command, press Ctrl+C.");
         }
 
-
         #region Console Extension
 
-
-        #endregion
-
+        #endregion Console Extension
 
         #region Win32
 
@@ -208,10 +198,9 @@ namespace GameLibrary.Helpers.Debug
         {
             if (Win32.ConsoleLibrary.AllocConsole())
             {
-
                 var _STDOUT = Win32.ConsoleLibrary.GetConsoleStandardOutput();
                 var _STDIN = Win32.ConsoleLibrary.GetConsoleStandardInput();
-                Win32.ConsoleLibrary.SetStdHandle(Win32.ConsoleLibrary.StdHandle.Output,_STDOUT);
+                Win32.ConsoleLibrary.SetStdHandle(Win32.ConsoleLibrary.StdHandle.Output, _STDOUT);
                 Win32.ConsoleLibrary.SetStdHandle(Win32.ConsoleLibrary.StdHandle.Input, _STDIN);
 
                 STDIN = _STDIN;
@@ -222,7 +211,6 @@ namespace GameLibrary.Helpers.Debug
                 Console.SetOut(OutWriter);
                 ErrWriter = new OutputWriter(OutWriter, () => { Console.ForegroundColor = ConsoleColor.Red; Console.Write("ERR<< "); }, () => { });
                 Console.SetError(ErrWriter);
-
 
                 return true;
             }
@@ -237,11 +225,13 @@ namespace GameLibrary.Helpers.Debug
         {
             return Win32.ConsoleLibrary.FreeConsole();
         }
-        #endregion
-        #endregion
+
+        #endregion Win32
+
+        #endregion Methods
     }
 
-    class OutputWriter : TextWriter
+    internal class OutputWriter : TextWriter
     {
         public OutputWriter(TextWriter stdOut, Action prefix, Action suffix)
         {
@@ -274,8 +264,8 @@ namespace GameLibrary.Helpers.Debug
             get { return Encoding.Default; }
         }
 
-        Action prefix;
-        Action suffix;
-        TextWriter STDOUTWriter;
+        private Action prefix;
+        private Action suffix;
+        private TextWriter STDOUTWriter;
     }
 }

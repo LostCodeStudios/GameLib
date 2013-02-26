@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Reflection;
 
 namespace GameLibrary.Helpers.Debug.DebugCommands
@@ -13,8 +11,7 @@ namespace GameLibrary.Helpers.Debug.DebugCommands
     {
         public ChangeScopeCommand(DebugConsole console)
             : base("cd", "Changes the current scope.",
-            null,1, "cd <Scope(^ move up, * move in)>")
-
+            null, 1, "cd <Scope(^ move up, * move in)>")
         {
             this._Execute = Run;
             this.console = console;
@@ -31,10 +28,10 @@ namespace GameLibrary.Helpers.Debug.DebugCommands
         }
 
         #region Fields
+
         private DebugConsole console;
-        #endregion
 
-
+        #endregion Fields
     }
 
     /// <summary>
@@ -47,7 +44,7 @@ namespace GameLibrary.Helpers.Debug.DebugCommands
         /// </summary>
         public DisplayScopeCommand(DebugConsole console)
             : base("dir", "Displays all variables within the current scope.",
-            null,0,
+            null, 0,
             "dir <display-mode> (public/private)\n -Display-Modes: all,fields,properties,methods")
         {
             this.console = console;
@@ -60,6 +57,7 @@ namespace GameLibrary.Helpers.Debug.DebugCommands
             string protection = "private";
 
             #region Handle Arguments
+
             if (args != null)
             {
                 //Display mode
@@ -70,7 +68,8 @@ namespace GameLibrary.Helpers.Debug.DebugCommands
                 if (args.Length > 1)
                     protection = (string)args[1];
             }
-            #endregion
+
+            #endregion Handle Arguments
 
             #region Process
 
@@ -84,6 +83,7 @@ namespace GameLibrary.Helpers.Debug.DebugCommands
                 case "private":
                     flags = flags | BindingFlags.NonPublic | BindingFlags.Public;
                     break;
+
                 case "public":
                     flags = flags | BindingFlags.Public;
                     break;
@@ -97,25 +97,29 @@ namespace GameLibrary.Helpers.Debug.DebugCommands
                 case "all":
                     members = members.Where(x => x.MemberType == MemberTypes.All).ToArray();
                     break;
+
                 case "fields":
                     members = members.Where(x => x.MemberType == MemberTypes.Field).ToArray();
                     memberColor = ConsoleColor.DarkCyan;
                     break;
+
                 case "methods":
                     members = members.Where(x => x.MemberType == MemberTypes.Method).ToArray();
                     memberColor = ConsoleColor.DarkMagenta;
                     break;
+
                 case "properties":
                     members = members.Where(x => x.MemberType == MemberTypes.Property).ToArray();
                     memberColor = ConsoleColor.DarkYellow;
                     break;
+
                 default:
                     memberColor = ConsoleColor.DarkCyan;
                     members = members.Where(x => x.MemberType == MemberTypes.Property || x.MemberType == MemberTypes.Field).ToArray();
                     break;
             }
 
-            #endregion
+            #endregion Process
 
             #region Display
 
@@ -144,25 +148,24 @@ namespace GameLibrary.Helpers.Debug.DebugCommands
                 Console.Write(member.Name);
                 Console.ForegroundColor = ConsoleColor.Gray;
                 if (member.MemberType == MemberTypes.Field)
-                    Console.Write(": " +(member as FieldInfo).GetValue(console.Scope));
+                    Console.Write(": " + (member as FieldInfo).GetValue(console.Scope));
                 else if (member.MemberType == MemberTypes.Property)
-                    if( (member as PropertyInfo).CanRead)
+                    if ((member as PropertyInfo).CanRead)
                         Console.Write(": " + (member as PropertyInfo).GetValue(console.Scope, null));
 
                 Console.WriteLine(" ");
             }
 
-            Console.ForegroundColor =  ConsoleColor.DarkYellow;
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("};");
 
-            #endregion
-
+            #endregion Display
         }
 
         #region Fields
 
         private DebugConsole console;
 
-        #endregion
+        #endregion Fields
     }
 }

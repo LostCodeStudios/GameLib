@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
 using System.Threading;
-using System.Drawing;
 
 namespace GameLibrary.Helpers.Debug
 {
     public class DebugCommand
     {
         #region Constructors
+
         /// <summary>
         /// Creates a console command
         /// </summary>
@@ -20,7 +16,6 @@ namespace GameLibrary.Helpers.Debug
             : this(command, description,
             (w, args) => Console.WriteLine("Command not implemented."))
         {
-
         }
 
         /// <summary>
@@ -44,9 +39,11 @@ namespace GameLibrary.Helpers.Debug
             : this("", "")
         {
         }
-        #endregion
+
+        #endregion Constructors
 
         #region Functioning Loop
+
         /// <summary>
         /// Calls the run command delegate and provides a method which developers can override when the command is ran.
         /// </summary>
@@ -72,16 +69,17 @@ namespace GameLibrary.Helpers.Debug
                 while (execution.IsAlive) ;
                 Console.WriteLine();
             }
-
         }
 
         /// <summary>
         /// The delegate called when the command is ran.
         /// </summary>
         protected ExecutionDelegate _Execute;
-        #endregion
+
+        #endregion Functioning Loop
 
         #region Properties
+
         /// <summary>
         /// The key that, when pressed, that will activate the command
         /// </summary>
@@ -111,7 +109,8 @@ namespace GameLibrary.Helpers.Debug
             set;
             get;
         }
-        #endregion
+
+        #endregion Properties
 
         #region Helpers
 
@@ -138,10 +137,9 @@ namespace GameLibrary.Helpers.Debug
                     + "\nUsage:\n"
                     + this.Usage.AddLeadingString(3)
                 ).AddLeadingString(2);
-
         }
 
-        #endregion
+        #endregion Helpers
 
         /// <summary>
         /// Runs a command in the given world regarding the world's entities.
