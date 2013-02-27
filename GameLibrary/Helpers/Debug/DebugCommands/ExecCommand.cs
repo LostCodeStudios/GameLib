@@ -17,7 +17,7 @@
                 string code = "";
                 foreach (string arg in args)
                     code += arg + " ";
-                ScriptRuntime.RunScope(code, _Console.Scope);
+                //ScriptRuntime.RunScope(code, _Console.Scope);
             }
         }
 
