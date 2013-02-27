@@ -65,7 +65,8 @@ namespace GameLibrary.Helpers.Debug
 
                     //Thread stuff
                     _Running = true;
-                    _ConsoleThread = new Thread(new ThreadStart(this.Run));
+                    _ConsoleThread = new 
+                        Thread(new ThreadStart(this.Run));
                     _ConsoleThread.IsBackground = true;
                     _ConsoleThread.Start();
                     return true;
