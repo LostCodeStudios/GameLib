@@ -173,7 +173,11 @@ namespace GameLibrary.Dependencies.Entities
             if (index < data.Length)
                 return data[index];
             else
+<<<<<<< HEAD
                 return default(E);
+=======
+                return data[data.Length - 1];
+>>>>>>> c25aaf61ba7ebe835f77670d9906b1162fec1d5a
         }
 
         /// <summary>
