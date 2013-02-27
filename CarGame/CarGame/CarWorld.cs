@@ -18,7 +18,7 @@ namespace CarGame
     /// <summary>
     /// The car world for the car.
     /// </summary>
-    class CarWorld : World
+    public class CarWorld : World
     {
         public CarWorld(Game Game)
             : base(Game, new Vector2(0f, 10f))
