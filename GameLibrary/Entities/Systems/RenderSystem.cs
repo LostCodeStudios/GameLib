@@ -4,7 +4,6 @@ using GameLibrary.Helpers;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using GameLibrary.Entities.Components.Render;
 
 namespace GameLibrary.Entities.Systems
 {
@@ -45,7 +44,7 @@ namespace GameLibrary.Entities.Systems
                 e.Delete();
             }
             else
-            {
+
                 //Draw to sprite batch
                 spriteBatch.Draw(
                     sprite.SpriteSheet.Texture,
@@ -56,7 +55,6 @@ namespace GameLibrary.Entities.Systems
                     sprite.Origin,
                     sprite.Scale,
                     SpriteEffects.None, sprite.Layer);
-            }
         }
 
         /// <summary>
