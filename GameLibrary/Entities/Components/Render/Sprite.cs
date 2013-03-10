@@ -165,7 +165,10 @@ namespace GameLibrary.Entities.Components
         /// </summary>
         public Rectangle CurrentRectangle
         {
-            get { return Source[FrameIndex]; }
+            get 
+            {
+                return FrameIndex != -1 ? Source[FrameIndex] : Source[0]; 
+            }
         }
 
         #endregion Properties
