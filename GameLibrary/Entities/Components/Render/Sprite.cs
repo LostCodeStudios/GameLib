@@ -170,10 +170,7 @@ namespace GameLibrary.Entities.Components
         /// </summary>
         public Rectangle CurrentRectangle
         {
-            get 
-            {
-                return FrameIndex != -1 ? Source[FrameIndex] : Source[0]; 
-            }
+            get { return Source[FrameIndex]; }
         }
 
         #endregion Properties
