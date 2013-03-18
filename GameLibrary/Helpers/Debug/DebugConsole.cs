@@ -227,11 +227,14 @@ namespace GameLibrary.Helpers.Debug
         /// <returns></returns>
         private bool FreeConsole()
         {
-            Win32.ConsoleLibrary.FreeConsole();
-            Win32.DeleteFile("CONOUT$");
-            Win32.DeleteFile("CONIN$");
-            Win32.CloseHandle(Win32.ConsoleLibrary.GetStdHandle((int)Win32.ConsoleLibrary.StdHandle.Output));
-            Win32.CloseHandle(Win32.ConsoleLibrary.GetStdHandle((int)Win32.ConsoleLibrary.StdHandle.Input));
+            if (Running)
+            {
+                Win32.ConsoleLibrary.FreeConsole();
+                Win32.DeleteFile("CONOUT$");
+                Win32.DeleteFile("CONIN$");
+                Win32.CloseHandle(Win32.ConsoleLibrary.GetStdHandle((int)Win32.ConsoleLibrary.StdHandle.Output));
+                Win32.CloseHandle(Win32.ConsoleLibrary.GetStdHandle((int)Win32.ConsoleLibrary.StdHandle.Input));
+            }
             return true;
         }
 
