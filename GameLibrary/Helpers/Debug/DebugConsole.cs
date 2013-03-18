@@ -1,4 +1,5 @@
 ﻿using GameLibrary.Helpers.Debug.DebugCommands;
+using Microsoft.Win32.SafeHandles;
 using System;
 using System.IO;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace GameLibrary.Helpers.Debug
             _World = world;
             _Running = false;
             Commands = new DebugCommandManager(_World, commands);
+            FreeConsole();
         }
 
         #region Functioning Loop
@@ -97,14 +99,11 @@ namespace GameLibrary.Helpers.Debug
         {
             if (_Running)
             {
-                _ConsoleThread.Abort();
                 _Running = false;
-                if (Win32.ConsoleLibrary.FreeConsole())
-                {
-                    Win32.CloseHandle(Win32.ConsoleLibrary.GetStdHandle((int)Win32.ConsoleLibrary.StdHandle.Output));
-                    Win32.CloseHandle(Win32.ConsoleLibrary.GetStdHandle((int)Win32.ConsoleLibrary.StdHandle.Input));
+                Commands.Clear();
+                _ConsoleThread.Abort();
+                if (FreeConsole())
                     return true;
-                }
             }
             return false;
         }
@@ -188,8 +187,6 @@ namespace GameLibrary.Helpers.Debug
 
         internal OutputWriter OutWriter;
         internal OutputWriter ErrWriter;
-        internal IntPtr STDOUT;
-        internal IntPtr STDIN;
 
         /// <summary>
         /// Allocates a console for this Win32 application
@@ -201,15 +198,21 @@ namespace GameLibrary.Helpers.Debug
             {
                 var _STDOUT = Win32.ConsoleLibrary.GetConsoleStandardOutput();
                 var _STDIN = Win32.ConsoleLibrary.GetConsoleStandardInput();
+
                 Win32.ConsoleLibrary.SetStdHandle(Win32.ConsoleLibrary.StdHandle.Output, _STDOUT);
                 Win32.ConsoleLibrary.SetStdHandle(Win32.ConsoleLibrary.StdHandle.Input, _STDIN);
 
-                STDIN = _STDIN;
-                STDOUT = _STDOUT;
+                //Console.SetOut(new StreamWriter(
+                //    new Out, Console.OutputEncoding));
+
+                Console.OpenStandardOutput();
+                Console.OpenStandardInput();
 
                 var tempout = Console.Out;
                 OutWriter = new OutputWriter(tempout);
                 Console.SetOut(OutWriter);
+
+
                 ErrWriter = new OutputWriter(OutWriter, () => { Console.ForegroundColor = ConsoleColor.Red; Console.Write("ERR<< "); }, () => { });
                 Console.SetError(ErrWriter);
 
@@ -224,7 +227,12 @@ namespace GameLibrary.Helpers.Debug
         /// <returns></returns>
         private bool FreeConsole()
         {
-            return Win32.ConsoleLibrary.FreeConsole();
+            Win32.ConsoleLibrary.FreeConsole();
+            Win32.DeleteFile("CONOUT$");
+            Win32.DeleteFile("CONIN$");
+            Win32.CloseHandle(Win32.ConsoleLibrary.GetStdHandle((int)Win32.ConsoleLibrary.StdHandle.Output));
+            Win32.CloseHandle(Win32.ConsoleLibrary.GetStdHandle((int)Win32.ConsoleLibrary.StdHandle.Input));
+            return true;
         }
 
         #endregion Win32

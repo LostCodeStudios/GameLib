@@ -59,6 +59,15 @@ namespace GameLibrary.Helpers.Debug
                 Console.WriteLine(c.ToString());
         }
 
+        public void Clear()
+        {
+            while (!this.IsEmpty)
+            {
+                DebugCommand result;
+                this.TryTake(out result);
+            }
+        }
+
         #endregion Helpers
     }
 }
