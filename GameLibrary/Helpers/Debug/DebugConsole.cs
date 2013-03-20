@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace GameLibrary.Helpers.Debug
 {
-    public class DebugConsole
+    public class DebugConsole 
     {
         public DebugConsole(World world, params DebugCommand[] commands)
         {
@@ -99,11 +99,13 @@ namespace GameLibrary.Helpers.Debug
         {
             if (_Running)
             {
-                _Running = false;
                 Commands.Clear();
                 _ConsoleThread.Abort();
                 if (FreeConsole())
+                {
+                    _Running = false;
                     return true;
+                }
             }
             return false;
         }
@@ -227,15 +229,15 @@ namespace GameLibrary.Helpers.Debug
         /// <returns></returns>
         private bool FreeConsole()
         {
-            if (Running)
+            if (_Running)
             {
-                Win32.ConsoleLibrary.FreeConsole();
                 Win32.DeleteFile("CONOUT$");
                 Win32.DeleteFile("CONIN$");
                 Win32.CloseHandle(Win32.ConsoleLibrary.GetStdHandle((int)Win32.ConsoleLibrary.StdHandle.Output));
                 Win32.CloseHandle(Win32.ConsoleLibrary.GetStdHandle((int)Win32.ConsoleLibrary.StdHandle.Input));
+                return Win32.ConsoleLibrary.FreeConsole();
             }
-            return true;
+            return false;
         }
 
         #endregion Win32
