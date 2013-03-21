@@ -44,7 +44,7 @@ namespace Pickn_Sticks
         {
             // TODO: Add your initialization logic here
             ConvertUnits.SetDisplayUnitToSimUnitRatio(24f);
-            ScreenHelper.Initialize(GraphicsDevice);
+            ScreenHelper.Initialize(graphics, graphics.GraphicsDevice);
             
             World = new StickWorld(this);
             World.Initialize();
