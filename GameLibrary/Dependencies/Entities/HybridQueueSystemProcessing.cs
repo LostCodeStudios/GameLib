@@ -44,7 +44,7 @@ namespace GameLibrary.Dependencies.Entities
                 return;
 
             int size = queue.Count > EntitiesToProcessEachFrame ? EntitiesToProcessEachFrame : queue.Count;
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < size; ++i)
             {
                 Process(queue.Dequeue());
             }

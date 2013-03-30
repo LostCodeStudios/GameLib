@@ -123,7 +123,7 @@ namespace GameLibrary.Helpers.Debug
             {
                 this.Scope = _World;
                 if (value.Split('.').Length > 0)
-                    for (int i = 0; i < value.Split('.').Length; i++)
+                    for (int i = 0; i < value.Split('.').Length; ++i)
                         if (!string.IsNullOrEmpty(value.Split('.')[i]))
                             if (this.Scope.GetType().GetField(value.Split('.')[i]).GetValue(this.Scope) != null)
                                 this.Scope = this.Scope.GetType().GetField(value.Split('.')[i]).GetValue(this.Scope);

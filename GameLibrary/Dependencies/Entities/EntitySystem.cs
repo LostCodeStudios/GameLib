@@ -43,7 +43,7 @@ namespace GameLibrary.Dependencies.Entities
 
         public EntitySystem(params Type[] types)
         {
-            for (int i = 0, j = types.Length; i < j; i++)
+            for (int i = 0, j = types.Length; i < j; ++i)
             {
                 Type type = types[i];
                 ComponentType ct = ComponentTypeManager.GetTypeFor(type);
@@ -258,7 +258,7 @@ namespace GameLibrary.Dependencies.Entities
             System.Diagnostics.Debug.Assert(requiredType != null);
             Type[] types = new Type[1 + otherTypes.Length];
             types[0] = requiredType;
-            for (int i = 0, j = otherTypes.Length; j > i; i++)
+            for (int i = 0, j = otherTypes.Length; j > i; ++i)
             {
                 types[i + 1] = otherTypes[i];
             }
