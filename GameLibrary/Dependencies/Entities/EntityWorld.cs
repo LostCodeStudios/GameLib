@@ -156,10 +156,10 @@ namespace GameLibrary.Dependencies.Entities
 
         public void LoopStart()
         {
-            ++stepCount;
+            stepCount++;
             if (!deleted.IsEmpty)
             {
-                for (int i = 0, j = deleted.Size; j > i; ++i)
+                for (int i = 0, j = deleted.Size; j > i; i++)
                 {
                     Entity e = deleted.Get(i);
                     entityManager.Remove(e);
@@ -172,7 +172,7 @@ namespace GameLibrary.Dependencies.Entities
 
             if (!refreshed.IsEmpty)
             {
-                for (int i = 0, j = refreshed.Size; j > i; ++i)
+                for (int i = 0, j = refreshed.Size; j > i; i++)
                 {
                     Entity e = refreshed.Get(i);
                     entityManager.Refresh(e);
@@ -188,7 +188,7 @@ namespace GameLibrary.Dependencies.Entities
             {
                 Bag<Entity> entities = entityManager.ActiveEntities;
                 Dictionary<Entity, Bag<Component>> currentState = new Dictionary<Entity, Bag<Component>>();
-                for (int i = 0, j = entities.Size; i < j; ++i)
+                for (int i = 0, j = entities.Size; i < j; i++)
                 {
                     Entity e = entities.Get(i);
                     Bag<Component> components = e.Components;
@@ -221,7 +221,7 @@ namespace GameLibrary.Dependencies.Entities
             {
                 groupManager.Set(groupName, e);
             }
-            for (int i = 0, j = components.Size; i < j; ++i)
+            for (int i = 0, j = components.Size; i < j; i++)
             {
                 e.AddComponent(components.Get(i));
             }

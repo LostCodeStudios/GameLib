@@ -161,8 +161,7 @@ namespace GameLibrary.Entities.Components
                 if (_Index < 0)
                     _Index = 0;
 
-                if (Source != null) //lol exception handling like a boss
-                    _Index = value % (Source.Count());
+                _Index = value % (Source.Count());
             }
         }
 

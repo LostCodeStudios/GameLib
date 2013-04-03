@@ -205,7 +205,7 @@ namespace GameLibrary.Dependencies.Entities
         {
             SystemManager systemManager = world.SystemManager;
             Bag<EntitySystem> systems = systemManager.Systems;
-            for (int i = 0, s = systems.Size; s > i; ++i)
+            for (int i = 0, s = systems.Size; s > i; i++)
             {
                 systems.Get(i).OnChange(e);
             }
