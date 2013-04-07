@@ -38,6 +38,8 @@ namespace GameLibrary.Entities.Systems
             ITransform transform = transformMapper.Get(e);
             Sprite sprite = spriteMapper.Get(e);
 
+            try
+            {
                 //Draw to sprite batch
                 spriteBatch.Draw(
                     sprite.SpriteSheet.Texture,
@@ -48,6 +50,9 @@ namespace GameLibrary.Entities.Systems
                     sprite.Origin,
                     sprite.Scale,
                     SpriteEffects.None, sprite.Layer);
+            }
+            catch
+            { } //LOLLLLLL EXCEPTION HANDLING LIKE A BOSS
         }
 
         /// <summary>
