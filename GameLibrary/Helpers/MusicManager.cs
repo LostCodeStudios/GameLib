@@ -47,13 +47,22 @@ namespace GameLibrary.Helpers
 
         public static bool IsPlaying
         {
-            get { return MediaPlayer.State == MediaState.Playing; }
+            get
+            {
+                return MediaPlayer.State == MediaState.Playing;
+            }
         }
 
         public static bool IsRepeating
         {
-            get { return MediaPlayer.IsRepeating; }
-            set { MediaPlayer.IsRepeating = value; }
+            get
+            {
+                return MediaPlayer.IsRepeating;
+            }
+            set
+            {
+                MediaPlayer.IsRepeating = value;
+            }
         }
     }
 }
