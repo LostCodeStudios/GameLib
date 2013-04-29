@@ -46,7 +46,7 @@ namespace CarGame
         {
             // TODO: Add your initialization logic here
             ConvertUnits.SetDisplayUnitToSimUnitRatio(24f);
-            ScreenHelper.Initialize(graphics.GraphicsDevice);
+            ScreenHelper.Initialize(graphics, graphics.GraphicsDevice);
 
             World = new CarWorld(this);
             World.Initialize();
