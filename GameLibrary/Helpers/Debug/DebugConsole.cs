@@ -149,10 +149,12 @@ namespace GameLibrary.Helpers.Debug
             }
         }
 
+#if WINDOWS
         /// <summary>
         /// Manages all the commands
         /// </summary>
         public DebugCommandManager Commands;
+#endif
 
         #endregion Properties
 
