@@ -1,4 +1,5 @@
-﻿using GameLibrary.Helpers.Debug.DebugCommands;
+﻿#if WINDOWS
+using GameLibrary.Helpers.Debug.DebugCommands;
 using Microsoft.Win32.SafeHandles;
 using System;
 using System.IO;
@@ -283,3 +284,4 @@ namespace GameLibrary.Helpers.Debug
         private TextWriter STDOUTWriter;
     }
 }
+#endif

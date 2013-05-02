@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if WINDOWS
+
+using System;
 using System.Threading;
 
 namespace GameLibrary.Helpers.Debug
@@ -149,3 +151,4 @@ namespace GameLibrary.Helpers.Debug
         public delegate void ExecutionDelegate(World World, params string[] args);
     }
 }
+#endif
