@@ -1,5 +1,4 @@
-﻿#if WINDOWS
-using System;
+﻿using System;
 using System.Linq;
 using System.Reflection;
 
@@ -170,4 +169,3 @@ namespace GameLibrary.Helpers.Debug.DebugCommands
         #endregion Fields
     }
 }
-#endif

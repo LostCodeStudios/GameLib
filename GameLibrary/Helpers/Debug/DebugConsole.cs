@@ -39,7 +39,7 @@ namespace GameLibrary.Helpers.Debug
                         Console.WriteLine("For more information on a specific command, type \"help <command>\"");
                         Commands.Print();
                     }
-                }));
+                }, 0, ""));
 
             //Log
 
@@ -150,10 +150,12 @@ namespace GameLibrary.Helpers.Debug
             }
         }
 
+#if WINDOWS
         /// <summary>
         /// Manages all the commands
         /// </summary>
         public DebugCommandManager Commands;
+#endif
 
         #endregion Properties
 

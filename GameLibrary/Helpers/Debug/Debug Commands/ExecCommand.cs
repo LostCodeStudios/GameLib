@@ -1,6 +1,4 @@
-﻿#if WINDOWS
-
-namespace GameLibrary.Helpers.Debug.DebugCommands
+﻿namespace GameLibrary.Helpers.Debug.DebugCommands
 {
     public class ExecCommand : DebugCommand
     {
@@ -26,4 +24,3 @@ namespace GameLibrary.Helpers.Debug.DebugCommands
         private DebugConsole _Console;
     }
 }
-#endif
