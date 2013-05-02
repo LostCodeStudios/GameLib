@@ -38,7 +38,7 @@ namespace GameLibrary.Helpers.Debug
                         Console.WriteLine("For more information on a specific command, type \"help <command>\"");
                         Commands.Print();
                     }
-                }));
+                }, 0, ""));
 
             //Log
 

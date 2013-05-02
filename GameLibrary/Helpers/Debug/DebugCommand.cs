@@ -14,7 +14,7 @@ namespace GameLibrary.Helpers.Debug
         /// <param name="description">The description of command.</param>
         public DebugCommand(string command, string description)
             : this(command, description,
-            (w, args) => Console.WriteLine("Command not implemented."))
+            (w, args) => Console.WriteLine("Command not implemented."), 0, "")
         {
         }
 
@@ -26,7 +26,7 @@ namespace GameLibrary.Helpers.Debug
         /// <param name="runCommand">The delegate called when command invoked</param>
         /// <param name="requiredArgs">The # of required args</param>
         /// <param name="usage">The usage string</param>
-        public DebugCommand(string commandString, string description, ExecutionDelegate runCommand, int requiredArgs = 0, string usage = "")
+        public DebugCommand(string commandString, string description, ExecutionDelegate runCommand, int requiredArgs, string usage)
         {
             this.Command = commandString;
             this.Description = description;
@@ -131,12 +131,12 @@ namespace GameLibrary.Helpers.Debug
         {
             return "=== " + this.Command.ToUpper() + " ==="
                 + ("\nDescription:\n"
-                    + this.Description.AddLeadingString(3)
+                    + this.Description.AddLeadingString(3, "")
                     + "\n#ArgsRequired:\n"
-                    + this.NumRequiredArgs.ToString().AddLeadingString(3)
+                    + this.NumRequiredArgs.ToString().AddLeadingString(3, "")
                     + "\nUsage:\n"
-                    + this.Usage.AddLeadingString(3)
-                ).AddLeadingString(2);
+                    + this.Usage.AddLeadingString(3, "")
+                ).AddLeadingString(2, "");
         }
 
         #endregion Helpers

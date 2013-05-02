@@ -1036,7 +1036,9 @@ namespace GameLibrary.Helpers.Debug
                     _batch.DrawString(_font, _worldStringData[i].S,
                         new Vector2(_worldStringData[i].X, _worldStringData[i].Y), _worldStringData[i].Color, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                 }
+#if WINDOWS
                 _worldStringData.RemoveAll(new Predicate<StringData>(x => x.S == _worldStringData[i].S));
+#endif
                 i--;
             }
 
