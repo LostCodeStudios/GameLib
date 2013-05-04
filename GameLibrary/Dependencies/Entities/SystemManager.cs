@@ -132,9 +132,11 @@ namespace GameLibrary.Dependencies.Entities
             }
         }
 
+#if WINDOWS
         private TaskFactory factory = new TaskFactory(TaskScheduler.Default);
         private List<Task> tasks = new List<Task>();
 
+#endif
         private void UpdatebagASSync(Bag<EntitySystem> temp)
         {
             tasks.Clear();

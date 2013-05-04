@@ -29,8 +29,8 @@ namespace CarGame
         public override void Initialize()
         {
             #region Systems
-            _groundRenderSystem = this.SystemManager.SetSystem(new GroundRenderSystem(Camera, this.SpriteBatch.GraphicsDevice), ExecutionType.Draw);
-            PlayerControlSystem = this.SystemManager.SetSystem(new PlayerControlSystem(), ExecutionType.Update);
+            _groundRenderSystem = this.SystemManager.SetSystem(new GroundRenderSystem(Camera, this.SpriteBatch.GraphicsDevice), ExecutionType.Draw, 0);
+            PlayerControlSystem = this.SystemManager.SetSystem(new PlayerControlSystem(), ExecutionType.Update, 0);
 
             #endregion
 

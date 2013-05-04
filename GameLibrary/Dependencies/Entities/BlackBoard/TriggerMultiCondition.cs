@@ -7,7 +7,10 @@ namespace GameLibrary.Dependencies.Entities
         private Func<BlackBoard, TriggerState, bool> Condition;
         private Action<TriggerState> onFire;
 
-        public TriggerMultiCondition(Func<BlackBoard, TriggerState, bool> Condition, Action<TriggerState> onFire = null, params String[] Names)
+        public TriggerMultiCondition(Func<BlackBoard, TriggerState, bool> Condition, params string[] Names)
+            : this(Condition, null, Names) { }
+
+        public TriggerMultiCondition(Func<BlackBoard, TriggerState, bool> Condition, Action<TriggerState> onFire, params String[] Names)
         {
             this.WorldPropertiesMonitored.AddRange(Names);
             this.Condition = Condition;

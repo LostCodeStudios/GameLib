@@ -28,7 +28,7 @@ namespace Pickn_Sticks
 
         protected override void BuildSystems()
         {
-            playerControlSystem = this.SystemManager.SetSystem(new PlayerControlSystem(2.235f), GameLibrary.Dependencies.Entities.ExecutionType.Update);
+            playerControlSystem = this.SystemManager.SetSystem(new PlayerControlSystem(2.235f), GameLibrary.Dependencies.Entities.ExecutionType.Update, 0);
 
             base.BuildSystems();
         }
