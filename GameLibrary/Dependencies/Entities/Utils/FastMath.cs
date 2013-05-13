@@ -52,16 +52,21 @@ namespace GameLibrary.Dependencies.Entities
             return (Math.Abs(x) < 1) ? x / (1 + _atan_a * x * x) : Math.Sign(x) * HALF_PI - x / (x * x + _atan_a);
         }
 
+#if WINDOWS
         public static float InverseSqrt(float x)
         {
             float xhalves = 0.5f * x;
             x = (float)BitConverter.Int64BitsToDouble(0x5FE6EB50C7B537AAL - (BitConverter.DoubleToInt64Bits((double)x) >> 1));
             return x * (1.5f - xhalves * x * x); // more iterations possible
         }
+#endif
 
+#if WINDOWS
         public static float Sqrt(float x)
         {
             return x * InverseSqrt(x);
         }
+
+#endif
     }
 }

@@ -188,7 +188,7 @@ namespace GameLibrary
         /// <param name="args"></param>
         public virtual void OnExit(object sender, EventArgs args)
         {
-#if DEBUG
+#if DEBUG && WINDOWS
             this._DebugSystem.Dispose();
 #endif
         }

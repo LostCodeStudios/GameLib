@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if WINDOWS
+
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -24,7 +26,9 @@ namespace GameLibrary.Dependencies.Entities
 
         public abstract void Process(Entity e);
 
+#if WINDOWS
         private TaskFactory factory = new TaskFactory(TaskScheduler.Default);
+#endif
 
         protected override void ProcessEntities(Dictionary<int, Entity> entities)
         {
@@ -53,3 +57,5 @@ namespace GameLibrary.Dependencies.Entities
         }
     }
 }
+
+#endif

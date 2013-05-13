@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+#if WINDOWS
 using System.Threading.Tasks;
-
+#endif
 namespace GameLibrary.Dependencies.Entities
 {
     public enum ExecutionType
@@ -133,6 +134,7 @@ namespace GameLibrary.Dependencies.Entities
             }
         }
 
+#if WINDOWS
         private TaskFactory factory = new TaskFactory(TaskScheduler.Default);
         private List<Task> tasks = new List<Task>();
 
@@ -151,7 +153,9 @@ namespace GameLibrary.Dependencies.Entities
             }
             Task.WaitAll(tasks.ToArray());
         }
+#endif
 
+#if WINDOWS
         public void UpdateAsynchronous(ExecutionType execType)
         {
             if (execType == ExecutionType.Draw)
@@ -169,8 +173,9 @@ namespace GameLibrary.Dependencies.Entities
                 }
             }
         }
+#endif
 
-#if DEBUG
+#if DEBUG && WINDOWS
 
         public override string ToString()
         {

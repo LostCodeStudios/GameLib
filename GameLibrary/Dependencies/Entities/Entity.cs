@@ -49,7 +49,7 @@ namespace GameLibrary.Dependencies.Entities
             get { return uniqueId; }
             internal set
             {
-                System.Diagnostics.Debug.Assert(uniqueId >= 0);
+                //System.Diagnostics.Debug.Assert(uniqueId >= 0);
                 uniqueId = value;
             }
         }

@@ -1,4 +1,6 @@
-﻿using GameLibrary.Dependencies.Physics.Collision.Shapes;
+﻿#if WINDOWS
+
+using GameLibrary.Dependencies.Physics.Collision.Shapes;
 using GameLibrary.Dependencies.Physics.Dynamics;
 using GameLibrary.Dependencies.Physics.Dynamics.Joints;
 using Microsoft.Xna.Framework;
@@ -1566,3 +1568,5 @@ namespace GameLibrary.Dependencies.Physics.Common
 
     #endregion XMLFragment
 }
+
+#endif

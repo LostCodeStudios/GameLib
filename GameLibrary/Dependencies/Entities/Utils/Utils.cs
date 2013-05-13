@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Microsoft.Xna.Framework;
 
 namespace GameLibrary.Dependencies.Entities
 {
@@ -21,6 +22,7 @@ namespace GameLibrary.Dependencies.Entities
             return (((1f - t) * (1f - t)) * a) + (((2f * t) * (1f - t)) * b) + ((t * t) * c);
         }
 
+#if WINDOWS
         public static float LengthOfQuadraticBezierCurve(float x0, float y0, float x1, float y1, float x2, float y2)
         {
             if ((x0 == x1 && y0 == y1) || (x1 == x2 && y1 == y2))
@@ -45,7 +47,7 @@ namespace GameLibrary.Dependencies.Entities
 
             return (A_32 * Sabc + A_2 * B * (Sabc - C_2) + (4f * C * A - B * B) * (float)Math.Log((2 * A_2 + BA + Sabc) / (BA + C_2))) / (4 * A_32);
         }
-
+#endif
         public static float Lerp(float a, float b, float t)
         {
             if (t < 0)
@@ -53,10 +55,12 @@ namespace GameLibrary.Dependencies.Entities
             return a + t * (b - a);
         }
 
+#if WINDOWS
         public static float Distance(float x1, float y1, float x2, float y2)
         {
             return EuclideanDistance(x1, y1, x2, y2);
         }
+#endif
 
         public static bool DoCirclesCollide(float x1, float y1, float radius1, float x2, float y2, float radius2)
         {
@@ -78,6 +82,7 @@ namespace GameLibrary.Dependencies.Entities
             return Math.Abs(x1 - x2) + Math.Abs(y1 - y2);
         }
 
+#if WINDOWS
         public static float EuclideanDistance(float x1, float y1, float x2, float y2)
         {
             float a = x1 - x2;
@@ -85,6 +90,7 @@ namespace GameLibrary.Dependencies.Entities
 
             return (float)FastMath.Sqrt(a * a + b * b);
         }
+#endif
 
         public static float AngleInDegrees(float ownerRotation, float x1, float y1, float x2, float y2)
         {
@@ -135,17 +141,19 @@ namespace GameLibrary.Dependencies.Entities
 
         public static bool Collides(float x1, float y1, float radius1, float x2, float y2, float radius2)
         {
-            float d = Utils.Distance(x1, y1, x2, y2);
+            float d = Vector2.Distance(new Vector2(x1, y1), new Vector2(x2, y2));
 
             d -= radius1 + radius2;
 
             return d < 0;
         }
 
+#if WINDOWS
         public static String ReadFileContents(String file)
         {
             string readText = File.ReadAllText(file, System.Text.Encoding.UTF8);
             return (readText);
         }
+#endif
     }
 }

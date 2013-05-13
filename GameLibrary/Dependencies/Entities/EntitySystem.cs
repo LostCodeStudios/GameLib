@@ -73,14 +73,14 @@ namespace GameLibrary.Dependencies.Entities
         {
             if (CheckProcessing())
             {
-#if DEBUG
+#if DEBUG && WINDOWS
                 w.Reset();
                 w.Start();
 #endif
                 Begin();
                 ProcessEntities(actives);
                 End();
-#if DEBUG
+#if DEBUG && WINDOWS
                 w.Stop();
                 UpdateTime = (long)MathHelper.SmoothStep(UpdateTime, w.ElapsedTicks, 1f);
 #endif

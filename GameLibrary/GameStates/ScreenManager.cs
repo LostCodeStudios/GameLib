@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Storage;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System;
 
 namespace GameLibrary.GameStates
 {
@@ -17,11 +18,15 @@ namespace GameLibrary.GameStates
     public class ScreenManager : DrawableGameComponent
     {
         #region Fields
-
-        private const string StateFilename = "ScreenManagerState.xml";
-
 #if XBOX
-        StorageDevice storageDevice;
+        public static StorageDevice Storage;
+
+        public static StorageContainer GetContainer()
+        {
+            IAsyncResult result = Storage.BeginOpenContainer("Space Hordes", null, null);
+            return Storage.EndOpenContainer(result);
+        }
+
 #endif
 
         private List<GameScreen> screens = new List<GameScreen>();
@@ -99,18 +104,6 @@ namespace GameLibrary.GameStates
         {
             get { return input; }
         }
-
-#if XBOX
-
-        /// <summary>
-        /// The game's storage device.
-        /// </summary>
-        public StorageDevice StorageDevice
-        {
-            get { return storageDevice; }
-            set { storageDevice = value; }
-        }
-#endif
 
         #endregion Properties
 
@@ -267,7 +260,7 @@ namespace GameLibrary.GameStates
         public void AddScreen(GameScreen screen, PlayerIndex? controllingPlayer)
         {
             screen.ControllingPlayer = controllingPlayer;
-            screen.ScreenManager = this;
+            screen.Manager = this;
             screen.IsExiting = false;
 
             //If we have a graphics device, tell the screen to load content.
