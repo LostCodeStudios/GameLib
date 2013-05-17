@@ -17,7 +17,7 @@ namespace GameLibrary.GameStates.Screens
         #region Fields
 
         private List<MenuEntry> menuEntries = new List<MenuEntry>();
-        private int selectedEntry = 0;
+        protected int selectedEntry = 0;
         private string menuTitle;
 
 #if XBOX || WINDOWS
