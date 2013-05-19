@@ -186,6 +186,8 @@ namespace GameLibrary.GameStates.Screens
                 {
                     SoundManager.Play(cancelSound);
                 }
+
+                CallExit();
             }
 
 #endif
