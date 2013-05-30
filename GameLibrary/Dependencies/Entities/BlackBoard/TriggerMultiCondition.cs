@@ -17,7 +17,7 @@ namespace GameLibrary.Dependencies.Entities
             this.onFire = onFire;
         }
 
-        public void RemoveThisTrigger()
+        public override void RemoveThisTrigger()
         {
             BlackBoard.RemoveTrigger(this);
         }

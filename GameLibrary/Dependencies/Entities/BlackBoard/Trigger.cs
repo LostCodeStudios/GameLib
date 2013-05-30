@@ -32,7 +32,7 @@ namespace GameLibrary.Dependencies.Entities
             internal set;
         }
 
-        public void RemoveThisTrigger()
+        public virtual void RemoveThisTrigger()
         {
             BlackBoard.RemoveTrigger(this);
         }
