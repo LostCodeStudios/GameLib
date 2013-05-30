@@ -11,7 +11,8 @@
     <AssemblyName>GameLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
-    <TargetFrameworkProfile></TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <XnaPlatform>Windows</XnaPlatform>
     <XnaProfile>Reach</XnaProfile>
     <XnaCrossPlatformGroupID>c7741885-3a9b-444e-aa27-f1351d8628e3</XnaCrossPlatformGroupID>
@@ -146,6 +147,7 @@
     <Compile Include="GameStates\ScreenManager.cs" />
     <Compile Include="GameStates\Screens\MenuEntry.cs" />
     <Compile Include="GameStates\Screens\MenuScreen.cs" />
+    <Compile Include="GameStates\Screens\TextScreen.cs" />
     <Compile Include="Helpers\Debug\Debug Commands\ExecCommand.cs" />
     <Compile Include="Helpers\Debug\Debug Commands\ScopeCommands.cs" />
     <Compile Include="Helpers\Debug\DebugCommand.cs">

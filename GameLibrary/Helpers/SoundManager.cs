@@ -1,12 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Input;
 
 namespace GameLibrary.Helpers
 {
     public static class SoundManager
     {
-        private static Dictionary<string, SoundEffect> sounds = new Dictionary<string, SoundEffect>();
+        #region Settings
 
         private static float volume;
 
@@ -29,6 +30,58 @@ namespace GameLibrary.Helpers
             }
         }
 
+        public static bool Rumble = true;
+
+        #endregion
+
+        #region Rumble
+
+        static float rumbleTime = 0;
+
+        public static void UpdateRumble(GameTime gameTime)
+        {
+            if (rumbleTime > 0)
+            {
+                rumbleTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                if (rumbleTime <= 0)
+                {
+                    SetVibration(0, 0);
+                }
+            }
+        }
+
+        public static void SetVibration(PlayerIndex index, float leftMotor, float rightMotor, float time)
+        {
+            if (!Rumble)
+                return;
+
+            GamePad.SetVibration(index, leftMotor, rightMotor);
+            rumbleTime = time;
+        }
+
+        public static void SetVibration(PlayerIndex index, float amount, float time)
+        {
+            SetVibration(index, amount, amount, time);
+        }
+
+        public static void SetVibration(float leftMotor, float rightMotor, float time)
+        {
+            for (int i = 0; i < 4; ++i)
+            {
+                SetVibration((PlayerIndex)i, leftMotor, rightMotor, time);
+            }
+        }
+
+        public static void SetVibration(float amount, float time)
+        {
+            SetVibration(amount, amount, time);
+        }
+
+        #endregion
+
+        #region Playback
+
         public static void Play(string soundKey)
         {
             Play(soundKey, 1);
@@ -40,6 +93,12 @@ namespace GameLibrary.Helpers
                 sounds[soundKey].Play(Volume * volume, Pitch, 0f);
         }
 
+        #endregion
+
+        #region Collection
+
+        private static Dictionary<string, SoundEffect> sounds = new Dictionary<string, SoundEffect>();
+
         public static void Add(string soundKey, SoundEffect sound)
         {
             sounds.Add(soundKey, sound);
@@ -49,5 +108,7 @@ namespace GameLibrary.Helpers
         {
             sounds.Remove(soundKey);
         }
+
+        #endregion
     }
 }
