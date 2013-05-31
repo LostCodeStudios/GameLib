@@ -13,7 +13,7 @@ namespace SpaceHordes.Entities.Systems
 
         public override void Process(Entity e)
         {
-            if (!e.HasComponent<Sprite>())
+            if (!e.HasComponent<Sprite>() || !e.HasComponent<Animation>())
                 return;
 
             Sprite sprite = e.GetComponent<Sprite>();
