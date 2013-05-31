@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceHordes.Entities.Systems;
 using System;
+using GameLibrary.Dependencies.Physics.Dynamics;
+using GameLibrary.Entities.Components;
 
 namespace GameLibrary
 {
@@ -125,6 +127,17 @@ namespace GameLibrary
                 this.SystemManager.UpdateSynchronous(ExecutionType.Update); //Update the entity world.
                 this.Step((float)gameTime.ElapsedGameTime.TotalSeconds / Speed); //Update physical world.
                 Camera.Update(gameTime); //Finally update the camera.
+
+                for (int i = 0; i < BodyList.Count; i++)
+                {
+                    if (BodyList[i].UserData == null || (BodyList[i].UserData != null && EntityManager.GetEntity((BodyList[i].UserData as Entity).Id) != (BodyList[i].UserData as Entity)))
+                    {
+#if DEBUG
+                        Console.WriteLine("We have a crisis; a nullification crisis. ");
+#endif
+                        RemoveBody(BodyList[i]);
+                    }
+                }
             }
         }
 

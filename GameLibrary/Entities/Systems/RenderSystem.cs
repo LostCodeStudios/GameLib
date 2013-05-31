@@ -38,7 +38,7 @@ namespace GameLibrary.Entities.Systems
             ITransform transform = transformMapper.Get(e);
             Sprite sprite = spriteMapper.Get(e);
 
-            if(sprite.Source != null)
+            if (sprite.Source != null)
                 //Draw to sprite batch
                 spriteBatch.Draw(
                     sprite.SpriteSheet.Texture,
@@ -49,6 +49,8 @@ namespace GameLibrary.Entities.Systems
                     sprite.Origin,
                     sprite.Scale,
                     SpriteEffects.None, sprite.Layer);
+            else
+                Console.WriteLine("Nullification Crisis");
         }
 
         /// <summary>
