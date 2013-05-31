@@ -20,12 +20,11 @@ namespace GameLibrary.GameStates.Screens
         protected int selectedEntry = 0;
         private string menuTitle;
 
-#if XBOX || WINDOWS
         private InputAction menuUp;
         private InputAction menuDown;
         private InputAction menuSelect;
-        private InputAction menuCancel;
-#endif
+        protected InputAction menuCancel;
+
         string selectionChangeSound = "";
         string selectionSound = "";
         string cancelSound = "";

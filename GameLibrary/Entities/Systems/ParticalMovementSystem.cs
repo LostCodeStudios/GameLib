@@ -20,6 +20,9 @@ namespace GameLibrary.Entities.Systems
 
         public override void Process(Entity e)
         {
+            if (!e.HasComponent<Particle>())
+                return;
+
             Particle particle = particleMapper.Get(e);
 
             float dt = World.Delta / 1000f;

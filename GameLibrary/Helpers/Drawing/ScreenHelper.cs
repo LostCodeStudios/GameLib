@@ -42,6 +42,12 @@ namespace GameLibrary.Helpers
             get;
         }
 
+        public static SpriteFont SpriteFont
+        {
+            get;
+            set;
+        }
+
         public static KeyboardState input;
 
         /// <summary>
