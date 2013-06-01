@@ -81,14 +81,14 @@ namespace GameLib.GameStates.Screens
             {
                 //set the left margin
                 position.X = Manager.GraphicsDevice.Viewport.Width / 2;
-                position.X -= ((Manager.Font.MeasureString(lines[i]).X)) / 2;
+                position.X -= ((Manager.CreditsFont.MeasureString(lines[i]).X)) / 2;
 
                 if (ScreenState == ScreenState.TransitionOn)
                     position.X -= transitionOffset * 256;
                 else
                     position.X += transitionOffset * 512;
 
-                spriteBatch.DrawString(Manager.Font, lines[i], position, Color.White * TransitionAlpha);
+                spriteBatch.DrawString(Manager.CreditsFont, lines[i], position, Color.White * TransitionAlpha);
 
                 position.Y += Manager.Font.LineSpacing;
             }

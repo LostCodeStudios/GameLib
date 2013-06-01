@@ -30,7 +30,8 @@ namespace GameLibrary.GameStates
 
         public static void ForceDispose()
         {
-            c.Dispose();
+            if (c != null)
+                c.Dispose();
         }
 
 #endif
@@ -43,6 +44,7 @@ namespace GameLibrary.GameStates
         private SpriteBatch spriteBatch;
         private SpriteFont font;
         private SpriteFont titleFont;
+        private SpriteFont creditFont;
         private SpriteFont initialEntryFont;
 
         private Texture2D blankTexture;
@@ -69,6 +71,11 @@ namespace GameLibrary.GameStates
         public SpriteFont Font
         {
             get { return font; }
+        }
+
+        public SpriteFont CreditsFont
+        {
+            get { return creditFont; }
         }
 
         /// <summary>
@@ -145,6 +152,7 @@ namespace GameLibrary.GameStates
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = content.Load<SpriteFont>("Fonts/menufont");
             titleFont = content.Load<SpriteFont>("Fonts/titlefont");
+            creditFont = content.Load<SpriteFont>("Fonts/creditfont");
             initialEntryFont = content.Load<SpriteFont>("Fonts/InitialEntryFont");
 
             blankTexture = content.Load<Texture2D>("Textures/blank");

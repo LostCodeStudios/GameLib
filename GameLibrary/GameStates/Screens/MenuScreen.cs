@@ -88,7 +88,7 @@ namespace GameLibrary.GameStates.Screens
                 true);
 
             menuSelect = new InputAction(
-                new Buttons[] { Buttons.A, Buttons.Start },
+                new Buttons[] { Buttons.A },
                 new Keys[] { Keys.Enter, Keys.Space },
                 true);
 
