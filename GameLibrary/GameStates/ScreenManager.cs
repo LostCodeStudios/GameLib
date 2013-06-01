@@ -20,11 +20,17 @@ namespace GameLibrary.GameStates
         #region Fields
 #if XBOX
         public static StorageDevice Storage;
-
+        static StorageContainer c;
         public static StorageContainer GetContainer()
         {
             IAsyncResult result = Storage.BeginOpenContainer("Space Hordes", null, null);
-            return Storage.EndOpenContainer(result);
+            c = Storage.EndOpenContainer(result);
+            return c;
+        }
+
+        public static void ForceDispose()
+        {
+            c.Dispose();
         }
 
 #endif
