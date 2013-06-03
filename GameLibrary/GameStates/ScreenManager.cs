@@ -23,9 +23,16 @@ namespace GameLibrary.GameStates
         static StorageContainer c;
         public static StorageContainer GetContainer()
         {
-            IAsyncResult result = Storage.BeginOpenContainer("Space Hordes", null, null);
-            c = Storage.EndOpenContainer(result);
-            return c;
+            try
+            {
+                IAsyncResult result = Storage.BeginOpenContainer("Space Hordes", null, null);
+                c = Storage.EndOpenContainer(result);
+                return c;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public static void ForceDispose()
