@@ -36,17 +36,20 @@ namespace GameLibrary.Helpers
 
         #region Rumble
 
-        static float rumbleTime = 0;
+        static float[] rumbleTime = new float[4];
 
         public static void UpdateRumble(GameTime gameTime)
         {
-            if (rumbleTime > 0)
+            for (int i = 0; i < 4; ++i)
             {
-                rumbleTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-                if (rumbleTime <= 0)
+                if (rumbleTime[i] > 0)
                 {
-                    SetVibration(0, 0);
+                    rumbleTime[i] -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                    if (rumbleTime[i] <= 0)
+                    {
+                        SetVibration((PlayerIndex)i, 0, 0);
+                    }
                 }
             }
         }
@@ -57,7 +60,11 @@ namespace GameLibrary.Helpers
                 return;
 
             GamePad.SetVibration(index, leftMotor, rightMotor);
-            rumbleTime = time;
+
+            for (int i = 0; i < 4; ++i)
+            {
+                rumbleTime[i] = time;
+            }
         }
 
         public static void SetVibration(PlayerIndex index, float amount, float time)
