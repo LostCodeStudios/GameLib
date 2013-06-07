@@ -61,10 +61,7 @@ namespace GameLibrary.Helpers
 
             GamePad.SetVibration(index, leftMotor, rightMotor);
 
-            for (int i = 0; i < 4; ++i)
-            {
-                rumbleTime[i] = time;
-            }
+            rumbleTime[(int)index] = time;
         }
 
         public static void SetVibration(PlayerIndex index, float amount, float time)
