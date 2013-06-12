@@ -447,8 +447,8 @@ namespace GameLibrary.Dependencies.Physics.Dynamics
 
         public void Add(Contact contact)
         {
-            if (ContactCount < _contactCapacity) ;
-            _contacts[ContactCount++] = contact;
+            if (ContactCount < _contactCapacity)
+                _contacts[ContactCount++] = contact;
         }
 
         public void Add(PhysicsJoint joint)
