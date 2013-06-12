@@ -143,11 +143,6 @@
     <Compile Include="Entities\Systems\ParticalMovementSystem.cs" />
     <Compile Include="Entities\Systems\RenderSystem.cs" />
     <Compile Include="Entities\Systems\AnimationSystem.cs" />
-    <Compile Include="GameStates\GameScreen.cs" />
-    <Compile Include="GameStates\ScreenManager.cs" />
-    <Compile Include="GameStates\Screens\MenuEntry.cs" />
-    <Compile Include="GameStates\Screens\MenuScreen.cs" />
-    <Compile Include="GameStates\Screens\TextScreen.cs" />
     <Compile Include="Helpers\Debug\Debug Commands\ExecCommand.cs" />
     <Compile Include="Helpers\Debug\Debug Commands\ScopeCommands.cs" />
     <Compile Include="Helpers\Debug\DebugCommand.cs">
