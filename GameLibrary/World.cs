@@ -62,7 +62,7 @@ namespace GameLibrary
         public virtual void LoadContent(ContentManager Content, params object[] args)
         {
 #if DEBUG && WINDOWS//Debug render system
-            this._DebugSystem.LoadContent(SpriteBatch.GraphicsDevice, Content);
+            _DebugSystem.LoadContent(SpriteBatch.GraphicsDevice, Content);
 #endif
 
             //Builds templates in world.
@@ -202,7 +202,7 @@ namespace GameLibrary
         public virtual void OnExit(object sender, EventArgs args)
         {
 #if DEBUG && WINDOWS
-            this._DebugSystem.Dispose();
+            _DebugSystem.Dispose();
 #endif
         }
 
