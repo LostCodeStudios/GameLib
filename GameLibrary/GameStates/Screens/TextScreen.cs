@@ -7,7 +7,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using GameLibrary.Helpers;
-namespace GameLib.GameStates.Screens
+
+namespace GameLibrary.GameStates.Screens
 {
     public class TextScreen : GameScreen
     {
