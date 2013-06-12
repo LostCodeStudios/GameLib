@@ -18,6 +18,7 @@
     <XnaCrossPlatformGroupID>c7741885-3a9b-444e-aa27-f1351d8628e3</XnaCrossPlatformGroupID>
     <XnaOutputType>Library</XnaOutputType>
     <XnaUpgrade />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -30,7 +31,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -143,6 +143,8 @@
     <Compile Include="Entities\Systems\ParticalMovementSystem.cs" />
     <Compile Include="Entities\Systems\RenderSystem.cs" />
     <Compile Include="Entities\Systems\AnimationSystem.cs" />
+    <Compile Include="GameStates2\Control.cs" />
+    <Compile Include="GameStates2\Transitionable.cs" />
     <Compile Include="GameStates\GameScreen.cs" />
     <Compile Include="GameStates\ScreenManager.cs" />
     <Compile Include="GameStates\Screens\MenuEntry.cs" />
@@ -167,10 +169,10 @@
     <Compile Include="Helpers\Drawing\PrimitiveBatch.cs" />
     <Compile Include="Helpers\Drawing\RectangleF.cs" />
     <Compile Include="Helpers\Drawing\ScreenHelper.cs" />
-    <Compile Include="Helpers\Input\IHandlesInput.cs" />
-    <Compile Include="Helpers\Input\InputAction.cs" />
-    <Compile Include="Helpers\Input\InputState.cs" />
-    <Compile Include="Helpers\Input\PlayerIndexEventArgs.cs" />
+    <Compile Include="GameStates2\Input\IHandlesInput.cs" />
+    <Compile Include="GameStates2\Input\InputAction.cs" />
+    <Compile Include="GameStates2\Input\InputState.cs" />
+    <Compile Include="GameStates2\Input\PlayerIndexEventArgs.cs" />
     <Compile Include="Dependencies\Physics\Collision\Collision.cs" />
     <Compile Include="Dependencies\Physics\Collision\Distance.cs" />
     <Compile Include="Dependencies\Physics\Collision\DynamicTree.cs" />
