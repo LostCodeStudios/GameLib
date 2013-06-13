@@ -21,7 +21,7 @@ namespace GameLibrary.NewGameStates
     /// <summary>
     /// Represents a side of the screen from which a transitioning control will appear.
     /// </summary>
-    public enum TransitionDirection
+    public enum ScreenSide
     {
         Top,
         Bottom,
