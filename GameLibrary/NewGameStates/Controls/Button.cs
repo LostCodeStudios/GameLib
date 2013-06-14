@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using GameLibrary.Helpers;
+using Microsoft.Xna.Framework.Input;
 
 namespace GameLibrary.NewGameStates.Controls
 {
@@ -102,9 +103,22 @@ namespace GameLibrary.NewGameStates.Controls
 
         #endregion
 
+        MouseState mouseState;
+        MouseState lastMouseState;
+
         public override void Update(GameTime gameTime, ControlManager manager)
         {
             base.Update(gameTime, manager);
+
+            mouseState = Mouse.GetState();
+
+            if (Selected && mouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released)
+            {
+                if (OnTrigger != null)
+                    OnTrigger(this, null);
+            }
+
+            lastMouseState = mouseState;
 
             selectionTransition.Update(gameTime);
         }
