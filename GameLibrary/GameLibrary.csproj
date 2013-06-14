@@ -281,6 +281,7 @@
     <Compile Include="Helpers\Win32.Functions.cs" />
     <Compile Include="NewGameStates\Control.cs" />
     <Compile Include="NewGameStates\ControlManager.cs" />
+    <Compile Include="NewGameStates\Controls\Button.cs" />
     <Compile Include="NewGameStates\Controls\Label.cs" />
     <Compile Include="NewGameStates\TextComponent.cs" />
     <Compile Include="NewGameStates\Transition.cs" />

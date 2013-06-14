@@ -28,7 +28,7 @@ namespace GameLibrary.NewGameStates
         /// <summary>
         /// Whether the ControlManager needs to draw.
         /// </summary>
-        public bool Visible = true;
+        public bool Visible = false;
 
         int selectedIndex;
 
@@ -47,11 +47,51 @@ namespace GameLibrary.NewGameStates
         }
 
         /// <summary>
+        /// Tells all controls to transition on. Input will be enabled when all have transitioned on.
+        /// </summary>
+        public void TransitionOn()
+        {
+            foreach (Control control in controls)
+            {
+                control.TransitionOn();
+            }
+
+            Visible = true;
+        }
+
+        /// <summary>
+        /// Tells all controls to transition off. Disables input.
+        /// </summary>
+        public void TransitionOff()
+        {
+            foreach (Control control in controls)
+            {
+                control.TransitionOff();
+            }
+
+            Enabled = false;
+        }
+
+        /// <summary>
         /// Handles input and updates every control in the manager's list.
         /// </summary>
         /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
+            //Once all controls are done transitioning, input should be enabled.
+            if (Visible && !Enabled)
+            {
+                Enabled = true;
+
+                foreach (Control control in controls)
+                {
+                    if (control.Transitioning)
+                    {
+                        Enabled = false;
+                    }
+                }
+            }
+
             GamePadState padState = GamePad.GetState(ControllingIndex);
 
             HandleInput(padState);

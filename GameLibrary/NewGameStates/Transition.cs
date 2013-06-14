@@ -68,7 +68,7 @@ namespace GameLibrary.NewGameStates
         /// <summary>
         /// Simple helper to determine if the Transitionable is in a transition.
         /// </summary>
-        protected bool Transitioning
+        public bool Transitioning
         {
             get
             { 
@@ -134,10 +134,18 @@ namespace GameLibrary.NewGameStates
         /// <returns>Whether or not a transition was actually necessary.</returns>
         public bool TransitionOn()
         {
-            if (state != TransitionState.Off || transitionOn == TimeSpan.Zero)
+            if (state == TransitionState.On || state == TransitionState.TransitionOn || transitionOn == TimeSpan.Zero)
                 return false;
 
-            elapsedTransition = TimeSpan.Zero;
+            if (state == TransitionState.TransitionOff)
+            {
+                float fraction = 1f - TransitionFraction;
+                double seconds = (double)fraction * transitionOn.TotalSeconds;
+                elapsedTransition = TimeSpan.FromSeconds(seconds);
+            }
+            else
+                elapsedTransition = TimeSpan.Zero;
+
             state = TransitionState.TransitionOn;
 
             return true;
@@ -149,10 +157,18 @@ namespace GameLibrary.NewGameStates
         /// <returns>Whether or not a transition was actually necessary.</returns>
         public bool TransitionOff()
         {
-            if (state != TransitionState.On)
+            if (state == TransitionState.Off || state == TransitionState.TransitionOff || transitionOff == TimeSpan.Zero)
                 return false;
-            
-            elapsedTransition = TimeSpan.Zero;
+
+            if (state == TransitionState.TransitionOn)
+            {
+                float fraction = 1f - TransitionFraction;
+                double seconds = (double)fraction * transitionOn.TotalSeconds;
+                elapsedTransition = TimeSpan.FromSeconds(seconds);
+            }
+            else
+                elapsedTransition = TimeSpan.Zero;
+
             state = TransitionState.TransitionOff;
 
             return true;

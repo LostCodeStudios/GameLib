@@ -160,14 +160,13 @@ namespace GameLibrary.NewGameStates
 
             UpdatePosition();
 
-            if (manager.Enabled && !Transitioning && TabStop) //Don't take input if the manager isn't.
+            if (manager.Enabled && TabStop) //Don't take input if the manager isn't.
             {
                 UpdateBounds();
 
                 MouseState ms = Mouse.GetState();
 
-                bool selected;
-                selected = (ms.X > Bounds.X && ms.X < Bounds.Right
+                bool selected = (ms.X > Bounds.X && ms.X < Bounds.Right
                     && ms.Y > Bounds.Y && ms.Y < Bounds.Bottom);
 
                 Selected = selected;
@@ -240,13 +239,13 @@ namespace GameLibrary.NewGameStates
         {
             int width, height;
             width = (int)text.Size.X;
-            height = (int)text.Size.Y / 2;
+            height = (int)text.Size.Y;
 
             int x, y;
             x = (int)Position.X - width / 2;
             y = (int)Position.Y - height / 2;
 
-            Bounds = new Rectangle(x, y, width, height);
+            Bounds = new Rectangle(x, y, width, height / 2); //MeasureString includes double spacing, divide height by 2 to compensate
         }
 
         #endregion
