@@ -243,7 +243,7 @@ namespace GameLibrary.NewGameStates
 
             int x, y;
             x = (int)Position.X - width / 2;
-            y = (int)Position.Y - height / 2;
+            y = (int)Position.Y - height / 4; //Dividing by 4 seems to get the rectangle spot-on
 
             Bounds = new Rectangle(x, y, width, height / 2); //MeasureString includes double spacing, divide height by 2 to compensate
         }

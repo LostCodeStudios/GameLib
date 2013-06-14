@@ -193,7 +193,8 @@ namespace GameLibrary.Dependencies.Physics.Dynamics.Contacts
 
                     float kNormal = bodyA.InvMass + bodyB.InvMass + bodyA.InvI * rnA + bodyB.InvI * rnB;
 
-                    Debug.Assert(kNormal > Settings.Epsilon);
+                    if (kNormal <= Settings.Epsilon)
+                        return;
                     ccp.NormalMass = 1.0f / kNormal;
 
                     float rtA = ccp.rA.X * tangent.Y - ccp.rA.Y * tangent.X;
