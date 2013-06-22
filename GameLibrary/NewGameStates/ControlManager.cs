@@ -23,7 +23,14 @@ namespace GameLibrary.NewGameStates
         /// <summary>
         /// Whether the ControlManager should update or accept input.
         /// </summary>
-        public bool Enabled = false;
+        public bool Enabled
+        {
+            get { return enabled && transitioned; }
+            set { enabled = value; }
+        }
+
+        bool enabled;
+        bool transitioned;
 
         /// <summary>
         /// Whether the ControlManager needs to draw.
@@ -79,15 +86,15 @@ namespace GameLibrary.NewGameStates
         public void Update(GameTime gameTime)
         {
             //Once all controls are done transitioning, input should be enabled.
-            if (Visible && !Enabled)
+            if (Visible && !transitioned)
             {
-                Enabled = true;
+                transitioned = true;
 
                 foreach (Control control in controls)
                 {
                     if (control.Transitioning)
                     {
-                        Enabled = false;
+                        transitioned = false;
                     }
                 }
             }
