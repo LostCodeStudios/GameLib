@@ -79,10 +79,10 @@ namespace GameLibrary.Helpers
             try
             {
                 IAsyncResult r = storageDevice.BeginOpenContainer(ContainerName, null, null);
-                storageContainer = storageDevice.EndOpenContainer(result);
+                storageContainer = storageDevice.EndOpenContainer(r);
                 return true;
             }
-            catch
+            catch (Exception e)
             {
                 return false;
             }
@@ -119,7 +119,12 @@ namespace GameLibrary.Helpers
         {
             try
             {
+                SaveChanges();
+
                 if (!storageDevice.IsConnected)
+                    return false;
+
+                if (storageContainer == null || storageContainer.IsDisposed)
                     return false;
 
                 storageContainer.OpenFile("!STORAGE_TEST!.txt", FileMode.OpenOrCreate).Close();

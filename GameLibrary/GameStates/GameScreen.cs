@@ -33,7 +33,7 @@ namespace GameLibrary.GameStates
         private ScreenManager screenManager;
         private PlayerIndex? controllingPlayer;
         private bool isSerializable = true;
-        protected bool needsStorage;
+        protected bool needsStorage = false;
 
         #endregion Fields
 

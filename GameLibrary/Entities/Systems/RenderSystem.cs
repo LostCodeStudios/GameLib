@@ -49,8 +49,6 @@ namespace GameLibrary.Entities.Systems
                     sprite.Origin,
                     sprite.Scale,
                     SpriteEffects.None, sprite.Layer);
-            else
-                Console.WriteLine("Nullification Crisis");
         }
 
         /// <summary>
