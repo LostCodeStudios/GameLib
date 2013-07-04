@@ -33,10 +33,19 @@ namespace GameLibrary.GameStates
         private ScreenManager screenManager;
         private PlayerIndex? controllingPlayer;
         private bool isSerializable = true;
+        protected bool needsStorage;
 
         #endregion Fields
 
         #region Properties
+
+        /// <summary>
+        /// Indicates whether this Screen needs storage.
+        /// </summary>
+        public bool NeedsStorage
+        {
+            get { return needsStorage; }
+        }
 
         /// <summary>
         /// Indicates whether lower screens need to be hidden.

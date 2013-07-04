@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework.Storage;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System;
+using GameLibrary.Helpers;
+using GameLibrary.GameStates.Screens;
 
 namespace GameLibrary.GameStates
 {
@@ -18,30 +20,6 @@ namespace GameLibrary.GameStates
     public class ScreenManager : DrawableGameComponent
     {
         #region Fields
-#if XBOX
-        public static StorageDevice Storage;
-        static StorageContainer c;
-        public static StorageContainer GetContainer()
-        {
-            try
-            {
-                IAsyncResult result = Storage.BeginOpenContainer("Space Hordes", null, null);
-                c = Storage.EndOpenContainer(result);
-                return c;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public static void ForceDispose()
-        {
-            if (c != null)
-                c.Dispose();
-        }
-
-#endif
 
         private List<GameScreen> screens = new List<GameScreen>();
         private List<GameScreen> tempScreensList = new List<GameScreen>();
@@ -280,6 +258,18 @@ namespace GameLibrary.GameStates
         /// <param name="controllingPlayer"></param>
         public void AddScreen(GameScreen screen, PlayerIndex? controllingPlayer)
         {
+            #if XBOX
+            if (screen.NeedsStorage) //The screen needs storage, so check if we have access first. If not, open up a StorageMessageScreen instead.
+            {
+                bool storageAvailable = StorageHelper.CheckStorage();
+
+                if (!storageAvailable)
+                {
+                    screen = new StorageMessageScreen();
+                }
+            }
+            #endif
+
             screen.ControllingPlayer = controllingPlayer;
             screen.Manager = this;
             screen.IsExiting = false;

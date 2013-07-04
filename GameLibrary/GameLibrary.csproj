@@ -147,6 +147,7 @@
     <Compile Include="GameStates\ScreenManager.cs" />
     <Compile Include="GameStates\Screens\MenuEntry.cs" />
     <Compile Include="GameStates\Screens\MenuScreen.cs" />
+    <Compile Include="GameStates\Screens\StorageMessageScreen.cs" />
     <Compile Include="GameStates\Screens\TextScreen.cs" />
     <Compile Include="Helpers\Debug\Debug Commands\ExecCommand.cs" />
     <Compile Include="Helpers\Debug\Debug Commands\ScopeCommands.cs" />
@@ -277,6 +278,7 @@
     <Compile Include="Helpers\MusicManager.cs" />
     <Compile Include="Helpers\ScriptRuntime.cs" />
     <Compile Include="Helpers\SoundManager.cs" />
+    <Compile Include="Helpers\StorageHelper.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Helpers\Win32.Functions.cs" />
     <Compile Include="NewGameStates\Control.cs" />
