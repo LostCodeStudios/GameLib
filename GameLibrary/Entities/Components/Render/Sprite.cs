@@ -110,7 +110,7 @@ namespace GameLibrary.Entities.Components
         }
 
         /// <summary>
-        /// Will is a bitch
+        /// Nat is a bitch
         /// </summary>
         /// <param name="_SpriteSheet"></param>
         /// <param name="spriteKey"></param>
