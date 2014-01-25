@@ -35,8 +35,8 @@ namespace GameLibrary.Entities.Systems
         public override void Process(Entity e)
         {
             //Get sprite data and transform
-            ITransform transform = transformMapper.Get(e);
-            Sprite sprite = spriteMapper.Get(e);
+            ITransform transform = e.GetComponent<ITransform>();
+            Sprite sprite = e.GetComponent<Sprite>();
 
             if (sprite.Source != null)
                 //Draw to sprite batch

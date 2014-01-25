@@ -35,7 +35,7 @@ namespace SpaceHordes.Entities.Systems
                     switch (anim.Type)
                     {
                         case AnimationType.Loop:
-                            sprite.FrameIndex++; Console.WriteLine("Animation happened");
+                            sprite.FrameIndex++; //Console.WriteLine("Animation happened");
                             break;
 
                         case AnimationType.ReverseLoop:
