@@ -1,5 +1,6 @@
 ﻿using GameLibrary.Dependencies.Entities;
 using GameLibrary.Entities.Components;
+using System;
 using System.Linq;
 
 namespace SpaceHordes.Entities.Systems
@@ -9,6 +10,11 @@ namespace SpaceHordes.Entities.Systems
         public AnimationSystem()
             : base(typeof(Animation))
         {
+        }
+
+        protected override void ProcessEntities(System.Collections.Generic.Dictionary<int, Entity> entities)
+        {
+            base.ProcessEntities(entities);
         }
 
         public override void Process(Entity e)
@@ -21,14 +27,15 @@ namespace SpaceHordes.Entities.Systems
 
             if (anim.Type != AnimationType.None)
             {
-                anim._Tick++;
-                anim._Tick %= anim.FrameRate;
-                if (anim._Tick == 0) //If time to animate.
+                anim._Tick += world.Delta;
+
+                if (anim._Tick >= anim.FrameRate)
                 {
+                    anim._Tick -= anim.FrameRate;
                     switch (anim.Type)
                     {
                         case AnimationType.Loop:
-                            sprite.FrameIndex++;
+                            sprite.FrameIndex++; Console.WriteLine("Animation happened");
                             break;
 
                         case AnimationType.ReverseLoop:
