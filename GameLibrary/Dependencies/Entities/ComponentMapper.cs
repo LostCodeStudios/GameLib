@@ -39,7 +39,7 @@ namespace GameLibrary.Dependencies.Entities
         /// <returns>Component</returns>
         public T Get(Entity e)
         {
-            System.Diagnostics.Debug.Assert(e != null);
+            //System.Diagnostics.Debug.Assert(e != null);
             return (T)em.GetComponent(e, type);
         }
     }

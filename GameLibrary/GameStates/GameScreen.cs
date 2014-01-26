@@ -247,7 +247,6 @@ namespace GameLibrary.GameStates
         public virtual void HandleInput(GameTime gameTime, InputState input)
         {
         }
-
         /// <summary>
         /// Allows the screen to run logic. Called regardless of the
         /// screen's state.
@@ -262,6 +261,7 @@ namespace GameLibrary.GameStates
             if (isExiting)
             {
                 screenState = ScreenState.TransitionOff;
+
 
                 if (!UpdateTransition(gameTime, transitionOffTime, 1))
                 {
@@ -316,5 +316,10 @@ namespace GameLibrary.GameStates
         public event EventHandler OnExit;
 
         #endregion Events
+
+        public virtual void OnFocus()
+        {
+
+        }
     }
 }

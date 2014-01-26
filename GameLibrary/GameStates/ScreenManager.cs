@@ -300,6 +300,7 @@ namespace GameLibrary.GameStates
 
             screens.Remove(screen);
             tempScreensList.Remove(screen);
+
         }
 
         /// <summary>

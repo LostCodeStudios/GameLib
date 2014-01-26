@@ -34,21 +34,29 @@ namespace GameLibrary.Entities.Systems
         /// <param name="e"></param>
         public override void Process(Entity e)
         {
-            //Get sprite data and transform
-            ITransform transform = transformMapper.Get(e);
-            Sprite sprite = spriteMapper.Get(e);
+            try
+            {
+                //Get sprite data and transform
+                ITransform transform = e.GetComponent<ITransform>();
+                Sprite sprite = e.GetComponent<Sprite>();
 
-            if (sprite.Source != null)
-                //Draw to sprite batch
-                spriteBatch.Draw(
-                    sprite.SpriteSheet.Texture,
-                    ConvertUnits.ToDisplayUnits(transform.Position),
-                    sprite.CurrentRectangle,
-                    sprite.Color,
-                    transform.Rotation,
-                    sprite.Origin,
-                    sprite.Scale,
-                    SpriteEffects.None, sprite.Layer);
+                if (sprite.Source != null)
+                    //Draw to sprite batch
+                    spriteBatch.Draw(
+                        sprite.SpriteSheet.Texture,
+                        ConvertUnits.ToDisplayUnits(transform.Position),
+                        sprite.CurrentRectangle,
+                        sprite.Color,
+                        transform.Rotation,
+                        sprite.Origin,
+                        sprite.Scale,
+                        SpriteEffects.None, sprite.Layer);
+            }
+            catch
+            {
+                e.Delete();
+                Console.WriteLine("Exception try-caught in RenderSystem");
+            }
         }
 
         /// <summary>
@@ -57,7 +65,7 @@ namespace GameLibrary.Entities.Systems
         /// <param name="entities"></param>
         protected override void ProcessEntities(Dictionary<int, Entity> entities)
         {
-            spriteBatch.Begin(SpriteSortMode.FrontToBack, null, null, null, null, null, camera.View);
+            spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.NonPremultiplied , null, null, null, null, camera.View);
             base.ProcessEntities(entities);
             spriteBatch.End();
         }
