@@ -76,7 +76,7 @@ namespace GameLibrary.GameStates.Screens
             spriteBatch.DrawString(Manager.TitleFont, title, titlePosition, titleColor, 0,
                 titleOrigin, titleScale, SpriteEffects.None, 0);
 
-            Vector2 position = new Vector2(0f, ScreenHelper.Viewport.Height * 0.19f);
+            Vector2 position = new Vector2(0f, ScreenHelper.Viewport.Height * 0.17f);
 
             for (int i = 0; i < lines.Length; i++)
             {
