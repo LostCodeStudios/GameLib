@@ -66,9 +66,9 @@ namespace GameLibrary.GameStates.Screens
 
             spriteBatch.Begin();
 
-            Vector2 titlePosition = new Vector2(Manager.GraphicsDevice.Viewport.Width / 2, Manager.GraphicsDevice.Viewport.Height * 0.1736111111111111f);
+            Vector2 titlePosition = new Vector2(Manager.GraphicsDevice.Viewport.Width / 2, Manager.GraphicsDevice.Viewport.Height * 0.08f);
             Vector2 titleOrigin = Manager.TitleFont.MeasureString(title) / 2;
-            Color titleColor = new Color(100, 77, 45) * TransitionAlpha;
+            Color titleColor = Color.DarkRed * TransitionAlpha;
             float titleScale = 1f;
 
             titlePosition.Y -= transitionOffset * 100;
@@ -76,7 +76,7 @@ namespace GameLibrary.GameStates.Screens
             spriteBatch.DrawString(Manager.TitleFont, title, titlePosition, titleColor, 0,
                 titleOrigin, titleScale, SpriteEffects.None, 0);
 
-            Vector2 position = new Vector2(0f, ScreenHelper.Viewport.Height * 0.25f);
+            Vector2 position = new Vector2(0f, ScreenHelper.Viewport.Height * 0.19f);
 
             for (int i = 0; i < lines.Length; i++)
             {
