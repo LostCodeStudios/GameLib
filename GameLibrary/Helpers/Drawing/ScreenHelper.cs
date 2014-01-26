@@ -42,6 +42,12 @@ namespace GameLibrary.Helpers
             get;
         }
 
+        public static Texture2D BlankTexture
+        {
+            get;
+            set;
+        }
+
         public static SpriteFont SpriteFont
         {
             get;

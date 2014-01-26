@@ -242,6 +242,11 @@ namespace GameLibrary.Dependencies.Entities
 
         public void Delete()
         {
+            if (Tag == "Player")
+            {
+                Console.WriteLine("The player was deleted");
+            }
+
             if (deletingState == true)
             {
                 return;
