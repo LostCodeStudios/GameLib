@@ -120,6 +120,17 @@ namespace GameLibrary.Entities.Components
         {
         }
 
+        /// <summary>
+        /// Nat is a bitch
+        /// </summary>
+        /// <param name="_SpriteSheet"></param>
+        /// <param name="spriteKey"></param>
+        /// <param name="layer"></param>
+        public Sprite(SpriteSheet _SpriteSheet, string spriteKey, float layer, Color c)
+            : this(_SpriteSheet, spriteKey, new Vector2(_SpriteSheet[spriteKey][0].Width / 2f, _SpriteSheet[spriteKey][0].Height / 2f), 1f, c, layer)
+        {
+        }
+
         #endregion Constructor
 
         #region Methods
