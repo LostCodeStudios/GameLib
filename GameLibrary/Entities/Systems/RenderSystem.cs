@@ -34,21 +34,29 @@ namespace GameLibrary.Entities.Systems
         /// <param name="e"></param>
         public override void Process(Entity e)
         {
-            //Get sprite data and transform
-            ITransform transform = e.GetComponent<ITransform>();
-            Sprite sprite = e.GetComponent<Sprite>();
+            try
+            {
+                //Get sprite data and transform
+                ITransform transform = e.GetComponent<ITransform>();
+                Sprite sprite = e.GetComponent<Sprite>();
 
-            if (sprite.Source != null)
-                //Draw to sprite batch
-                spriteBatch.Draw(
-                    sprite.SpriteSheet.Texture,
-                    ConvertUnits.ToDisplayUnits(transform.Position),
-                    sprite.CurrentRectangle,
-                    sprite.Color,
-                    transform.Rotation,
-                    sprite.Origin,
-                    sprite.Scale,
-                    SpriteEffects.None, sprite.Layer);
+                if (sprite.Source != null)
+                    //Draw to sprite batch
+                    spriteBatch.Draw(
+                        sprite.SpriteSheet.Texture,
+                        ConvertUnits.ToDisplayUnits(transform.Position),
+                        sprite.CurrentRectangle,
+                        sprite.Color,
+                        transform.Rotation,
+                        sprite.Origin,
+                        sprite.Scale,
+                        SpriteEffects.None, sprite.Layer);
+            }
+            catch
+            {
+                e.Delete();
+                Console.WriteLine("Exception try-caught in RenderSystem");
+            }
         }
 
         /// <summary>
