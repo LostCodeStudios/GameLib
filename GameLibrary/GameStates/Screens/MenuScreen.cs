@@ -126,7 +126,7 @@ namespace GameLibrary.GameStates.Screens
                     if (!string.IsNullOrEmpty(selectionChangeSound))
                         SoundManager.Play(selectionChangeSound);
                 }
-                if (input.LeftButtonDownIn(entry.ClickRectangle) && prevMouseCheck())
+                if (selectedEntry == MenuEntries.IndexOf(entry) && input.LeftButtonDownIn(entry.ClickRectangle) && prevMouseCheck())
                 {
                     OnSelectEntry(selectedEntry, PlayerIndex.One);
                 }
