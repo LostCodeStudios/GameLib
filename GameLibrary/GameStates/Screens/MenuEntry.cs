@@ -10,6 +10,8 @@ namespace GameLibrary.GameStates.Screens
     /// </summary>
     public class MenuEntry
     {
+        const int A_LITTLE_EXTRA = 10;
+
         #region Fields
 
         protected string text;
@@ -138,7 +140,7 @@ namespace GameLibrary.GameStates.Screens
         /// </summary>
         public virtual int GetHeight(MenuScreen screen)
         {
-            return screen.Manager.Font.LineSpacing;
+            return screen.Manager.Font.LineSpacing + A_LITTLE_EXTRA;
         }
 
         /// <summary>
