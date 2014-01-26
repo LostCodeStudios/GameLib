@@ -303,7 +303,7 @@ namespace GameLibrary.GameStates.Screens
             //Draw the menu title centered on the screen
             Vector2 titlePosition = new Vector2(graphics.Viewport.Width / 2, graphics.Viewport.Height * 0.1736111111111111f);
             Vector2 titleOrigin = titleFont.MeasureString(menuTitle) / 2;
-            Color titleColor = new Color(100, 77, 45) * TransitionAlpha;
+            Color titleColor = Color.DarkRed * TransitionAlpha;
             float titleScale = 1f;
 
             titlePosition.Y -= transitionOffset * 100;

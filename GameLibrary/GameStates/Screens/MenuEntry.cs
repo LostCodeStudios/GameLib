@@ -118,7 +118,10 @@ namespace GameLibrary.GameStates.Screens
             SpriteBatch spriteBatch = screenManager.SpriteBatch;
             SpriteFont font = screenManager.Font;
 
-            clickRectangle = new Rectangle((int)Position.X, (int)Position.Y, (int)(font.MeasureString(Text).X * Scale), (int)(font.MeasureString(Text).Y * Scale));
+            Vector2 size = font.MeasureString(Text) * Scale;
+            clickRectangle = new Rectangle(
+                (int)Position.X, (int)(Position.Y - size.Y / 2), 
+                (int)size.X, (int)size.Y);
 
             color *= screen.TransitionAlpha;
 
