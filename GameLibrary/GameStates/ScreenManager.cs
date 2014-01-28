@@ -157,7 +157,8 @@ namespace GameLibrary.GameStates
             //Tell each of the screens to unload their content.
             foreach (GameScreen screen in screens)
             {
-                screen.Unload();
+                if(screen != null)
+                    screen.Unload();
             }
         }
 
@@ -295,6 +296,7 @@ namespace GameLibrary.GameStates
             //If we have a graphics device, tell the screen to unload content.
             if (isInitialized)
             {
+                if(screen != null)
                 screen.Unload();
             }
 
