@@ -295,6 +295,7 @@ namespace GameLibrary.GameStates
             //If we have a graphics device, tell the screen to unload content.
             if (isInitialized)
             {
+                if(screen != null)
                 screen.Unload();
             }
 
